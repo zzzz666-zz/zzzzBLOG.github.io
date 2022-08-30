@@ -1,5 +1,12 @@
 https://www.zzzheng.top/2022/08/29/SSM%E6%95%B4%E5%90%88%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/
-https://www.zzzheng.top/tags/index.html
+https://www.zzzheng.top/categories/index.html
 https://www.zzzheng.top/about/index.html
+https://www.zzzheng.top/tags/index.html
 https://www.zzzheng.top/2022/08/25/my-site/
 https://www.zzzheng.top/
+https://www.zzzheng.top/tags/java/
+https://www.zzzheng.top/tags/spring/
+https://www.zzzheng.top/tags/springMVC/
+https://www.zzzheng.top/tags/MyBatis/
+https://www.zzzheng.top/tags/SSM/
+https://www.zzzheng.top/categories/java/

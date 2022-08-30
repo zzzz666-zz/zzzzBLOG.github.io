@@ -220,5 +220,15 @@
 <p>到这里差不多结束啦，最后使用插件逆向建模即可。后续也会把我的SSM整合pull到我的网站上,算是一步步记录我的学习之路。</p>
 <p><span id="busuanzi_container_page_pv">  本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
 ]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>spring</tag>
+        <tag>springMVC</tag>
+        <tag>MyBatis</tag>
+        <tag>SSM</tag>
+      </tags>
   </entry>
 </search>
