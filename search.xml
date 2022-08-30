@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>my_site</title>
-    <url>/2022/08/25/my-site/</url>
-    <content><![CDATA[<p>我的第一篇博客，不太会使用markdown，just a try！</p>
-]]></content>
-  </entry>
-  <entry>
     <title>SSM整合配置文件</title>
     <url>/2022/08/29/SSM%E6%95%B4%E5%90%88%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<p>我这里主要是跟的尚硅谷的一个比较老的版本的一个SSM整合，本人也是个小菜鸡，欢迎指正错误和讨论哈，部分是我修改的，大部分都是参照视频里的。</p>
@@ -230,5 +224,11 @@
         <tag>MyBatis</tag>
         <tag>SSM</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>my_site</title>
+    <url>/2022/08/25/my-site/</url>
+    <content><![CDATA[<p>我的第一篇博客，不太会使用markdown，just a try！</p>
+]]></content>
   </entry>
 </search>
