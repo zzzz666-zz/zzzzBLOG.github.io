@@ -2842,7 +2842,7 @@ mark.search-keyword {
   }
 }
 body {
-  background: url("/images/background.jpg");
+  background: url("/./images/background.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
