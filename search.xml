@@ -231,4 +231,71 @@
         <tag>SSM</tag>
       </tags>
   </entry>
+  <entry>
+    <title>python中的json模块</title>
+    <url>/2022/09/09/python%E4%B8%AD%E7%9A%84json%E6%A8%A1%E5%9D%97/</url>
+    <content><![CDATA[<p>之前一直会把load、loads,dump、dumps的功能搞混。在这里记录一下，一个简单区分他们的方式就是loads、dumps 结尾都带一个s,可以理解为操作string字符串的意思. </p>
+<span id="more"></span>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th align="center">作用及用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>json.dump</td>
+<td align="center">传入一个python对象,将其编码为json格式后存储到io流,保存到文件中</td>
+</tr>
+<tr>
+<td>json.dumps</td>
+<td align="center">传入一个python对象,将其编码为json格式后存储到str</td>
+</tr>
+<tr>
+<td>json.load</td>
+<td align="center">传入一个json格式的文件流，将其解码为python对象</td>
+</tr>
+<tr>
+<td>json.loads</td>
+<td align="center">传入一个json格式的str，将其解码为python对象</td>
+</tr>
+</tbody></table>
+<h1 id="json文件的格式-也可以是python对象的格式"><a href="#json文件的格式-也可以是python对象的格式" class="headerlink" title="json文件的格式(也可以是python对象的格式)"></a>json文件的格式(也可以是python对象的格式)</h1><pre><code>data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
+</code></pre>
+<p>由中括号包围的就相当于列表类型，列表中的每个元素可以是任意类型，这个示例中它是字典类型，由大括号包围。</p>
+<p>json 可以由以上两种形式自由组合而成，可以无限次嵌套，结构清晰，是数据交换的极佳方式。</p>
+<h2 id="json-dump"><a href="#json-dump" class="headerlink" title="json.dump()"></a>json.dump()</h2><p>既然存储到IO流,那就肯定需要打开一个文件。</p>
+<pre><code>import json
+data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
+with open(&#39;./new_data.json&#39;,&#39;w&#39;) as f:
+json.dump(data,f)
+</code></pre>
+<h2 id="json-dumps"><a href="#json-dumps" class="headerlink" title="json.dumps()"></a>json.dumps()</h2><p>把python对象转换为str</p>
+<pre><code>import json
+data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
+print(type(data))  # list
+data2 = json.dumps(data)
+print(type(data2))  # str
+</code></pre>
+<h2 id="json-load"><a href="#json-load" class="headerlink" title="json.load()"></a>json.load()</h2><p>传入一个json格式的文件流，将其解码为python对象<br>    import json</p>
+<pre><code>with open(&#39;./nested_list.json&#39;) as f:
+    data = json.load(f)
+
+print(data)
+</code></pre>
+<h2 id="json-loads"><a href="#json-loads" class="headerlink" title="json.loads()"></a>json.loads()</h2><p>传入一个json格式的str，将其解码为python对象</p>
+<pre><code>with open(&#39;./nested_list.json&#39;) as f:
+    data = json.loads(f.read())
+print(data)
+</code></pre>
+<h1 id="第三方库demjson"><a href="#第三方库demjson" class="headerlink" title="第三方库demjson"></a>第三方库demjson</h1><p>demjson.encode：将 Python 对象编码成 JSON 字符串</p>
+<p>demjson.decode：将已编码的 JSON 字符串解码为 Python 对象</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
 </search>
