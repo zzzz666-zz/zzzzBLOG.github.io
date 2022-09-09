@@ -277,8 +277,9 @@ print(type(data))  # list
 data2 = json.dumps(data)
 print(type(data2))  # str
 </code></pre>
-<h2 id="json-load"><a href="#json-load" class="headerlink" title="json.load()"></a>json.load()</h2><p>传入一个json格式的文件流，将其解码为python对象<br>    import json</p>
-<pre><code>with open(&#39;./nested_list.json&#39;) as f:
+<h2 id="json-load"><a href="#json-load" class="headerlink" title="json.load()"></a>json.load()</h2><p>传入一个json格式的文件流，将其解码为python对象</p>
+<pre><code>import json	
+with open(&#39;./nested_list.json&#39;) as f:
     data = json.load(f)
 
 print(data)
