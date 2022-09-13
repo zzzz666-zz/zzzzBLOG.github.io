@@ -1,303 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>SSM整合配置文件</title>
-    <url>/2022/08/29/SSM%E6%95%B4%E5%90%88%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<p>我这里主要是跟的尚硅谷的一个比较老的版本的一个SSM整合，本人也是个小菜鸡，欢迎指正错误和讨论哈，部分是我修改的，大部分都是参照视频里的。</p>
-<span id="more"></span>
-<h2 id="配置web-xml"><a href="#配置web-xml" class="headerlink" title="配置web.xml"></a>配置web.xml</h2><p> 启动一个web项目时，容器（如tomcat）会去读web.xml, 先读取context-param和listener监听器两个结点，然后再读取filter和servlet。所以我们第一步要配置web.xml。</p>
-<h3 id="配置Spring"><a href="#配置Spring" class="headerlink" title="配置Spring"></a>配置Spring</h3><p>第一步当然是配置Spring，因为在web.xml 里要配置servlet，而我们会使用SpringMvc的dispatchServlet，都需要交给Spring来管理。</p>
-<pre><code>&lt;!--1、启动Spring的容器--&gt;
-&lt;context-param&gt;
-    &lt;!--Spring的配置文件信息--&gt;
-    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
-    &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;
-&lt;/context-param&gt;
-
-&lt;listener&gt;
-    &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
-&lt;/listener&gt;
-</code></pre>
-<p>contextConfigLocation主要是告诉一个Spring的配置文件的地址，通常会放在main&#x2F;resources&#x2F;applicationContext.xml。这里不配置context-param也可以,因为Spring是有默认的一个配置文件的位置的。<br>ContextLoaderListener这个listener必须要配置，主要作用是来监听服务器的启动。</p>
-<h3 id="配置前端控制器"><a href="#配置前端控制器" class="headerlink" title="配置前端控制器"></a>配置前端控制器</h3><pre><code>&lt;servlet&gt;
-    &lt;servlet-name&gt;dispatcherServlet&lt;/servlet-name&gt;
-    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
-    &lt;init-param&gt;
-        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
-        &lt;param-value&gt;classpath:springMVC.xml&lt;/param-value&gt;
-    &lt;/init-param&gt;
-    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
-&lt;/servlet&gt;
-&lt;servlet-mapping&gt;
-    &lt;servlet-name&gt;dispatcherServlet&lt;/servlet-name&gt;
-    &lt;url-pattern&gt;/&lt;/url-pattern&gt;
-&lt;/servlet-mapping&gt;
-</code></pre>
-<p>主要配置的是DispatchServlet，同样也指定了一个SpringMVC的配置文件位置。load-on-startup可以设置servlet的加载优先级别和容器是否在启动时加载该servlet。</p>
-<h3 id="配置过滤器filter"><a href="#配置过滤器filter" class="headerlink" title="配置过滤器filter"></a>配置过滤器filter</h3><pre><code>&lt;!--字符编码过滤器,要放在所有过滤器的首位--&gt;
-&lt;filter&gt;
-    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;
-    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
-    &lt;!--这两个参数用于初始化CharacterEncodingFilter,可以查看CharacterEncodingFilter的初始化--&gt;
-    &lt;init-param&gt;
-        &lt;param-name&gt;forceResponseEncoding&lt;/param-name&gt;
-        &lt;param-value&gt;true&lt;/param-value&gt;
-    &lt;/init-param&gt;
-    &lt;init-param&gt;
-        &lt;param-name&gt;encoding&lt;/param-name&gt;
-        &lt;param-value&gt;utf-8&lt;/param-value&gt;
-    &lt;/init-param&gt;
-&lt;/filter&gt;
-&lt;filter-mapping&gt;
-    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;
-    &lt;url-pattern&gt;/&lt;/url-pattern&gt;
-&lt;/filter-mapping&gt;
-&lt;!--配置转换请求方式的filter,将页面普通的post请求转为指定的delete或put请求--&gt;
-&lt;filter&gt;
-    &lt;filter-name&gt;hiddenHttpMethodFilter&lt;/filter-name&gt;
-    &lt;filter-class&gt;org.springframework.web.filter.HiddenHttpMethodFilter&lt;/filter-class&gt;
-&lt;/filter&gt;
-&lt;filter-mapping&gt;
-    &lt;filter-name&gt;hiddenHttpMethodFilter&lt;/filter-name&gt;
-    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-&lt;/filter-mapping&gt;
-</code></pre>
-<p>主要是一个字符编码过滤器和一个转换请求方式的filter。</p>
-<h2 id="配置SpringMVC-xml"><a href="#配置SpringMVC-xml" class="headerlink" title="配置SpringMVC.xml"></a>配置SpringMVC.xml</h2><p>springmvc的配置文件主要有三部分，第一个部分是对Controller放入IOC容器中进行管理，第二部分是视图解析器，第三部分是一些默认跳转或者是处理静态资源的配置。<br>    &lt;context:component-scan base-package&#x3D;”com.atguigu.curd.controller”&gt;<br>        <!--开启注解扫描,只扫描控制器--><br>    </context:component-scan></p>
-<pre><code>&lt;!--配置视图解析器--&gt;
-&lt;!-- 配置Thymeleaf视图解析器 --&gt;
-&lt;bean id=&quot;viewResolver&quot; class=&quot;org.thymeleaf.spring5.view.ThymeleafViewResolver&quot;&gt;
-    &lt;property name=&quot;order&quot; value=&quot;1&quot;/&gt;
-    &lt;property name=&quot;characterEncoding&quot; value=&quot;UTF-8&quot;/&gt;
-    &lt;property name=&quot;templateEngine&quot;&gt;
-        &lt;bean class=&quot;org.thymeleaf.spring5.SpringTemplateEngine&quot;&gt;
-            &lt;property name=&quot;templateResolver&quot;&gt;
-                &lt;bean class=&quot;org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver&quot;&gt;
-
-                    &lt;!-- 视图前缀 --&gt;
-                    &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/templates/&quot;/&gt;
-
-                    &lt;!-- 视图后缀 --&gt;
-                    &lt;property name=&quot;suffix&quot; value=&quot;.html&quot;/&gt;
-                    &lt;property name=&quot;templateMode&quot; value=&quot;HTML&quot;/&gt;
-                    &lt;property name=&quot;characterEncoding&quot; value=&quot;UTF-8&quot; /&gt;
-                &lt;/bean&gt;
-            &lt;/property&gt;
-        &lt;/bean&gt;
-    &lt;/property&gt;
-&lt;/bean&gt;
-
-&lt;mvc:view-controller path=&quot;/&quot; view-name=&quot;index&quot;/&gt;
-
-&lt;!--两个标准配置--&gt;
-&lt;!--将springMVC不能处理的请求交给tomcat--&gt;
-&lt;!--处理静态资源--&gt;
-&lt;mvc:default-servlet-handler/&gt;
-&lt;!--能支持springMVC更高级的一些功能，JSR303校验，快捷的ajax请求...映射动态请求--&gt;
-&lt;mvc:annotation-driven/&gt;
-</code></pre>
-<p>其实thymeleaf也没怎么用上，前端大部分时间使用的是vue，虽然用的很垃圾。</p>
-<h2 id="配置Spring-1"><a href="#配置Spring-1" class="headerlink" title="配置Spring"></a>配置Spring</h2><p>Spring配置文件的核心点(数据源、与MyBatis的整合、事务的控制)</p>
-<!--Spring的配置文件，这里主要配置和业务逻辑有关的-->
-<pre><code>&lt;!--数据源、事务控制--&gt;
-
-&lt;!--开启扫描--&gt;
-&lt;context:component-scan base-package=&quot;com.atguigu&quot;&gt;
-    &lt;!--controller交由SpringMVC管理,所以这里要去掉--&gt;
-    &lt;context:exclude-filter type=&quot;annotation&quot; expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;
-&lt;/context:component-scan&gt;
-&lt;!--引入外部配置文件--&gt;
-&lt;context:property-placeholder location=&quot;classpath:dbconfig.properties&quot;&gt;&lt;/context:property-placeholder&gt;
-&lt;bean id=&quot;pooledDataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot; destroy-method=&quot;close&quot;&gt;
-    &lt;property name=&quot;jdbcUrl&quot; value=&quot;$&#123;jdbc.jdbcUrl&#125;&quot;&gt;&lt;/property&gt;
-    &lt;property name=&quot;driverClass&quot; value=&quot;$&#123;jdbc.driverClass&#125;&quot;&gt;&lt;/property&gt;
-    &lt;property name=&quot;user&quot; value=&quot;$&#123;jdbc.user&#125;&quot;&gt;&lt;/property&gt;
-    &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;&gt;&lt;/property&gt;
-&lt;/bean&gt;
-
-
-
-&lt;!--配置和MyBatis的整合--&gt;
-&lt;bean id=&quot;sqlSessionFactoryBuilder&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
-    &lt;!--指定MyBatis的全局配置文件的位置--&gt;
-    &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis-config.xml&quot;/&gt;
-    &lt;property name=&quot;dataSource&quot; ref=&quot;pooledDataSource&quot;/&gt;
-    &lt;!--&lt;property name=&quot;dataSource&quot; ref=&quot;pooledDataSource&quot;/&gt;--&gt;
-    &lt;!--指定mybatis，mapper文件的位置--&gt;
-    &lt;!--这里的不要和mybatis-config.xml的配置重复了，保留此处即可--&gt;
-    &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:com/atguigu/curd/dao/*.xml&quot;/&gt;
-&lt;/bean&gt;
-
-&lt;!--配置扫描器，将mybatis接口的实现加入到IOC容器管理。
---&gt;
-&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
-    &lt;!--扫描所有dao接口的实现，加入到IOC容器中--&gt;
-    &lt;property name=&quot;basePackage&quot; value=&quot;com.atguigu.curd.dao&quot;&gt;&lt;/property&gt;
-&lt;/bean&gt;
-&lt;!--事务控制的配置--&gt;
-&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
-    &lt;!--控制数据源--&gt;
-    &lt;property name=&quot;dataSource&quot; ref=&quot;pooledDataSource&quot;/&gt;
-&lt;/bean&gt;
-
-&lt;!--配置一个可以批量插入的sqlSession--&gt;
-&lt;bean class=&quot;org.mybatis.spring.SqlSessionTemplate&quot; id=&quot;sqlSession&quot;&gt;
-    &lt;constructor-arg name=&quot;sqlSessionFactory&quot; ref=&quot;sqlSessionFactoryBuilder&quot;/&gt;
-    &lt;constructor-arg name=&quot;executorType&quot; value=&quot;BATCH&quot;/&gt;
-&lt;/bean&gt;
-&lt;!--开启基于注解的事务，使用xml配置形式的事务(必要主要的都是使用配置式)--&gt;
-&lt;!--配置事务增强,事务如何切入--&gt;
-&lt;aop:config&gt;
-    &lt;!--切入点表达式--&gt;
-    &lt;aop:pointcut id=&quot;txPoint&quot; expression=&quot;execution(* com.atguigu.curd.service..*.*(..))&quot;/&gt;
-    &lt;!--配置事务增强--&gt;
-    &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;txPoint&quot;/&gt;
-&lt;/aop:config&gt;
-&lt;!--配置事务增强，配置事务如何切入--&gt;
-&lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
-    &lt;tx:attributes&gt;
-        &lt;!--所有方法都是事务方法--&gt;
-        &lt;tx:method name=&quot;*&quot;/&gt;
-        &lt;!--以get开始的所有方法--&gt;
-        &lt;tx:method name=&quot;get*&quot; read-only=&quot;true&quot;/&gt;
-    &lt;/tx:attributes&gt;
-&lt;/tx:advice&gt;
-&lt;!--开启基于注解的事务，使用xml配置形式的事务（必要主要的都是使用配置式）--&gt;
-</code></pre>
-<h2 id="MyBatis的配置"><a href="#MyBatis的配置" class="headerlink" title="MyBatis的配置"></a>MyBatis的配置</h2><pre><code>&lt;!--自动驼峰命名转换,主要是为了转换一个pojo的属性和数据库的命名不一致的问题--&gt;
-&lt;settings&gt;
-    &lt;setting name=&quot;mapUnderscoreToCamelCase&quot; value=&quot;true&quot;/&gt;
-&lt;/settings&gt;
-
-&lt;!--这个标签的主要目的是起别名,在mapper.xml 里通常要写resultType,使用了别名之后可以轻松的写入--&gt;
-&lt;typeAliases&gt;
-    &lt;package name=&quot;com.atguigu.curd.pojo&quot;/&gt;
-&lt;/typeAliases&gt;
-&lt;!--分页插件的配置，这里不配置是无法生效的--&gt;
-&lt;plugins&gt;
-    &lt;plugin interceptor=&quot;com.github.pagehelper.PageInterceptor&quot;&gt;
-        &lt;!--分页参数合理化  --&gt;
-        &lt;property name=&quot;reasonable&quot; value=&quot;true&quot;/&gt;
-    &lt;/plugin&gt;
-&lt;/plugins&gt;
-</code></pre>
-<h2 id="MyBatis-Generator"><a href="#MyBatis-Generator" class="headerlink" title="MyBatis Generator"></a>MyBatis Generator</h2><p>可以参考<a href="http://mybatis.org/generator/configreference/xmlconfig.html">官方文档</a><br>主要就是一个数据库连接信息、javaBean生成策略、映射文件生成策略、Mapper接口生成策略、以及逆向分析的表。</p>
-<pre><code>&lt;context id=&quot;DB2Tables&quot; targetRuntime=&quot;MyBatis3&quot;&gt;
-    &lt;!-- 数据库的连接信息 --&gt;
-    &lt;jdbcConnection driverClass=&quot;com.mysql.cj.jdbc.Driver&quot;
-                    connectionURL=&quot;jdbc:mysql://localhost:3306/mybatis&quot;
-                    userId=&quot;root&quot;
-                    password=&quot;990506&quot;&gt;
-    &lt;/jdbcConnection&gt;
-    &lt;!-- javaBean的生成策略--&gt;
-    &lt;javaModelGenerator targetPackage=&quot;com.atguigu.mybatis.pojo&quot; targetProject=&quot;.\src\main\java&quot;&gt;
-        &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;
-        &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot; /&gt;
-    &lt;/javaModelGenerator&gt;
-    &lt;!-- SQL映射文件的生成策略 --&gt;
-    &lt;sqlMapGenerator targetPackage=&quot;com.atguigu.mybatis.mapper&quot;
-                     targetProject=&quot;.\src\main\resources&quot;&gt;
-        &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;
-    &lt;/sqlMapGenerator&gt;
-    &lt;!-- Mapper接口的生成策略 --&gt;
-    &lt;javaClientGenerator type=&quot;XMLMAPPER&quot;
-                         targetPackage=&quot;com.atguigu.mybatis.mapper&quot; targetProject=&quot;.\src\main\java&quot;&gt;
-        &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;
-    &lt;/javaClientGenerator&gt;
-    &lt;!-- 逆向分析的表 --&gt;
-    &lt;!-- tableName设置为*号，可以对应所有表，此时不写domainObjectName --&gt;
-    &lt;!-- domainObjectName属性指定生成出来的实体类的类名 --&gt;
-    &lt;table tableName=&quot;t_emp&quot; domainObjectName=&quot;Emp&quot;/&gt;
-    &lt;table tableName=&quot;t_dept&quot; domainObjectName=&quot;Dept&quot;/&gt;
-&lt;/context&gt;
-</code></pre>
-<p>到这里差不多结束啦，最后使用插件逆向建模即可。后续也会把我的SSM整合pull到我的网站上,算是一步步记录我的学习之路。</p>
-<p><span id="busuanzi_container_page_pv">  本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>spring</tag>
-        <tag>springMVC</tag>
-        <tag>MyBatis</tag>
-        <tag>SSM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>my_site</title>
     <url>/2022/08/25/my-site/</url>
     <content><![CDATA[<p>我的第一篇博客，不太会使用markdown，just a try！</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>python中的json模块</title>
-    <url>/2022/09/09/python%E4%B8%AD%E7%9A%84json%E6%A8%A1%E5%9D%97/</url>
-    <content><![CDATA[<p>之前一直会把load、loads,dump、dumps的功能搞混。在这里记录一下，一个简单区分他们的方式就是loads、dumps 结尾都带一个s,可以理解为操作string字符串的意思. </p>
-<span id="more"></span>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th align="center">作用及用法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>json.dump</td>
-<td align="center">传入一个python对象,将其编码为json格式后存储到io流,保存到文件中</td>
-</tr>
-<tr>
-<td>json.dumps</td>
-<td align="center">传入一个python对象,将其编码为json格式后存储到str</td>
-</tr>
-<tr>
-<td>json.load</td>
-<td align="center">传入一个json格式的文件流，将其解码为python对象</td>
-</tr>
-<tr>
-<td>json.loads</td>
-<td align="center">传入一个json格式的str，将其解码为python对象</td>
-</tr>
-</tbody></table>
-<h1 id="json文件的格式-也可以是python对象的格式"><a href="#json文件的格式-也可以是python对象的格式" class="headerlink" title="json文件的格式(也可以是python对象的格式)"></a>json文件的格式(也可以是python对象的格式)</h1><pre><code>data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
-</code></pre>
-<p>由中括号包围的就相当于列表类型，列表中的每个元素可以是任意类型，这个示例中它是字典类型，由大括号包围。</p>
-<p>json 可以由以上两种形式自由组合而成，可以无限次嵌套，结构清晰，是数据交换的极佳方式。</p>
-<h2 id="json-dump"><a href="#json-dump" class="headerlink" title="json.dump()"></a>json.dump()</h2><p>既然存储到IO流,那就肯定需要打开一个文件。</p>
-<pre><code>import json
-data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
-with open(&#39;./new_data.json&#39;,&#39;w&#39;) as f:
-json.dump(data,f)
-</code></pre>
-<h2 id="json-dumps"><a href="#json-dumps" class="headerlink" title="json.dumps()"></a>json.dumps()</h2><p>把python对象转换为str</p>
-<pre><code>import json
-data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
-print(type(data))  # list
-data2 = json.dumps(data)
-print(type(data2))  # str
-</code></pre>
-<h2 id="json-load"><a href="#json-load" class="headerlink" title="json.load()"></a>json.load()</h2><p>传入一个json格式的文件流，将其解码为python对象</p>
-<pre><code>import json	
-with open(&#39;./nested_list.json&#39;) as f:
-    data = json.load(f)
-
-print(data)
-</code></pre>
-<h2 id="json-loads"><a href="#json-loads" class="headerlink" title="json.loads()"></a>json.loads()</h2><p>传入一个json格式的str，将其解码为python对象</p>
-<pre><code>with open(&#39;./nested_list.json&#39;) as f:
-    data = json.loads(f.read())
-print(data)
-</code></pre>
-<h1 id="第三方库demjson"><a href="#第三方库demjson" class="headerlink" title="第三方库demjson"></a>第三方库demjson</h1><p>demjson.encode：将 Python 对象编码成 JSON 字符串</p>
-<p>demjson.decode：将已编码的 JSON 字符串解码为 Python 对象</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
   </entry>
   <entry>
     <title>pytorch代码过程中使用和见到的一些pytorch操作张量函数</title>
@@ -543,6 +250,299 @@ sort()函数作用显而易见，是用来排序的，返回两个值。一个�
         <tag>python</tag>
         <tag>pytorch</tag>
         <tag>dl</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python中的json模块</title>
+    <url>/2022/09/09/python%E4%B8%AD%E7%9A%84json%E6%A8%A1%E5%9D%97/</url>
+    <content><![CDATA[<p>之前一直会把load、loads,dump、dumps的功能搞混。在这里记录一下，一个简单区分他们的方式就是loads、dumps 结尾都带一个s,可以理解为操作string字符串的意思. </p>
+<span id="more"></span>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th align="center">作用及用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>json.dump</td>
+<td align="center">传入一个python对象,将其编码为json格式后存储到io流,保存到文件中</td>
+</tr>
+<tr>
+<td>json.dumps</td>
+<td align="center">传入一个python对象,将其编码为json格式后存储到str</td>
+</tr>
+<tr>
+<td>json.load</td>
+<td align="center">传入一个json格式的文件流，将其解码为python对象</td>
+</tr>
+<tr>
+<td>json.loads</td>
+<td align="center">传入一个json格式的str，将其解码为python对象</td>
+</tr>
+</tbody></table>
+<h1 id="json文件的格式-也可以是python对象的格式"><a href="#json文件的格式-也可以是python对象的格式" class="headerlink" title="json文件的格式(也可以是python对象的格式)"></a>json文件的格式(也可以是python对象的格式)</h1><pre><code>data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
+</code></pre>
+<p>由中括号包围的就相当于列表类型，列表中的每个元素可以是任意类型，这个示例中它是字典类型，由大括号包围。</p>
+<p>json 可以由以上两种形式自由组合而成，可以无限次嵌套，结构清晰，是数据交换的极佳方式。</p>
+<h2 id="json-dump"><a href="#json-dump" class="headerlink" title="json.dump()"></a>json.dump()</h2><p>既然存储到IO流,那就肯定需要打开一个文件。</p>
+<pre><code>import json
+data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
+with open(&#39;./new_data.json&#39;,&#39;w&#39;) as f:
+json.dump(data,f)
+</code></pre>
+<h2 id="json-dumps"><a href="#json-dumps" class="headerlink" title="json.dumps()"></a>json.dumps()</h2><p>把python对象转换为str</p>
+<pre><code>import json
+data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
+print(type(data))  # list
+data2 = json.dumps(data)
+print(type(data2))  # str
+</code></pre>
+<h2 id="json-load"><a href="#json-load" class="headerlink" title="json.load()"></a>json.load()</h2><p>传入一个json格式的文件流，将其解码为python对象</p>
+<pre><code>import json	
+with open(&#39;./nested_list.json&#39;) as f:
+    data = json.load(f)
+
+print(data)
+</code></pre>
+<h2 id="json-loads"><a href="#json-loads" class="headerlink" title="json.loads()"></a>json.loads()</h2><p>传入一个json格式的str，将其解码为python对象</p>
+<pre><code>with open(&#39;./nested_list.json&#39;) as f:
+    data = json.loads(f.read())
+print(data)
+</code></pre>
+<h1 id="第三方库demjson"><a href="#第三方库demjson" class="headerlink" title="第三方库demjson"></a>第三方库demjson</h1><p>demjson.encode：将 Python 对象编码成 JSON 字符串</p>
+<p>demjson.decode：将已编码的 JSON 字符串解码为 Python 对象</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSM整合配置文件</title>
+    <url>/2022/08/29/SSM%E6%95%B4%E5%90%88%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<p>我这里主要是跟的尚硅谷的一个比较老的版本的一个SSM整合，本人也是个小菜鸡，欢迎指正错误和讨论哈，部分是我修改的，大部分都是参照视频里的。</p>
+<span id="more"></span>
+<h2 id="配置web-xml"><a href="#配置web-xml" class="headerlink" title="配置web.xml"></a>配置web.xml</h2><p> 启动一个web项目时，容器（如tomcat）会去读web.xml, 先读取context-param和listener监听器两个结点，然后再读取filter和servlet。所以我们第一步要配置web.xml。</p>
+<h3 id="配置Spring"><a href="#配置Spring" class="headerlink" title="配置Spring"></a>配置Spring</h3><p>第一步当然是配置Spring，因为在web.xml 里要配置servlet，而我们会使用SpringMvc的dispatchServlet，都需要交给Spring来管理。</p>
+<pre><code>&lt;!--1、启动Spring的容器--&gt;
+&lt;context-param&gt;
+    &lt;!--Spring的配置文件信息--&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+
+&lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+<p>contextConfigLocation主要是告诉一个Spring的配置文件的地址，通常会放在main&#x2F;resources&#x2F;applicationContext.xml。这里不配置context-param也可以,因为Spring是有默认的一个配置文件的位置的。<br>ContextLoaderListener这个listener必须要配置，主要作用是来监听服务器的启动。</p>
+<h3 id="配置前端控制器"><a href="#配置前端控制器" class="headerlink" title="配置前端控制器"></a>配置前端控制器</h3><pre><code>&lt;servlet&gt;
+    &lt;servlet-name&gt;dispatcherServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;classpath:springMVC.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;dispatcherServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+<p>主要配置的是DispatchServlet，同样也指定了一个SpringMVC的配置文件位置。load-on-startup可以设置servlet的加载优先级别和容器是否在启动时加载该servlet。</p>
+<h3 id="配置过滤器filter"><a href="#配置过滤器filter" class="headerlink" title="配置过滤器filter"></a>配置过滤器filter</h3><pre><code>&lt;!--字符编码过滤器,要放在所有过滤器的首位--&gt;
+&lt;filter&gt;
+    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+    &lt;!--这两个参数用于初始化CharacterEncodingFilter,可以查看CharacterEncodingFilter的初始化--&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;forceResponseEncoding&lt;/param-name&gt;
+        &lt;param-value&gt;true&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;encoding&lt;/param-name&gt;
+        &lt;param-value&gt;utf-8&lt;/param-value&gt;
+    &lt;/init-param&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+&lt;!--配置转换请求方式的filter,将页面普通的post请求转为指定的delete或put请求--&gt;
+&lt;filter&gt;
+    &lt;filter-name&gt;hiddenHttpMethodFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.HiddenHttpMethodFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;hiddenHttpMethodFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</code></pre>
+<p>主要是一个字符编码过滤器和一个转换请求方式的filter。</p>
+<h2 id="配置SpringMVC-xml"><a href="#配置SpringMVC-xml" class="headerlink" title="配置SpringMVC.xml"></a>配置SpringMVC.xml</h2><p>springmvc的配置文件主要有三部分，第一个部分是对Controller放入IOC容器中进行管理，第二部分是视图解析器，第三部分是一些默认跳转或者是处理静态资源的配置。<br>    &lt;context:component-scan base-package&#x3D;”com.atguigu.curd.controller”&gt;<br>        <!--开启注解扫描,只扫描控制器--><br>    </context:component-scan></p>
+<pre><code>&lt;!--配置视图解析器--&gt;
+&lt;!-- 配置Thymeleaf视图解析器 --&gt;
+&lt;bean id=&quot;viewResolver&quot; class=&quot;org.thymeleaf.spring5.view.ThymeleafViewResolver&quot;&gt;
+    &lt;property name=&quot;order&quot; value=&quot;1&quot;/&gt;
+    &lt;property name=&quot;characterEncoding&quot; value=&quot;UTF-8&quot;/&gt;
+    &lt;property name=&quot;templateEngine&quot;&gt;
+        &lt;bean class=&quot;org.thymeleaf.spring5.SpringTemplateEngine&quot;&gt;
+            &lt;property name=&quot;templateResolver&quot;&gt;
+                &lt;bean class=&quot;org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver&quot;&gt;
+
+                    &lt;!-- 视图前缀 --&gt;
+                    &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/templates/&quot;/&gt;
+
+                    &lt;!-- 视图后缀 --&gt;
+                    &lt;property name=&quot;suffix&quot; value=&quot;.html&quot;/&gt;
+                    &lt;property name=&quot;templateMode&quot; value=&quot;HTML&quot;/&gt;
+                    &lt;property name=&quot;characterEncoding&quot; value=&quot;UTF-8&quot; /&gt;
+                &lt;/bean&gt;
+            &lt;/property&gt;
+        &lt;/bean&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;mvc:view-controller path=&quot;/&quot; view-name=&quot;index&quot;/&gt;
+
+&lt;!--两个标准配置--&gt;
+&lt;!--将springMVC不能处理的请求交给tomcat--&gt;
+&lt;!--处理静态资源--&gt;
+&lt;mvc:default-servlet-handler/&gt;
+&lt;!--能支持springMVC更高级的一些功能，JSR303校验，快捷的ajax请求...映射动态请求--&gt;
+&lt;mvc:annotation-driven/&gt;
+</code></pre>
+<p>其实thymeleaf也没怎么用上，前端大部分时间使用的是vue，虽然用的很垃圾。</p>
+<h2 id="配置Spring-1"><a href="#配置Spring-1" class="headerlink" title="配置Spring"></a>配置Spring</h2><p>Spring配置文件的核心点(数据源、与MyBatis的整合、事务的控制)</p>
+<!--Spring的配置文件，这里主要配置和业务逻辑有关的-->
+<pre><code>&lt;!--数据源、事务控制--&gt;
+
+&lt;!--开启扫描--&gt;
+&lt;context:component-scan base-package=&quot;com.atguigu&quot;&gt;
+    &lt;!--controller交由SpringMVC管理,所以这里要去掉--&gt;
+    &lt;context:exclude-filter type=&quot;annotation&quot; expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;
+&lt;/context:component-scan&gt;
+&lt;!--引入外部配置文件--&gt;
+&lt;context:property-placeholder location=&quot;classpath:dbconfig.properties&quot;&gt;&lt;/context:property-placeholder&gt;
+&lt;bean id=&quot;pooledDataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot; destroy-method=&quot;close&quot;&gt;
+    &lt;property name=&quot;jdbcUrl&quot; value=&quot;$&#123;jdbc.jdbcUrl&#125;&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;driverClass&quot; value=&quot;$&#123;jdbc.driverClass&#125;&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;user&quot; value=&quot;$&#123;jdbc.user&#125;&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+
+
+&lt;!--配置和MyBatis的整合--&gt;
+&lt;bean id=&quot;sqlSessionFactoryBuilder&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+    &lt;!--指定MyBatis的全局配置文件的位置--&gt;
+    &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis-config.xml&quot;/&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;pooledDataSource&quot;/&gt;
+    &lt;!--&lt;property name=&quot;dataSource&quot; ref=&quot;pooledDataSource&quot;/&gt;--&gt;
+    &lt;!--指定mybatis，mapper文件的位置--&gt;
+    &lt;!--这里的不要和mybatis-config.xml的配置重复了，保留此处即可--&gt;
+    &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:com/atguigu/curd/dao/*.xml&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--配置扫描器，将mybatis接口的实现加入到IOC容器管理。
+--&gt;
+&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+    &lt;!--扫描所有dao接口的实现，加入到IOC容器中--&gt;
+    &lt;property name=&quot;basePackage&quot; value=&quot;com.atguigu.curd.dao&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+&lt;!--事务控制的配置--&gt;
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;!--控制数据源--&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;pooledDataSource&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--配置一个可以批量插入的sqlSession--&gt;
+&lt;bean class=&quot;org.mybatis.spring.SqlSessionTemplate&quot; id=&quot;sqlSession&quot;&gt;
+    &lt;constructor-arg name=&quot;sqlSessionFactory&quot; ref=&quot;sqlSessionFactoryBuilder&quot;/&gt;
+    &lt;constructor-arg name=&quot;executorType&quot; value=&quot;BATCH&quot;/&gt;
+&lt;/bean&gt;
+&lt;!--开启基于注解的事务，使用xml配置形式的事务(必要主要的都是使用配置式)--&gt;
+&lt;!--配置事务增强,事务如何切入--&gt;
+&lt;aop:config&gt;
+    &lt;!--切入点表达式--&gt;
+    &lt;aop:pointcut id=&quot;txPoint&quot; expression=&quot;execution(* com.atguigu.curd.service..*.*(..))&quot;/&gt;
+    &lt;!--配置事务增强--&gt;
+    &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;txPoint&quot;/&gt;
+&lt;/aop:config&gt;
+&lt;!--配置事务增强，配置事务如何切入--&gt;
+&lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
+    &lt;tx:attributes&gt;
+        &lt;!--所有方法都是事务方法--&gt;
+        &lt;tx:method name=&quot;*&quot;/&gt;
+        &lt;!--以get开始的所有方法--&gt;
+        &lt;tx:method name=&quot;get*&quot; read-only=&quot;true&quot;/&gt;
+    &lt;/tx:attributes&gt;
+&lt;/tx:advice&gt;
+&lt;!--开启基于注解的事务，使用xml配置形式的事务（必要主要的都是使用配置式）--&gt;
+</code></pre>
+<h2 id="MyBatis的配置"><a href="#MyBatis的配置" class="headerlink" title="MyBatis的配置"></a>MyBatis的配置</h2><pre><code>&lt;!--自动驼峰命名转换,主要是为了转换一个pojo的属性和数据库的命名不一致的问题--&gt;
+&lt;settings&gt;
+    &lt;setting name=&quot;mapUnderscoreToCamelCase&quot; value=&quot;true&quot;/&gt;
+&lt;/settings&gt;
+
+&lt;!--这个标签的主要目的是起别名,在mapper.xml 里通常要写resultType,使用了别名之后可以轻松的写入--&gt;
+&lt;typeAliases&gt;
+    &lt;package name=&quot;com.atguigu.curd.pojo&quot;/&gt;
+&lt;/typeAliases&gt;
+&lt;!--分页插件的配置，这里不配置是无法生效的--&gt;
+&lt;plugins&gt;
+    &lt;plugin interceptor=&quot;com.github.pagehelper.PageInterceptor&quot;&gt;
+        &lt;!--分页参数合理化  --&gt;
+        &lt;property name=&quot;reasonable&quot; value=&quot;true&quot;/&gt;
+    &lt;/plugin&gt;
+&lt;/plugins&gt;
+</code></pre>
+<h2 id="MyBatis-Generator"><a href="#MyBatis-Generator" class="headerlink" title="MyBatis Generator"></a>MyBatis Generator</h2><p>可以参考<a href="http://mybatis.org/generator/configreference/xmlconfig.html">官方文档</a><br>主要就是一个数据库连接信息、javaBean生成策略、映射文件生成策略、Mapper接口生成策略、以及逆向分析的表。</p>
+<pre><code>&lt;context id=&quot;DB2Tables&quot; targetRuntime=&quot;MyBatis3&quot;&gt;
+    &lt;!-- 数据库的连接信息 --&gt;
+    &lt;jdbcConnection driverClass=&quot;com.mysql.cj.jdbc.Driver&quot;
+                    connectionURL=&quot;jdbc:mysql://localhost:3306/mybatis&quot;
+                    userId=&quot;root&quot;
+                    password=&quot;990506&quot;&gt;
+    &lt;/jdbcConnection&gt;
+    &lt;!-- javaBean的生成策略--&gt;
+    &lt;javaModelGenerator targetPackage=&quot;com.atguigu.mybatis.pojo&quot; targetProject=&quot;.\src\main\java&quot;&gt;
+        &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;
+        &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot; /&gt;
+    &lt;/javaModelGenerator&gt;
+    &lt;!-- SQL映射文件的生成策略 --&gt;
+    &lt;sqlMapGenerator targetPackage=&quot;com.atguigu.mybatis.mapper&quot;
+                     targetProject=&quot;.\src\main\resources&quot;&gt;
+        &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;
+    &lt;/sqlMapGenerator&gt;
+    &lt;!-- Mapper接口的生成策略 --&gt;
+    &lt;javaClientGenerator type=&quot;XMLMAPPER&quot;
+                         targetPackage=&quot;com.atguigu.mybatis.mapper&quot; targetProject=&quot;.\src\main\java&quot;&gt;
+        &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;
+    &lt;/javaClientGenerator&gt;
+    &lt;!-- 逆向分析的表 --&gt;
+    &lt;!-- tableName设置为*号，可以对应所有表，此时不写domainObjectName --&gt;
+    &lt;!-- domainObjectName属性指定生成出来的实体类的类名 --&gt;
+    &lt;table tableName=&quot;t_emp&quot; domainObjectName=&quot;Emp&quot;/&gt;
+    &lt;table tableName=&quot;t_dept&quot; domainObjectName=&quot;Dept&quot;/&gt;
+&lt;/context&gt;
+</code></pre>
+<p>到这里差不多结束啦，最后使用插件逆向建模即可。后续也会把我的SSM整合pull到我的网站上,算是一步步记录我的学习之路。</p>
+<p><span id="busuanzi_container_page_pv">  本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>spring</tag>
+        <tag>springMVC</tag>
+        <tag>MyBatis</tag>
+        <tag>SSM</tag>
       </tags>
   </entry>
 </search>
