@@ -23,13 +23,13 @@
 
     <meta name="description" content="一直都想记录一下自己在写深度学习模型中见到和使用的函数，了解更多的pytorch函数也有助于更好地编写模型，终于有空了记录一下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pytorch代码过程中使用和见到的一些pytorch操作张量函数">
-<meta property="og:url" content="https://www.zzzheng.top/2022/09/13/pytorch%E4%BB%A3%E7%A0%81%E8%BF%87%E7%A8%8B%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%92%8C%E8%A7%81%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9Bpytorch%E6%93%8D%E4%BD%9C%E5%BC%A0%E9%87%8F%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:title" content="编写pytorch代码过程中使用和见到的一些pytorch操作张量函数">
+<meta property="og:url" content="https://www.zzzheng.top/2022/09/13/pytorch/index.html">
 <meta property="og:site_name" content="即兴表演的个人博客网站">
 <meta property="og:description" content="一直都想记录一下自己在写深度学习模型中见到和使用的函数，了解更多的pytorch函数也有助于更好地编写模型，终于有空了记录一下。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-13T07:01:27.000Z">
-<meta property="article:modified_time" content="2022-09-13T07:05:36.273Z">
+<meta property="article:modified_time" content="2022-09-13T08:03:28.911Z">
 <meta property="article:author" content="即兴表演">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="pytorch">
@@ -37,14 +37,14 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://www.zzzheng.top/2022/09/13/pytorch%E4%BB%A3%E7%A0%81%E8%BF%87%E7%A8%8B%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%92%8C%E8%A7%81%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9Bpytorch%E6%93%8D%E4%BD%9C%E5%BC%A0%E9%87%8F%E5%87%BD%E6%95%B0/">
+<link rel="canonical" href="https://www.zzzheng.top/2022/09/13/pytorch/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zzzheng.top/2022/09/13/pytorch%E4%BB%A3%E7%A0%81%E8%BF%87%E7%A8%8B%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%92%8C%E8%A7%81%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9Bpytorch%E6%93%8D%E4%BD%9C%E5%BC%A0%E9%87%8F%E5%87%BD%E6%95%B0/","path":"2022/09/13/pytorch代码过程中使用和见到的一些pytorch操作张量函数/","title":"pytorch代码过程中使用和见到的一些pytorch操作张量函数"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zzzheng.top/2022/09/13/pytorch/","path":"2022/09/13/pytorch/","title":"编写pytorch代码过程中使用和见到的一些pytorch操作张量函数"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>pytorch代码过程中使用和见到的一些pytorch操作张量函数 | 即兴表演的个人博客网站</title>
+<title>编写pytorch代码过程中使用和见到的一些pytorch操作张量函数 | 即兴表演的个人博客网站</title>
   
 
 
@@ -135,7 +135,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -148,6 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#torch-max-input-dim-keepdim-x3D-False-out-x3D-None"><span class="nav-number">1.</span> <span class="nav-text">torch.max(input, dim, keepdim&#x3D;False, out&#x3D;None)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#torch-sum-input-list-dim-bool-keepdim-x3D-False-dtype-x3D-None-%E2%86%92-Tensor"><span class="nav-number">2.</span> <span class="nav-text">torch.sum(input, list: dim, bool: keepdim&#x3D;False, dtype&#x3D;None) → Tensor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#torch-nonzero-input"><span class="nav-number">3.</span> <span class="nav-text">torch.nonzero(input)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#torch-where-condition%EF%BC%8Ca%EF%BC%8Cb-%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E6%8C%89%E7%85%A7%E4%B8%80%E5%AE%9A%E7%9A%84%E8%A7%84%E5%88%99%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AAtensor%E7%B1%BB%E5%9E%8B%E3%80%82a%E5%92%8Cb%E6%94%AF%E6%8C%81%E5%B9%BF%E6%92%AD%E6%9C%BA%E5%88%B6%E3%80%82"><span class="nav-number">4.</span> <span class="nav-text">torch.where(condition，a，b)函数的作用是按照一定的规则合并两个tensor类型。a和b支持广播机制。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#torch-eye-n%EF%BC%8Cm-x3D-None%EF%BC%8Cout-x3D-None"><span class="nav-number">5.</span> <span class="nav-text">torch.eye(n，m&#x3D;None，out&#x3D;None)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#torch-fliplr-input"><span class="nav-number">6.</span> <span class="nav-text">torch.fliplr(input)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#torch-clamp-input-min-max-out-x3D-None-%E2%86%92-Tensor"><span class="nav-number">7.</span> <span class="nav-text">torch.clamp(input, min, max, out&#x3D;None) → Tensor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#torch-sort-input-dim-descending-x3D-false"><span class="nav-number">8.</span> <span class="nav-text">torch.sort(input,dim,descending&#x3D;false)</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -205,7 +206,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.zzzheng.top/2022/09/13/pytorch%E4%BB%A3%E7%A0%81%E8%BF%87%E7%A8%8B%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%92%8C%E8%A7%81%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9Bpytorch%E6%93%8D%E4%BD%9C%E5%BC%A0%E9%87%8F%E5%87%BD%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="https://www.zzzheng.top/2022/09/13/pytorch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/./img/touxiang.jpg">
@@ -218,12 +219,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="pytorch代码过程中使用和见到的一些pytorch操作张量函数 | 即兴表演的个人博客网站">
+      <meta itemprop="name" content="编写pytorch代码过程中使用和见到的一些pytorch操作张量函数 | 即兴表演的个人博客网站">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          pytorch代码过程中使用和见到的一些pytorch操作张量函数
+          编写pytorch代码过程中使用和见到的一些pytorch操作张量函数
         </h1>
 
         <div class="post-meta-container">
@@ -235,7 +236,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-09-13 15:01:27 / 修改时间：15:05:36" itemprop="dateCreated datePublished" datetime="2022-09-13T15:01:27+08:00">2022-09-13</time>
+      <time title="创建时间：2022-09-13 15:01:27 / 修改时间：16:03:28" itemprop="dateCreated datePublished" datetime="2022-09-13T15:01:27+08:00">2022-09-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -265,239 +266,231 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>一直都想记录一下自己在写深度学习模型中见到和使用的函数，了解更多的pytorch函数也有助于更好地编写模型，终于有空了记录一下。</p>
-<!-- more ->
-## torch.max(input, dim, keepdim=False, out=None) ##
-返回两个值,第一个是指定维度的最大值,第二个是所在维度的索引。
+<span id="more"></span>
+<h2 id="torch-max-input-dim-keepdim-x3D-False-out-x3D-None"><a href="#torch-max-input-dim-keepdim-x3D-False-out-x3D-None" class="headerlink" title="torch.max(input, dim, keepdim&#x3D;False, out&#x3D;None)"></a>torch.max(input, dim, keepdim&#x3D;False, out&#x3D;None)</h2><p>返回两个值,第一个是指定维度的最大值,第二个是所在维度的索引。</p>
+<pre><code>import torch
+a = torch.rand(3,4,5)
+print(a.max(1))
 
-    import torch
-    a = torch.rand(3,4,5)
-    print(a.max(1))
-    
-    output:
-    torch.return_types.max(
-    values=tensor([[0.7422, 0.8498, 0.9386, 0.6664, 0.9278],
-            [0.8470, 0.7466, 0.8889, 0.8465, 0.8636],
-            [0.5928, 0.8738, 0.8301, 0.1932, 0.7880]]),
-    indices=tensor([[3, 2, 3, 1, 2],
-            [2, 3, 0, 0, 1],
-            [3, 0, 2, 0, 3]]))
-    1
-    2
-    3
-    4
-    5
-    6
-    7
-    8
-    9
-    10
-    11
-    12
-## torch.sum(input, list: dim, bool: keepdim=False, dtype=None) → Tensor ##
-在指定维度上求和，不加维度默认把所有值加起来。keepdim就是保持维度的数量不变，指定相加的维度不被squeeze掉。
+output:
+torch.return_types.max(
+values=tensor([[0.7422, 0.8498, 0.9386, 0.6664, 0.9278],
+        [0.8470, 0.7466, 0.8889, 0.8465, 0.8636],
+        [0.5928, 0.8738, 0.8301, 0.1932, 0.7880]]),
+indices=tensor([[3, 2, 3, 1, 2],
+        [2, 3, 0, 0, 1],
+        [3, 0, 2, 0, 3]]))
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</code></pre>
+<h2 id="torch-sum-input-list-dim-bool-keepdim-x3D-False-dtype-x3D-None-→-Tensor"><a href="#torch-sum-input-list-dim-bool-keepdim-x3D-False-dtype-x3D-None-→-Tensor" class="headerlink" title="torch.sum(input, list: dim, bool: keepdim&#x3D;False, dtype&#x3D;None) → Tensor"></a>torch.sum(input, list: dim, bool: keepdim&#x3D;False, dtype&#x3D;None) → Tensor</h2><p>在指定维度上求和，不加维度默认把所有值加起来。keepdim就是保持维度的数量不变，指定相加的维度不被squeeze掉。</p>
+<pre><code>import torch
+a = torch.rand(2,2)
+print(a)
+print(torch.sum(a))
+print(torch.sum(a,dim=0))
+print(torch.sum(a,dim=0).shape)
+print(torch.sum(a,dim=0,keepdim=True))
+print(torch.sum(a,dim=0,keepdim=True).shape)
 
-    import torch
-    a = torch.rand(2,2)
-    print(a)
-    print(torch.sum(a))
-    print(torch.sum(a,dim=0))
-    print(torch.sum(a,dim=0).shape)
-    print(torch.sum(a,dim=0,keepdim=True))
-    print(torch.sum(a,dim=0,keepdim=True).shape)
-    
-    
-    output:
-    tensor([[0.6603, 0.3693],
-            [0.8700, 0.0522]])
-    tensor(1.9518)
-    tensor([1.5303, 0.4215])
-    torch.Size([2])
-    tensor([[1.5303, 0.4215]])
-    torch.Size([1, 2])
-    
-    1
-    2
-    3
-    4
-    5
-    6
-    7
-    8
-    9
-    10
-    11
-    12
-    13
-    14
-    15
-    16
-    17
-    18
-## torch.nonzero(input) ##
-看名字就知道是为了找到张量中不为0的数字，返回的是索引值。
 
-    a = torch.randint(-5,5,(1,2,3))
-    print(a)
-    print(torch.nonzero(a))
-    
-    output:
-    tensor([[[ 0,  1,  1],
-             [-2,  0,  0]]])
-    tensor([[0, 0, 1],   对应1
-            [0, 0, 2],	 对应1
-            [0, 1, 0]])  对应-2
-    1
-    2
-    3
-    4
-    5
-    6
-    7
-    8
-    9
-    10
-## torch.where(condition，a，b)函数的作用是按照一定的规则合并两个tensor类型。a和b支持广播机制。 ##
-以上这种是网上的常用做法，但我发现还可以另做他用。比如找到张量中所有大于0.5的索引。如果输入是三维张量，返回的就是三个list，分别代表三个坐标的值。
+output:
+tensor([[0.6603, 0.3693],
+        [0.8700, 0.0522]])
+tensor(1.9518)
+tensor([1.5303, 0.4215])
+torch.Size([2])
+tensor([[1.5303, 0.4215]])
+torch.Size([1, 2])
 
-    a = torch.rand(2,3)
-    b = torch.rand(2,2,3)
-    c = torch.where(a>b,a,b)  # 根据a>b这条规则，满足条件当前位置上选择a,否则选择b
-    print(a)
-    print(b)
-    print(c)
-    
-    output:
-    tensor([[0.7851, 0.8679, 0.3948],
-            [0.7929, 0.5749, 0.8827]])
-    tensor([[[0.8215, 0.6820, 0.1545],
-             [0.9412, 0.8363, 0.5284]],
-    
-            [[0.0378, 0.4208, 0.0058],
-             [0.3449, 0.3634, 0.4359]]])
-    tensor([[[0.8215, 0.8679, 0.3948],
-             [0.9412, 0.8363, 0.8827]],
-    
-            [[0.7851, 0.8679, 0.3948],
-             [0.7929, 0.5749, 0.8827]]])
-    
-    1
-    2
-    3
-    4
-    5
-    6
-    7
-    8
-    9
-    10
-    11
-    12
-    13
-    14
-    15
-    16
-    17
-    18
-    19
-    20
-    a = torch.rand(2,2,3)
-    print(a)
-    print(torch.where(a>0.5))
-    
-    output:
-    tensor([[[0.3192, 0.5837, 0.9851],
-             [0.6990, 0.1669, 0.5436]],
-    
-            [[0.3373, 0.2244, 0.8450],
-             [0.6042, 0.1214, 0.7448]]])
-    (tensor([0, 0, 0, 0, 1, 1, 1]), tensor([0, 0, 1, 1, 0, 1, 1]), tensor([1, 2, 0, 2, 2, 0, 2]))
-    1
-    2
-    3
-    4
-    5
-    6
-    7
-    8
-    9
-    10
-    11
-## torch.eye(n，m=None，out=None) ##
-生成一个二维矩阵，主对角线为1，其余位置为0. 可以用来做mask
-n：行数 m：列数 out：输出类型
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</code></pre>
+<h2 id="torch-nonzero-input"><a href="#torch-nonzero-input" class="headerlink" title="torch.nonzero(input)"></a>torch.nonzero(input)</h2><p>看名字就知道是为了找到张量中不为0的数字，返回的是索引值。</p>
+<pre><code>a = torch.randint(-5,5,(1,2,3))
+print(a)
+print(torch.nonzero(a))
 
-    print(torch.eye(3))
-    
-    output:
-    tensor([[1., 0., 0.],
-            [0., 1., 0.],
-            [0., 0., 1.]])
-    1
-    2
-    3
-    4
-    5
-    6
-## torch.fliplr(input) ##
-左右翻转张量，要求输入至少是二维的，可以和上面的torch.eye()配合生成副对角线的为1的矩阵。
+output:
+tensor([[[ 0,  1,  1],
+         [-2,  0,  0]]])
+tensor([[0, 0, 1],   对应1
+        [0, 0, 2],	 对应1
+        [0, 1, 0]])  对应-2
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</code></pre>
+<h2 id="torch-where-condition，a，b-函数的作用是按照一定的规则合并两个tensor类型。a和b支持广播机制。"><a href="#torch-where-condition，a，b-函数的作用是按照一定的规则合并两个tensor类型。a和b支持广播机制。" class="headerlink" title="torch.where(condition，a，b)函数的作用是按照一定的规则合并两个tensor类型。a和b支持广播机制。"></a>torch.where(condition，a，b)函数的作用是按照一定的规则合并两个tensor类型。a和b支持广播机制。</h2><p>以上这种是网上的常用做法，但我发现还可以另做他用。比如找到张量中所有大于0.5的索引。如果输入是三维张量，返回的就是三个list，分别代表三个坐标的值。</p>
+<pre><code>a = torch.rand(2,3)
+b = torch.rand(2,2,3)
+c = torch.where(a&gt;b,a,b)  # 根据a&gt;b这条规则，满足条件当前位置上选择a,否则选择b
+print(a)
+print(b)
+print(c)
 
-    a = torch.eye(3)
-    print(a)
-    print(torch.fliplr(a))
-    
-    output:
-    tensor([[1., 0., 0.],
-            [0., 1., 0.],
-            [0., 0., 1.]])
-    tensor([[0., 0., 1.],
-            [0., 1., 0.],
-            [1., 0., 0.]])
-    1
-    2
-    3
-    4
-    5
-    6
-    7
-    8
-    9
-    10
-    11
-## torch.clamp(input, min, max, out=None) → Tensor ##
-clamp（）函数的功能将输入input张量每个元素的值压缩到区间 [min,max]，并返回结果到一个新张量。
+output:
+tensor([[0.7851, 0.8679, 0.3948],
+        [0.7929, 0.5749, 0.8827]])
+tensor([[[0.8215, 0.6820, 0.1545],
+         [0.9412, 0.8363, 0.5284]],
 
-    a=torch.randint(low=0,high=10,size=(2,3))
-    print(a)
-    b=torch.clamp(a,3,6)
-    print(b)
-    
-    output:
-    tensor([[8, 2, 6],
-            [7, 3, 3]])
-    tensor([[6, 3, 6],
-            [6, 3, 3]])
-    1
-    2
-    3
-    4
-    5
-    6
-    7
-    8
-    9
-    10
-## torch.sort(input,dim,descending=false) ##
-sort()函数作用显而易见，是用来排序的，返回两个值。一个是排序后的数组，另外一个是原先数组中的索引。descending=false代表从小到大，true为从大到小
+        [[0.0378, 0.4208, 0.0058],
+         [0.3449, 0.3634, 0.4359]]])
+tensor([[[0.8215, 0.8679, 0.3948],
+         [0.9412, 0.8363, 0.8827]],
 
-    import torch
-    a = torch.rand(5)
-    print(a)
-    print(torch.sort(a))
-    
-    output:
-    tensor([0.9443, 0.1087, 0.6701, 0.5038, 0.5880])
-    values=tensor([0.1087, 0.5038, 0.5880, 0.6701, 0.9443]),
-    indices=tensor([1, 3, 4, 2, 0]))
+        [[0.7851, 0.8679, 0.3948],
+         [0.7929, 0.5749, 0.8827]]])
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+a = torch.rand(2,2,3)
+print(a)
+print(torch.where(a&gt;0.5))
+
+output:
+tensor([[[0.3192, 0.5837, 0.9851],
+         [0.6990, 0.1669, 0.5436]],
+
+        [[0.3373, 0.2244, 0.8450],
+         [0.6042, 0.1214, 0.7448]]])
+(tensor([0, 0, 0, 0, 1, 1, 1]), tensor([0, 0, 1, 1, 0, 1, 1]), tensor([1, 2, 0, 2, 2, 0, 2]))
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</code></pre>
+<h2 id="torch-eye-n，m-x3D-None，out-x3D-None"><a href="#torch-eye-n，m-x3D-None，out-x3D-None" class="headerlink" title="torch.eye(n，m&#x3D;None，out&#x3D;None)"></a>torch.eye(n，m&#x3D;None，out&#x3D;None)</h2><p>生成一个二维矩阵，主对角线为1，其余位置为0. 可以用来做mask<br>n：行数 m：列数 out：输出类型</p>
+<pre><code>print(torch.eye(3))
+
+output:
+tensor([[1., 0., 0.],
+        [0., 1., 0.],
+        [0., 0., 1.]])
+1
+2
+3
+4
+5
+6
+</code></pre>
+<h2 id="torch-fliplr-input"><a href="#torch-fliplr-input" class="headerlink" title="torch.fliplr(input)"></a>torch.fliplr(input)</h2><p>左右翻转张量，要求输入至少是二维的，可以和上面的torch.eye()配合生成副对角线的为1的矩阵。</p>
+<pre><code>a = torch.eye(3)
+print(a)
+print(torch.fliplr(a))
+
+output:
+tensor([[1., 0., 0.],
+        [0., 1., 0.],
+        [0., 0., 1.]])
+tensor([[0., 0., 1.],
+        [0., 1., 0.],
+        [1., 0., 0.]])
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</code></pre>
+<h2 id="torch-clamp-input-min-max-out-x3D-None-→-Tensor"><a href="#torch-clamp-input-min-max-out-x3D-None-→-Tensor" class="headerlink" title="torch.clamp(input, min, max, out&#x3D;None) → Tensor"></a>torch.clamp(input, min, max, out&#x3D;None) → Tensor</h2><p>clamp（）函数的功能将输入input张量每个元素的值压缩到区间 [min,max]，并返回结果到一个新张量。</p>
+<pre><code>a=torch.randint(low=0,high=10,size=(2,3))
+print(a)
+b=torch.clamp(a,3,6)
+print(b)
+
+output:
+tensor([[8, 2, 6],
+        [7, 3, 3]])
+tensor([[6, 3, 6],
+        [6, 3, 3]])
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</code></pre>
+<h2 id="torch-sort-input-dim-descending-x3D-false"><a href="#torch-sort-input-dim-descending-x3D-false" class="headerlink" title="torch.sort(input,dim,descending&#x3D;false)"></a>torch.sort(input,dim,descending&#x3D;false)</h2><p>sort()函数作用显而易见，是用来排序的，返回两个值。一个是排序后的数组，另外一个是原先数组中的索引。descending&#x3D;false代表从小到大，true为从大到小</p>
+<pre><code>import torch
+a = torch.rand(5)
+print(a)
+print(torch.sort(a))
+
+output:
+tensor([0.9443, 0.1087, 0.6701, 0.5038, 0.5880])
+values=tensor([0.1087, 0.5038, 0.5880, 0.6701, 0.9443]),
+indices=tensor([1, 3, 4, 2, 0]))
+</code></pre>
+
     </div>
 
     
@@ -532,7 +525,7 @@ sort()函数作用显而易见，是用来排序的，返回两个值。一个�
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://www.zzzheng.top/2022/09/13/pytorch%E4%BB%A3%E7%A0%81%E8%BF%87%E7%A8%8B%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%92%8C%E8%A7%81%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9Bpytorch%E6%93%8D%E4%BD%9C%E5%BC%A0%E9%87%8F%E5%87%BD%E6%95%B0/" title="pytorch代码过程中使用和见到的一些pytorch操作张量函数">https://www.zzzheng.top/2022/09/13/pytorch代码过程中使用和见到的一些pytorch操作张量函数/</a>
+      <a href="https://www.zzzheng.top/2022/09/13/pytorch/" title="编写pytorch代码过程中使用和见到的一些pytorch操作张量函数">https://www.zzzheng.top/2022/09/13/pytorch/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
