@@ -300,6 +300,22 @@ print(data)
 ]]></content>
   </entry>
   <entry>
+    <title>springboot项目实战---在线博客</title>
+    <url>/2022/09/14/springboot%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98-%E5%9C%A8%E7%BA%BF%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>之前本来一直在看</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>spring</tag>
+        <tag>springMVC</tag>
+        <tag>springBoot</tag>
+        <tag>MybatisPlus</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>编写pytorch代码过程中使用和见到的一些pytorch操作张量函数</title>
     <url>/2022/09/13/pytorch/</url>
     <content><![CDATA[<p>一直都想记录一下自己在写深度学习模型中见到和使用的函数，了解更多的pytorch函数也有助于更好地编写模型，终于有空了记录一下。</p>
@@ -538,8 +554,123 @@ indices=tensor([1, 3, 4, 2, 0]))
       </tags>
   </entry>
   <entry>
-    <title>springboot项目实战---在线博客</title>
-    <url>/2022/09/14/springboot%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98-%E5%9C%A8%E7%BA%BF%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[]]></content>
+    <title>数学建模</title>
+    <url>/2022/09/16/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/</url>
+    <content><![CDATA[<h2 id="一、卡夫检验"><a href="#一、卡夫检验" class="headerlink" title="一、卡夫检验"></a>一、卡夫检验</h2><p>卡夫检验可以用来分析两个变量间的关系：是否相互独立，是否来自一个总体。<br>使用列联表与python可以非常快地计算两个变量之间是否存在关系。<br>列联表如下所示。</p>
+<table>
+<thead>
+<tr>
+<th align="left">纹饰</th>
+<th align="right">风化</th>
+<th align="center">无风化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">C</td>
+<td align="right">15</td>
+<td align="center">13</td>
+</tr>
+<tr>
+<td align="left">A</td>
+<td align="right">9</td>
+<td align="center">16</td>
+</tr>
+<tr>
+<td align="left">B</td>
+<td align="right">6</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="left">在这里让我们来分析陶瓷的纹饰和风化是否存在关联。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">默认假设是纹饰与分化无关。并且定义显著性 alpha&#x3D;0.05(一般都设为0.05). 若p值&lt;0.05则拒绝原假设，也就是有关。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<pre><code>import pandas as pd
+import scipy
+d = &#123;&#39;C&#39;:&#123;&#39;风化&#39;:15,&#39;无风化&#39;:13&#125;,&#39;A&#39;:&#123;&#39;风化&#39;:9,&#39;无风化&#39;:11&#125;,&#39;B&#39;:&#123;&#39;风化&#39;:6,&#39;无风化&#39;:0&#125;&#125;
+f = pd.DataFrame(d)
+print(f)
+print(scipy.stats.chi2_contingency(f) )
+chi2, p, df, expected = scipy.stats.chi2_contingency(f)
+if p &lt; 0.05:
+    print(&#39;纹饰和风化有关&#39;)
+else:
+    print(&#39;纹饰和风化无关&#39;)
+</code></pre>
+<h2 id="二、PCA降维"><a href="#二、PCA降维" class="headerlink" title="二、PCA降维"></a>二、PCA降维</h2><p>目的是希望用较少的变量去解释原来资料中的大部分变异，把相关性很高的变量转化成彼此相互独立或不相关的变量，是一种降维方法。 </p>
+<pre><code>import matplotlib.pyplot as plt                
+from sklearn.decomposition import PCA          
+from sklearn.datasets import load_iris
+
+# 然后以字典的形式加载鸢尾花数据集，使用y表示数据集中的标签，使用x表示数据集中的属性数据。
+data=load_iris()
+y=data.target
+x=data.data
+print(x.shape)
+print(type(x))
+# 调用PCA算法进行降维主成分分析
+# 指定主成分个数，即降维后数据维度，降维后的数据保存在reduced_x中。
+pca=PCA(n_components=2)     
+reduced_x=pca.fit_transform(x)
+print(reduced_x.shape)
+print(pca.explained_variance_)
+print(pca.n_features_)
+</code></pre>
+<h2 id="三、判别分析"><a href="#三、判别分析" class="headerlink" title="三、判别分析"></a>三、判别分析</h2><p>根据所研究的个体的观测指标来推断该个体所属类型的一种统计方法.<br>这里主要介绍Fisher判别，也就是机器学习中的LDA线性判别分析。LDA是有标签的降维。</p>
+<pre><code>import matplotlib.pyplot as plt                
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+
+df=load_iris()
+# 因为鸢尾花数据集不是随机分布，而是从上到下按同一个类别在一起排列的，所以拆分数据的时候需要指定stratify这个参数
+X_train, X_test,y_train,y_test = train_test_split(df.data,df.target,test_size=0.25,random_state=0,stratify=df.target) 
+print(df.target)
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+LDA = LinearDiscriminantAnalysis()
+LDA.fit(X_train,y_train)
+LDA.predict(X_test)
+</code></pre>
+<h2 id="K-means算法"><a href="#K-means算法" class="headerlink" title="K-means算法"></a>K-means算法</h2><p>常用的聚类算法</p>
+<pre><code>from sklearn import datasets
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+ 
+# 加载数据集，是一个字典类似Java中的map
+lris_df = datasets.load_iris()
+ 
+# 挑选出前两个维度作为x轴和y轴，你也可以选择其他维度
+x_axis = lris_df.data[:, 0]
+y_axis = lris_df.data[:, 3]
+
+# 这里已经知道了分3类，其他分类这里的参数需要调试
+model = KMeans(n_clusters=3)
+ 
+# 训练模型
+model.fit(lris_df.data)
+ 
+# 选取行标为100的那条数据，进行预测
+# prddicted_label = model.predict([[6.3, 3.3, 6, 2.5]])
+ 
+# 预测全部150条数据
+all_predictions = model.predict(lris_df.data)
+ 
+# x,y 是数据,c是center_point
+plt.scatter(x_axis, y_axis, c=all_predictions)
+plt.show()
+</code></pre>
+]]></content>
+      <categories>
+        <category>数学建模</category>
+      </categories>
+      <tags>
+        <tag>数学建模</tag>
+        <tag>pandas</tag>
+      </tags>
   </entry>
 </search>
