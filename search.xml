@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>python中的json模块</title>
+    <url>/2022/09/09/python%E4%B8%AD%E7%9A%84json%E6%A8%A1%E5%9D%97/</url>
+    <content><![CDATA[<p>之前一直会把load、loads,dump、dumps的功能搞混。在这里记录一下，一个简单区分他们的方式就是loads、dumps 结尾都带一个s,可以理解为操作string字符串的意思. </p>
+<span id="more"></span>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th align="center">作用及用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>json.dump</td>
+<td align="center">传入一个python对象,将其编码为json格式后存储到io流,保存到文件中</td>
+</tr>
+<tr>
+<td>json.dumps</td>
+<td align="center">传入一个python对象,将其编码为json格式后存储到str</td>
+</tr>
+<tr>
+<td>json.load</td>
+<td align="center">传入一个json格式的文件流，将其解码为python对象</td>
+</tr>
+<tr>
+<td>json.loads</td>
+<td align="center">传入一个json格式的str，将其解码为python对象</td>
+</tr>
+</tbody></table>
+<h1 id="json文件的格式-也可以是python对象的格式"><a href="#json文件的格式-也可以是python对象的格式" class="headerlink" title="json文件的格式(也可以是python对象的格式)"></a>json文件的格式(也可以是python对象的格式)</h1><pre><code>data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
+</code></pre>
+<p>由中括号包围的就相当于列表类型，列表中的每个元素可以是任意类型，这个示例中它是字典类型，由大括号包围。</p>
+<p>json 可以由以上两种形式自由组合而成，可以无限次嵌套，结构清晰，是数据交换的极佳方式。</p>
+<h2 id="json-dump"><a href="#json-dump" class="headerlink" title="json.dump()"></a>json.dump()</h2><p>既然存储到IO流,那就肯定需要打开一个文件。</p>
+<pre><code>import json
+data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
+with open(&#39;./new_data.json&#39;,&#39;w&#39;) as f:
+json.dump(data,f)
+</code></pre>
+<h2 id="json-dumps"><a href="#json-dumps" class="headerlink" title="json.dumps()"></a>json.dumps()</h2><p>把python对象转换为str</p>
+<pre><code>import json
+data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
+print(type(data))  # list
+data2 = json.dumps(data)
+print(type(data2))  # str
+</code></pre>
+<h2 id="json-load"><a href="#json-load" class="headerlink" title="json.load()"></a>json.load()</h2><p>传入一个json格式的文件流，将其解码为python对象</p>
+<pre><code>import json	
+with open(&#39;./nested_list.json&#39;) as f:
+    data = json.load(f)
+
+print(data)
+</code></pre>
+<h2 id="json-loads"><a href="#json-loads" class="headerlink" title="json.loads()"></a>json.loads()</h2><p>传入一个json格式的str，将其解码为python对象</p>
+<pre><code>with open(&#39;./nested_list.json&#39;) as f:
+    data = json.loads(f.read())
+print(data)
+</code></pre>
+<h1 id="第三方库demjson"><a href="#第三方库demjson" class="headerlink" title="第三方库demjson"></a>第三方库demjson</h1><p>demjson.encode：将 Python 对象编码成 JSON 字符串</p>
+<p>demjson.decode：将已编码的 JSON 字符串解码为 Python 对象</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SSM整合配置文件</title>
     <url>/2022/08/29/SSM%E6%95%B4%E5%90%88%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<p>我这里主要是跟的尚硅谷的一个比较老的版本的一个SSM整合，本人也是个小菜鸡，欢迎指正错误和讨论哈，部分是我修改的，大部分都是参照视频里的。</p>
@@ -230,74 +298,6 @@
     <url>/2022/08/25/my-site/</url>
     <content><![CDATA[<p>我的第一篇博客，不太会使用markdown，just a try！</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>python中的json模块</title>
-    <url>/2022/09/09/python%E4%B8%AD%E7%9A%84json%E6%A8%A1%E5%9D%97/</url>
-    <content><![CDATA[<p>之前一直会把load、loads,dump、dumps的功能搞混。在这里记录一下，一个简单区分他们的方式就是loads、dumps 结尾都带一个s,可以理解为操作string字符串的意思. </p>
-<span id="more"></span>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th align="center">作用及用法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>json.dump</td>
-<td align="center">传入一个python对象,将其编码为json格式后存储到io流,保存到文件中</td>
-</tr>
-<tr>
-<td>json.dumps</td>
-<td align="center">传入一个python对象,将其编码为json格式后存储到str</td>
-</tr>
-<tr>
-<td>json.load</td>
-<td align="center">传入一个json格式的文件流，将其解码为python对象</td>
-</tr>
-<tr>
-<td>json.loads</td>
-<td align="center">传入一个json格式的str，将其解码为python对象</td>
-</tr>
-</tbody></table>
-<h1 id="json文件的格式-也可以是python对象的格式"><a href="#json文件的格式-也可以是python对象的格式" class="headerlink" title="json文件的格式(也可以是python对象的格式)"></a>json文件的格式(也可以是python对象的格式)</h1><pre><code>data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
-</code></pre>
-<p>由中括号包围的就相当于列表类型，列表中的每个元素可以是任意类型，这个示例中它是字典类型，由大括号包围。</p>
-<p>json 可以由以上两种形式自由组合而成，可以无限次嵌套，结构清晰，是数据交换的极佳方式。</p>
-<h2 id="json-dump"><a href="#json-dump" class="headerlink" title="json.dump()"></a>json.dump()</h2><p>既然存储到IO流,那就肯定需要打开一个文件。</p>
-<pre><code>import json
-data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
-with open(&#39;./new_data.json&#39;,&#39;w&#39;) as f:
-json.dump(data,f)
-</code></pre>
-<h2 id="json-dumps"><a href="#json-dumps" class="headerlink" title="json.dumps()"></a>json.dumps()</h2><p>把python对象转换为str</p>
-<pre><code>import json
-data = [ &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125; ,&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5&#125;]
-print(type(data))  # list
-data2 = json.dumps(data)
-print(type(data2))  # str
-</code></pre>
-<h2 id="json-load"><a href="#json-load" class="headerlink" title="json.load()"></a>json.load()</h2><p>传入一个json格式的文件流，将其解码为python对象</p>
-<pre><code>import json	
-with open(&#39;./nested_list.json&#39;) as f:
-    data = json.load(f)
-
-print(data)
-</code></pre>
-<h2 id="json-loads"><a href="#json-loads" class="headerlink" title="json.loads()"></a>json.loads()</h2><p>传入一个json格式的str，将其解码为python对象</p>
-<pre><code>with open(&#39;./nested_list.json&#39;) as f:
-    data = json.loads(f.read())
-print(data)
-</code></pre>
-<h1 id="第三方库demjson"><a href="#第三方库demjson" class="headerlink" title="第三方库demjson"></a>第三方库demjson</h1><p>demjson.encode：将 Python 对象编码成 JSON 字符串</p>
-<p>demjson.decode：将已编码的 JSON 字符串解码为 Python 对象</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
   </entry>
   <entry>
     <title>编写pytorch代码过程中使用和见到的一些pytorch操作张量函数</title>
@@ -558,7 +558,7 @@ indices=tensor([1, 3, 4, 2, 0]))
     <url>/2022/09/16/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/</url>
     <content><![CDATA[<p>最近在弄数学建模,准备一些预备知识。</p>
 <span id="more"></span>
-<h2 id="一、卡夫检验"><a href="#一、卡夫检验" class="headerlink" title="一、卡夫检验"></a>一、卡夫检验</h2><p>卡夫检验可以用来分析两个变量间的关系：是否相互独立，是否来自一个总体。<br>使用列联表与python可以非常快地计算两个变量之间是否存在关系。<br>列联表如下所示。</p>
+<h2 id="卡夫检验"><a href="#卡夫检验" class="headerlink" title="卡夫检验"></a>卡夫检验</h2><p>卡夫检验可以用来分析两个变量间的关系：是否相互独立，是否来自一个总体。<br>使用列联表与python可以非常快地计算两个变量之间是否存在关系。<br>列联表如下所示。</p>
 <table>
 <thead>
 <tr>
@@ -605,7 +605,7 @@ if p &lt; 0.05:
 else:
     print(&#39;纹饰和风化无关&#39;)
 </code></pre>
-<h2 id="二、PCA降维"><a href="#二、PCA降维" class="headerlink" title="二、PCA降维"></a>二、PCA降维</h2><p>目的是希望用较少的变量去解释原来资料中的大部分变异，把相关性很高的变量转化成彼此相互独立或不相关的变量，是一种降维方法。 </p>
+<h2 id="PCA降维"><a href="#PCA降维" class="headerlink" title="PCA降维"></a>PCA降维</h2><p>目的是希望用较少的变量去解释原来资料中的大部分变异，把相关性很高的变量转化成彼此相互独立或不相关的变量，是一种降维方法。 </p>
 <pre><code>import matplotlib.pyplot as plt                
 from sklearn.decomposition import PCA          
 from sklearn.datasets import load_iris
@@ -624,7 +624,7 @@ print(reduced_x.shape)
 print(pca.explained_variance_)
 print(pca.n_features_)
 </code></pre>
-<h2 id="三、判别分析"><a href="#三、判别分析" class="headerlink" title="三、判别分析"></a>三、判别分析</h2><p>根据所研究的个体的观测指标来推断该个体所属类型的一种统计方法.<br>这里主要介绍Fisher判别，也就是机器学习中的LDA线性判别分析。LDA是有标签的降维。</p>
+<h2 id="三、判别分析"><a href="#三、判别分析" class="headerlink" title="三、判别分析"></a>三、判别分析</h2><p>根据所研究的个体的观测指标来推断该个体所属类型的一种统计方法.可用于多分类问题。<br>这里主要介绍Fisher判别，也就是机器学习中的LDA线性判别分析。LDA是有标签的降维。</p>
 <pre><code>import matplotlib.pyplot as plt                
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
@@ -665,6 +665,73 @@ all_predictions = model.predict(lris_df.data)
 # x,y 是数据,c是center_point
 plt.scatter(x_axis, y_axis, c=all_predictions)
 plt.show()
+</code></pre>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>线性回归可能是统计和机器学习中最著名和最容易理解的算法之一。预测建模主要关注的是最小化模型的误差或做出最准确的预测，但以牺牲可解释性为代价。代码里展示的多元线性回归</p>
+<pre><code>from  numpy import genfromtxt      #genfromtxt函数创建数组表格数据
+import numpy as np
+from sklearn import datasets,linear_model
+ 
+data_multi = genfromtxt(&#39;data_multi.csv&#39;,delimiter=&#39;,&#39;)       #将路径下的文本文件导入并转化成numpy数组格式
+print(&quot;data_multi:&quot;,data_multi)
+ 
+X = data_multi[:,:-1]      #取所有行和除了最后一列的所有列作为特征向量
+Y = data_multi[:,-1]       #取所有行和最后一列作为回归的值
+print(&quot;X:&quot;,X)
+print(&quot;Y:&quot;,Y)
+ 
+#建立回归模型
+regr = linear_model.LinearRegression()
+regr.fit(X,Y)
+print(&quot;coefficients:&quot;,regr.coef_)          #b1,...,bp（与x相结合的各个参数）
+print(&quot;intercept:&quot;,regr.intercept_)        #b0（截面）
+x_pred = [[102,4,6]]
+y_pred = regr.predict(x_pred)         #预测
+print(&quot;y_pred:&quot;,y_pred)
+</code></pre>
+<h2 id="Spearman相关系数"><a href="#Spearman相关系数" class="headerlink" title="Spearman相关系数"></a>Spearman相关系数</h2><p>Spearman相关系数被称为等级变量之间的皮尔森相关系数，主要利用单调方程来衡量两个变量之间的相关性。也就是常说的成正比或者反比。</p>
+<pre><code>import pandas as pd
+import numpy as np
+from sklearn.datasets import load_iris
+from scipy.stats import spearmanr
+
+X=load_iris().data
+# 使用scipy.stats计算spearmanr相关系数
+#该函数返回(相关系数，p-values)
+result_2=spearmanr(X)[0]
+print(result_2)
+</code></pre>
+<h2 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h2><p>常见的逻辑回归，主要用于二分类而不是回归问题。</p>
+<pre><code>###logistic Regression
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+import pandas as pd
+LR = LogisticRegression()
+data = pd.read_csv(&#39;./diabetes.csv&#39;)
+train_data = data.iloc[:,:-1]
+label = data.iloc[:,-1]
+# print(label)
+# print(data.iloc[1])
+X_train, X_test, Y_train,Y_test = train_test_split(train_data,label,test_size=0.3,random_state=43)
+
+LR.fit(X_train,Y_train)
+
+LR.predict(X_test)
+</code></pre>
+<h2 id="decision-tree"><a href="#decision-tree" class="headerlink" title="decision tree##"></a>decision tree##</h2><p>决策树主要有两种用法，一种用于分类,一种用于回归。<br>    ###decision tree 4 classification</p>
+<pre><code>from sklearn.tree import DecisionTreeClassifier,plot_tree  # 可视化决策树
+from sklearn.metrics import accuracy_score
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+data=load_iris()
+x,y = data.data,data.target
+X_train, X_test, Y_train,Y_test = train_test_split(x,y,test_size=0.3,random_state=43)
+
+model = DecisionTreeClassifier()
+model.fit(X_train,Y_train)
+
+print(model.predict(X_test))
+print(model.feature_importances_)  # 分析每个权重的重要性
+plot_tree(model)  # 还可以添加一些参数的名字等等.
 </code></pre>
 ]]></content>
       <categories>
