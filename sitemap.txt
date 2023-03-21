@@ -1,5 +1,7 @@
+https://www.zzzheng.top/2023/03/21/mysql/
+https://www.zzzheng.top/2022/10/20/bash/
+https://www.zzzheng.top/2022/10/05/pandas/
 https://www.zzzheng.top/2022/09/16/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/
-https://www.zzzheng.top/2022/09/14/springboot%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98-%E5%9C%A8%E7%BA%BF%E5%8D%9A%E5%AE%A2/
 https://www.zzzheng.top/2022/09/13/pytorch/
 https://www.zzzheng.top/2022/09/09/python%E4%B8%AD%E7%9A%84json%E6%A8%A1%E5%9D%97/
 https://www.zzzheng.top/2022/08/29/SSM%E6%95%B4%E5%90%88%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/
@@ -16,10 +18,12 @@ https://www.zzzheng.top/tags/MyBatis/
 https://www.zzzheng.top/tags/SSM/
 https://www.zzzheng.top/tags/pytorch/
 https://www.zzzheng.top/tags/dl/
-https://www.zzzheng.top/tags/springBoot/
-https://www.zzzheng.top/tags/MybatisPlus/
 https://www.zzzheng.top/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/
 https://www.zzzheng.top/tags/pandas/
+https://www.zzzheng.top/tags/bash/
+https://www.zzzheng.top/tags/sql/
 https://www.zzzheng.top/categories/python/
 https://www.zzzheng.top/categories/java/
 https://www.zzzheng.top/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/
+https://www.zzzheng.top/categories/linux/
+https://www.zzzheng.top/categories/sql/

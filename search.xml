@@ -538,22 +538,6 @@ indices=tensor([1, 3, 4, 2, 0]))
       </tags>
   </entry>
   <entry>
-    <title>springboot项目实战---在线博客</title>
-    <url>/2022/09/14/springboot%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98-%E5%9C%A8%E7%BA%BF%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>之前本来一直在看</p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>spring</tag>
-        <tag>springMVC</tag>
-        <tag>springBoot</tag>
-        <tag>MybatisPlus</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数学建模</title>
     <url>/2022/09/16/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/</url>
     <content><![CDATA[<p>最近在弄数学建模,准备一些预备知识。</p>
@@ -741,5 +725,51 @@ plot_tree(model)  # 还可以添加一些参数的名字等等.
         <tag>数学建模</tag>
         <tag>pandas</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>bash</title>
+    <url>/2022/10/20/bash/</url>
+    <content><![CDATA[<p>touch helloScript.sh<br>新建一个sh文件<br>vim helloScript.sh<br>编辑</p>
+<p>cat &gt; hello.txt<br>输出这行命令的作用是写入hello.txt，并且覆盖之前的内容<br>cat &gt;&gt; hello.txt<br>输出这行命令的作用是写入hello.txt ，在原有的内容之上写入新的内容</p>
+<p>cat &lt;&lt; kreative<br>this is a creative idea<br>kreative</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>bash</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql</title>
+    <url>/2023/03/21/mysql/</url>
+    <content><![CDATA[<p>很久没写过sql语句了,有点忘记了，看面经里面的东西也有点不太懂，跟着b站的教程稍微学习一下。<br> <a href="https://www.bilibili.com/video/BV1PT4y1e7UU/?spm_id_from=333.337.search-card.all.click&vd_source=60045f8f7bf00f3d724b0fead00d82fa">这是一个sql教程链接</a>。 台湾人讲话蛮有意思的。<br>话不多说就记录一下吧。</p>
+]]></content>
+      <categories>
+        <category>sql</category>
+      </categories>
+      <tags>
+        <tag>sql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pandas</title>
+    <url>/2022/10/05/pandas/</url>
+    <content><![CDATA[<h2 id="查看文件数据的属性"><a href="#查看文件数据的属性" class="headerlink" title="查看文件数据的属性"></a>查看文件数据的属性</h2><pre><code>print(df)  查看全部内容
+print(df.head()) # 查看前5行
+print(df.tail()) # 查看后5行
+print(df.index) # 查看索引行
+print(df.values) # 查看内容
+print(df.columns) # 查看列名列表
+print(df.shape) # 查看数据的形状（返回行、列数）
+print(df.dtypes) # 查看每列的数据类型
+</code></pre>
+<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><p>比如说在一个区间的数据</p>
+<pre><code># df.loc方法，根据行、列的标签值查询  df.loc[行标签,列标签] 主要用这个
+# df.iloc方法，根据行、列的数字位置查询
+df[&#39;name&#39;] = df[&#39;name&#39;].map(lambda x: x +&#39;a&#39;)  # 直接修改一列的数据，使用map函数
+# df[] 只限于column,df.loc就类似于矩阵索引
+</code></pre>
+]]></content>
   </entry>
 </search>
