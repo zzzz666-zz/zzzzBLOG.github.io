@@ -29,7 +29,7 @@
 <meta property="og:description" content="很久没写过sql语句了,有点忘记了，看面经里面的东西也有点不太懂，跟着b站的教程稍微学习一下。 这是一个sql教程链接。 台湾人讲话蛮有意思的。话不多说就记录一下吧。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-21T11:37:33.000Z">
-<meta property="article:modified_time" content="2023-03-21T11:45:23.197Z">
+<meta property="article:modified_time" content="2023-03-27T10:47:48.590Z">
 <meta property="article:author" content="即兴表演">
 <meta property="article:tag" content="sql">
 <meta name="twitter:card" content="summary">
@@ -133,7 +133,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -146,6 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL196"><span class="nav-number">1.</span> <span class="nav-text">SQL196</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL201"><span class="nav-number">2.</span> <span class="nav-text">SQL201</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL229"><span class="nav-number">3.</span> <span class="nav-text">SQL229</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL230"><span class="nav-number">4.</span> <span class="nav-text">SQL230</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL231"><span class="nav-number">5.</span> <span class="nav-text">SQL231</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -231,9 +232,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-03-21 19:37:33 / 修改时间：19:45:23" itemprop="dateCreated datePublished" datetime="2023-03-21T19:37:33+08:00">2023-03-21</time>
+      <time title="创建时间：2023-03-21 19:37:33" itemprop="dateCreated datePublished" datetime="2023-03-21T19:37:33+08:00">2023-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-27 18:47:48" itemprop="dateModified" datetime="2023-03-27T18:47:48+08:00">2023-03-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -264,6 +271,257 @@
     <div class="post-body" itemprop="articleBody">
         <p>很久没写过sql语句了,有点忘记了，看面经里面的东西也有点不太懂，跟着b站的教程稍微学习一下。<br> <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PT4y1e7UU/?spm_id_from=333.337.search-card.all.click&vd_source=60045f8f7bf00f3d724b0fead00d82fa">这是一个sql教程链接</a>。 台湾人讲话蛮有意思的。<br>话不多说就记录一下吧。</p>
 <span id="more"></span>
+
+<pre><code>    create database `database`;  # &#39;&#39;是为了和关键字区分，创建一个名字为database的数据库
+    show databases; # 显示所有数据库
+    drop database `database`; # 删除名字叫database的数据库
+
+    CREATE DATABASE `bzh678`; # ``是为了和关键字区分，创建名字叫bzh678的数据库
+    SHOW DATABASES; # 展示所有的数据库
+    DROP DATABASE `bzh678`; # 删除名字叫bzh678的数据库
+    
+    CREATE DATABASE `sql_tutorial`;
+    USE `sql_tutorial`;
+    
+    # 创建一个table，名字叫student，有三个属性student_id、name、major。student_id是主键 int类型，name字符串类型，major 字符串类型
+    CREATE TABLE `student`(
+        `student_id` INT PRIMARY KEY AUTO_INCREMENT,
+        `name` VARCHAR(50) NOT NULL, # 约束 不为空
+        `major` VARCHAR(50) UNIQUE # 不可重复
+    );
+    
+    # 常见的约束
+    # NOT NULL 不为空  UNIQUE 不可重复  DEFAULT 设置默认值
+    
+    DESCRIBE `student`; # 描述一下表格
+    ALTER TABLE `student` ADD `gpa` DECIMAL(3,2); # 给表格中添加一个属性
+    ALTER TABLE `student` DROP COLUMN `gpa`; # 删除表格中的gpa属性
+    DROP TABLE `student`;
+    SELECT * FROM `student`;
+    
+    # 插入
+    INSERT INTO `student` VALUES(&quot;小白&quot;,&#39;历史&#39;);
+    # 插入时指定属性的顺序
+    INSERT INTO `student`(`name`,`major`) VALUES(&quot;小黑&quot;,&#39;历史&#39;);
+    
+    
+    # 修改、删除
+    CREATE TABLE `student`(
+        `student_id` INT PRIMARY KEY,
+        `name` VARCHAR(50), # 约束 不为空
+        `major` VARCHAR(50), # 不可重复
+        `score` INT
+    );
+    
+    INSERT INTO `student` VALUES(3,&#39;bzh3&#39;,&#39;history&#39;,86);
+    UPDATE `student` SET `major` = &#39;英语&#39; ,`name` = &#39;zz&#39; WHERE `major` = &#39;english&#39; OR `name` = &#39;bzh2&#39;; 
+    DELETE FROM `student` WHERE `student_id` = 3;
+    
+    
+    # 取得资料
+    SELECT * FROM `student` ORDER BY `score` DESC LIMIT 2; # 排序 order by  desc 代表降序 limit 表示只取前2个数据
+    SELECT `name` ,`major` FROM `student` ORDER BY `score`;
+    
+    
+    
+    
+    
+    
+    # 创建公司数据库
+    CREATE TABLE `employee`(
+        `emp_id` INT PRIMARY KEY,
+        `name` VARCHAR(20),
+        `birth_data` DATE,
+        `sex` VARCHAR(1),
+        `salary` INT,
+        `branch_id` INT,
+        `sup_id` INT
+    );
+    
+    create table `branch`(
+        `branch_id` int primary key,
+        `branch_name` varchar(20),
+        `manager_id` int,
+        foreign key (`manager_id`) references `employee`(`emp_id`) on delete set null
+    );
+    
+    # 补充刚刚没有的foreign key
+    alter table `employee` add foreign key (`sup_id`) references `employee`(`emp_id`) on delete set null;
+    ALTER TABLE `employee` ADD FOREIGN KEY (`branch_id`) REFERENCES `branch`(`branch_id`) ON DELETE SET NULL;
+    
+    create table `client`(
+        `client_id` INT primary key,
+        `client_name` varchar(20),
+        `phone` varchar(11)
+    );
+    CREATE TABLE `works_with`(
+        `emp_id` INT ,
+        `client_id` INT,
+        `total_sales` int,
+        primary key(`emp_id`,`client_id`),
+        foreign key (`emp_id`) references `employee`(`emp_id`) on delete cascade,
+        FOREIGN KEY (`client_id`) REFERENCES `client`(`client_id`) ON DELETE CASCADE
+    );
+    
+    
+    # 新增部门
+    insert into branch values(1,&#39;研发&#39;,NUll);
+    INSERT INTO branch VALUES(2,&#39;行政&#39;,NULL);
+    INSERT INTO branch VALUES(3,&#39;咨询&#39;,NULL);
+    
+    # 新增员工资料
+    insert into employee values(206,&#39;yui&#39;,&#39;1998-10-10&#39;,&#39;F&#39;,5000,1,NUll);
+    INSERT INTO employee VALUES(207,&#39;qwe&#39;,&#39;1998-10-10&#39;,&#39;F&#39;,5000,2,206);
+    INSERT INTO employee VALUES(208,&#39;sdfg&#39;,&#39;1998-10-10&#39;,&#39;F&#39;,5000,3,206);
+    INSERT INTO employee VALUES(209,&#39;gfd&#39;,&#39;1998-10-10&#39;,&#39;F&#39;,5000,1,207);
+    INSERT INTO employee VALUES(210,&#39;tre&#39;,&#39;1998-10-10&#39;,&#39;F&#39;,5000,2,208);
+    
+    # 更新部门信息
+    update `branch` set `manager_id` = 206 where `branch_id` = 1;
+    UPDATE `branch` SET `manager_id` = 207 WHERE `branch_id` = 2;
+    UPDATE `branch` SET `manager_id` = 208 WHERE `branch_id` = 3;
+    
+    # 新增客户资料
+    insert into `client` values(400,&#39;uio&#39;,&#39;78945613&#39;);
+    INSERT INTO `client` VALUES(401,&#39;poi&#39;,&#39;78945613&#39;);
+    INSERT INTO `client` VALUES(402,&#39;lkj&#39;,&#39;78945613&#39;);
+    
+    # 新增work_with
+    insert into works_with values(206,400,456789);
+    INSERT INTO works_with VALUES(207,401,6547);
+    INSERT INTO works_with VALUES(208,402,60000);
+    INSERT INTO works_with VALUES(209,402,50000);
+    INSERT INTO works_with VALUES(210,400,30000);
+    
+    
+    # 练习
+    # 1. 取得所有员工资料
+    select * from `employee`;
+    # 2. 取得所有客户资料
+    select * from `client`;
+    # 3. 按薪水从低到高取得员工资料
+    SELECT * FROM `employee` order by `salary`;
+    # 4. 取得薪水前三高的员工
+    SELECT * FROM `employee` ORDER BY `salary` desc limit 3;
+    # 2. 取得所有员工的名字
+    select `name` from `employee`;
+    
+    
+    # aggregate function 聚合函数
+    # 1.查看员工人数
+    select count(*) from employee;
+    # 2.取得所有出生于1970-01-01之后的女性员工人数
+    SELECT COUNT(*) FROM `employee` where birth_data &gt; &#39;1970-01-01&#39; and `sex` = &#39;F&#39;;
+    # 3.取得所有员工的平均薪水
+    select avg(`salary`) from `employee`;
+    # 4.取得所有员工薪水的总和
+    SELECT sum(`salary`) FROM `employee`;
+    # 5.取得薪水最高的员工
+    select max(`salary`) from `employee`;
+    # 5.取得薪水最低的员工
+    SELECT min(`salary`) FROM `employee`;
+    
+    
+    # wildcards 通配符 %代表多个字，_代表一个字
+    # 1.取得电话号码是335的客户
+    select * from `client` where `phone` like &#39;%335&#39;;
+    
+    # 取得姓艾的客户
+    select * from `client` where `client_name` like &#39;艾%&#39;;
+    
+    # 取得生日在12月的员工
+    select * from `employee` where `birth_data` like &#39;%-09-__&#39;;
+    
+    # union 合集,作用就是把多个结果集放在一起，要求列数相同而且数据类型兼容,列名由第一个查询决定
+    # 1.员工名字和客户名字
+    select `name` from `employee` union select `client_name` from `client`;
+    # 员工id + 员工名字 union 客户id + 客户名字
+    select `emp_id` as `total_id`,`name` as `total_name` from `employee` union select `client_id`,`client_name` from `client`;
+    # 员工薪水 union 销售金额
+    select `salary` from `employee` union select `total_sales` from `works_with`;
+    
+    
+    # join 连接
+    # 1.取得所有经理的名字
+    select `employee`.`emp_id`,`employee`.`name`,`branch`.`branch_name` from `employee` join `branch` on `employee`.`emp_id` = `branch`.`manager_id`;
+    
+    # left join 不管右边成不成立，都会把左边表格的所有数据返回，不存在的值设为null
+    select * from `employee` left join `branch` on `emp_id` = `manager_id`;
+    
+    # subquery 子查询
+    # 1.找出研发部门的经理名字
+    select `name` from `employee` where `emp_id` = (
+        select `manager_id` from `branch` where `branch_name` = &#39;研发&#39;
+    );
+    
+    # 2,找出对单位客户销售额超过5w的员工名字
+    select * from `employee` where `emp_id` in (
+        select `emp_id` from `works_with` where `total_sales` &gt; 50000
+    );
+    
+    #
+    # on delete set null的意思是一张表的外键关联了另一张表的primary key，在另一张表删除了一条记录，那么本张表的对应的值设为null
+    # on delete cascade 就是跟着一起删掉
+</code></pre>
+<p>其实这个教程只是简单入门，并没有很详细，后续会刷牛客上的sql题，通过刷题来补充没有看到的信息。<br><a target="_blank" rel="noopener" href="https://www.nowcoder.com/exam/oj?page=1&tab=SQL%E7%AF%87&topicId=82">sql练习题</a></p>
+<h2 id="SQL196"><a href="#SQL196" class="headerlink" title="SQL196"></a>SQL196</h2><pre><code>    select * from `employees` where `hire_date` = (select distinct `hire_date` from `employees` order by `hire_date` 
+    desc limit 1 offset 2);
+</code></pre>
+<p>这题重新捡起了<strong>offset</strong> 表示一个偏移量。<br>还有<strong>distinct</strong> 关键字，表示去重。会去掉记录中重复的记录。</p>
+<h2 id="SQL201"><a href="#SQL201" class="headerlink" title="SQL201"></a>SQL201</h2><pre><code>    select `emp_no` ,count(*) as t from `salaries` group by `emp_no` having t &gt; 15;
+</code></pre>
+<p><strong>group by</strong>关键字分组</p>
+<p><strong>having</strong>关键字。mysql中，当我们用到聚合函数，如sum，count后，又需要筛选条件时，having就派上用场了，因为WHERE是在聚合前筛选记录的，having和group by是组合着用的</p>
+<h2 id="SQL229"><a href="#SQL229" class="headerlink" title="SQL229"></a>SQL229</h2><pre><code>    # mysql中常用的三种插入数据的语句: 
+    # insert into表示插入数据，数据库会检查主键，如果出现重复会报错； 
+    # replace into表示插入替换数据，需求表中有PrimaryKey，
+    #             或者unique索引，如果数据库已经存在数据，则用新数据替换，如果没有数据效果则和insert into一样； 
+    # insert ignore表示，如果中已经存在相同的记录，则忽略当前新数据；
+    insert ignore into actor values(&quot;3&quot;,&quot;ED&quot;,&quot;CHASE&quot;,&quot;2006-02-15 12:34:33&quot;);
+</code></pre>
+<p>常用的三种insert</p>
+<h2 id="SQL230"><a href="#SQL230" class="headerlink" title="SQL230"></a>SQL230</h2><pre><code>    常规创建
+    create table if not exists 目标表
+    复制表格
+    create 目标表 like 来源表
+    将table1的部分拿来创建table2
+    create table if not exists actor_name
+    (
+    first_name varchar(45) not null,
+    last_name varchar(45) not null
+    )
+    select first_name,last_name
+    from actor
+</code></pre>
+<h2 id="SQL231"><a href="#SQL231" class="headerlink" title="SQL231"></a>SQL231</h2><p>alter和create 都可以创建索引。<br>Alter可以省略索引名。如果省略索引名，数据库会默认根据第一个索引列赋予一个名称；Create必须指定索引名称。</p>
+<p>Create不能用于创建Primary key索引；</p>
+<p>Alter允许一条语句同时创建多个索引；Create一次只能创建一个索引<br>        ALTER TABLE 表名 ADD Primary key (col);<br>        添加唯一索引<br>        &gt; 特点：索引列是唯一的，可以null；Mysql主动将该字段进行排序</p>
+<pre><code>    ALTER TABLE 表名 ADD unique &lt;索引名&gt; (col1, col2, ...col3);
+    添加普通索引
+    &gt; 特点：添加普通索引， 索引值不唯一，可为null
+    
+    
+    Alter table 表名 ADD index &lt;索引名&gt; (col1, col2, ...,);
+    添加全文索引
+    &gt; 特点：只能在文本类型CHAR，VARCHAR, TEXT类型字段上创建全文索引；
+    
+    
+    ALTER TABLE 表名 ADD Fulltext &lt;索引名&gt; (col)
+    添加多列索引
+    &gt; 特点：多列是唯一的
+    
+    
+    ALTER TABLE 表名 ADD UNIQUE (col1, col2, ..., )
+    1.2 使用Create创建索引
+    &gt; 语法：create index 索引名 on 表名(字段)
+    
+    添加普通索引
+    
+    create index 索引名 on 表名(col1, col2, ..., )
+    添加唯一索引
+    1
+    create unique index 索引名 on 表名(col1, col2, ..., )
+</code></pre>
 
     </div>
 
@@ -320,6 +578,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2023/04/21/java%E5%85%AB%E8%82%A1%E6%96%87/" rel="next" title="java八股文">
+                  java八股文 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

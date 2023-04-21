@@ -21,26 +21,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.zzzheng.top","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="即兴表演的个人博客网站">
-<meta property="og:type" content="website">
-<meta property="og:title" content="即兴表演的个人博客网站">
-<meta property="og:url" content="https://www.zzzheng.top/index.html">
+    <meta name="description" content="JDK、JRE、JVM之间的区别 hashCode()与equals()之间的关系 String、StringBuffer、StringBuilder的区别 泛型中extends和super的区别 &#x3D;&#x3D;和equals方法的区别 重载和重写的区别 List和Set的区别 ArrayList和LinkedList区别 谈谈ConcurrentHashMap的扩容机制 Jdk.到Jd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java八股文">
+<meta property="og:url" content="https://www.zzzheng.top/2023/04/21/java%E5%85%AB%E8%82%A1%E6%96%87/index.html">
 <meta property="og:site_name" content="即兴表演的个人博客网站">
-<meta property="og:description" content="即兴表演的个人博客网站">
+<meta property="og:description" content="JDK、JRE、JVM之间的区别 hashCode()与equals()之间的关系 String、StringBuffer、StringBuilder的区别 泛型中extends和super的区别 &#x3D;&#x3D;和equals方法的区别 重载和重写的区别 List和Set的区别 ArrayList和LinkedList区别 谈谈ConcurrentHashMap的扩容机制 Jdk.到Jd">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-21T02:55:46.000Z">
+<meta property="article:modified_time" content="2023-04-21T02:56:12.816Z">
 <meta property="article:author" content="即兴表演">
 <meta property="article:tag" content="java、python、linux">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://www.zzzheng.top/">
+<link rel="canonical" href="https://www.zzzheng.top/2023/04/21/java%E5%85%AB%E8%82%A1%E6%96%87/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zzzheng.top/2023/04/21/java%E5%85%AB%E8%82%A1%E6%96%87/","path":"2023/04/21/java八股文/","title":"java八股文"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>即兴表演的个人博客网站 - 努力学习中...</title>
+<title>java八股文 | 即兴表演的个人博客网站</title>
   
 
 
@@ -71,7 +73,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">即兴表演的个人博客网站</h1>
+      <p class="site-title">即兴表演的个人博客网站</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">努力学习中...</p>
@@ -190,16 +192,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.zzzheng.top/2023/04/21/java%E5%85%AB%E8%82%A1%E6%96%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -213,13 +216,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 即兴表演的个人博客网站">
+      <meta itemprop="name" content="java八股文 | 即兴表演的个人博客网站">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/04/21/java%E5%85%AB%E8%82%A1%E6%96%87/" class="post-title-link" itemprop="url">java八股文</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          java八股文
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -234,6 +237,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
 </div>
 
         </div>
@@ -243,7 +253,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>JDK、JRE、JVM之间的区别</p>
+        <p>JDK、JRE、JVM之间的区别</p>
 <p>hashCode()与equals()之间的关系</p>
 <p>String、StringBuffer、StringBuilder的区别</p>
 <p>泛型中extends和super的区别</p>
@@ -520,7 +530,6 @@
 <p>消息队列有哪些作用<br>死信队列是什么？延时队列是什么？<br>如何保证消息的高效读写？<br>1 .select模型，使用的是数组来存储Socket连接文件描述符，容量是固定的，需要通过轮询来判断是<br>否发生了IO事件<br>2 .poll模型，使用的是链表来存储Socket连接文件描述符，容量是不固定的，同样需要通过轮询来判<br>断是否发生了IO事件<br>3 .epoll模型，epoll和poll是完全不同的，epoll是一种事件通知模型，当发生了IO事件时，应用程序才<br>进行IO操作，不需要像poll模型那样主动去轮询<br>TCP协议是 7 层网络协议中的传输层协议，负责数据的可靠传输。<br>在建立TCP连接时，需要通过三次握手来建立，过程是：<br>1 .客户端向服务端发送一个SYN<br>2 .服务端接收到SYN后，给客户端发送一个SYN_ACK<br>3 .客户端接收到SYN_ACK后，再给服务端发送一个ACK<br>在断开TCP连接时，需要通过四次挥手来断开，过程是：<br>1 .客户端向服务端发送FIN<br>2 .服务端接收FIN后，向客户端发送ACK，表示我接收到了断开连接的请求，客户端你可以不发数据<br>了，不过服务端这边可能还有数据正在处理<br>3 .服务端处理完所有数据后，向客户端发送FIN，表示服务端现在可以断开连接<br>4 .客户端收到服务端的FIN，向服务端发送ACK，表示客户端也会断开连接了<br>1 .浏览器解析用户输入的URL，生成一个HTTP格式的请求<br>2 .先根据URL域名从本地hosts文件查找是否有映射IP，如果没有就将域名发送给电脑所配置的DNS进<br>行域名解析，得到IP地址<br>3 .浏览器通过操作系统将请求通过四层网络协议发送出去<br>4 .途中可能会经过各种路由器、交换机，最终到达服务器<br>5 .服务器收到请求后，根据请求所指定的端口，将请求传递给绑定了该端口的应用程序，比如 8080 被<br>tomcat占用了<br>6 .tomcat接收到请求数据后，按照http协议的格式进行解析，解析得到所要访问的servlet<br>7 .然后servlet来处理这个请求，如果是SpringMVC中的DispatcherServlet，那么则会找到对应的<br>Controller中的方法，并执行该方法得到结果<br>8 .Tomcat得到响应结果后封装成HTTP响应的格式，并再次通过网络发送给浏览器所在的服务器<br>epoll和poll的区别<br>TCP的三次握手和四次挥手<br>浏览器发出一个请求到收到响应经历了哪些步骤？<br>9 .浏览器所在的服务器拿到结果后再传递给浏览器，浏览器则负责解析并渲染<br>跨域是指浏览器在发起网络请求时，会检查该请求所对应的协议、域名、端口和当前网⻚是否一致，如<br>果不一致则浏览器会进行限制，比如在<a target="_blank" rel="noopener" href="http://www.baidu.com的某个网⻚中,如果使用ajax去访问/">www.baidu.com的某个网⻚中，如果使用ajax去访问</a><br><a target="_blank" rel="noopener" href="http://www.jd.com是不行的,但是如果是img、iframe、script等标签的src属性去访问则是可以的,之所以浏/">http://www.jd.com是不行的，但是如果是img、iframe、script等标签的src属性去访问则是可以的，之所以浏</a><br>览器要做这层限制，是为了用户信息安全。但是如果开发者想要绕过这层限制也是可以的：</p>
 <p>1 .response添加header，比如resp.setHeader(“Access-Control-Allow-Origin”, “*”);表示可以访问<br>所有网站，不受是否同源的限制<br>2 .jsonp的方式，该技术底层就是基于script标签来实现的，因为script标签是可以跨域的<br>3 .后台自己控制，先访问同域名下的接口，然后在接口中再去使用HTTPClient等工具去调用目标接口<br>4 .网关，和第三种方式类似，都是交给后台服务来进行跨域访问<br>零拷⻉指的是，应用程序在需要把内核中的一块区域数据转移到另外一块内核区域去时，不需要经过先<br>复制到用户空间，再转移到目标内核区域去了，而直接实现转移。<br>跨域请求是什么？有什么问题？怎么解决？<br>零拷⻉是什么</p>
 
-      
     </div>
 
     
@@ -528,724 +537,57 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
+          <div class="reward-container">
+  <div>赏个鸡腿</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/./img/wx.jpg" alt="即兴表演 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/./img/zfb.jpg" alt="即兴表演 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>即兴表演
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.zzzheng.top/2023/04/21/java%E5%85%AB%E8%82%A1%E6%96%87/" title="java八股文">https://www.zzzheng.top/2023/04/21/java八股文/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
 
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zzzheng.top/2023/03/21/mysql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/./img/touxiang.jpg">
-      <meta itemprop="name" content="即兴表演">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="即兴表演的个人博客网站">
-      <meta itemprop="description" content="即兴表演的个人博客网站">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 即兴表演的个人博客网站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/03/21/mysql/" class="post-title-link" itemprop="url">mysql</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-03-21 19:37:33" itemprop="dateCreated datePublished" datetime="2023-03-21T19:37:33+08:00">2023-03-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-27 18:47:48" itemprop="dateModified" datetime="2023-03-27T18:47:48+08:00">2023-03-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/sql/" itemprop="url" rel="index"><span itemprop="name">sql</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>很久没写过sql语句了,有点忘记了，看面经里面的东西也有点不太懂，跟着b站的教程稍微学习一下。<br> <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PT4y1e7UU/?spm_id_from=333.337.search-card.all.click&vd_source=60045f8f7bf00f3d724b0fead00d82fa">这是一个sql教程链接</a>。 台湾人讲话蛮有意思的。<br>话不多说就记录一下吧。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/21/mysql/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zzzheng.top/2022/10/20/bash/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/./img/touxiang.jpg">
-      <meta itemprop="name" content="即兴表演">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="即兴表演的个人博客网站">
-      <meta itemprop="description" content="即兴表演的个人博客网站">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 即兴表演的个人博客网站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/20/bash/" class="post-title-link" itemprop="url">bash</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-10-20 14:19:12" itemprop="dateCreated datePublished" datetime="2022-10-20T14:19:12+08:00">2022-10-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-21 19:45:40" itemprop="dateModified" datetime="2023-03-21T19:45:40+08:00">2023-03-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>touch helloScript.sh<br>新建一个sh文件<br>vim helloScript.sh<br>编辑</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/10/20/bash/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/21/mysql/" rel="prev" title="mysql">
+                  <i class="fa fa-chevron-left"></i> mysql
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zzzheng.top/2022/10/05/pandas/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/./img/touxiang.jpg">
-      <meta itemprop="name" content="即兴表演">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="即兴表演的个人博客网站">
-      <meta itemprop="description" content="即兴表演的个人博客网站">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 即兴表演的个人博客网站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/05/pandas/" class="post-title-link" itemprop="url">pandas</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-10-05 20:02:38" itemprop="dateCreated datePublished" datetime="2022-10-05T20:02:38+08:00">2022-10-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-21 19:45:55" itemprop="dateModified" datetime="2023-03-21T19:45:55+08:00">2023-03-21</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="查看文件数据的属性"><a href="#查看文件数据的属性" class="headerlink" title="查看文件数据的属性"></a>查看文件数据的属性</h2><pre><code>print(df)  查看全部内容
-print(df.head()) # 查看前5行
-print(df.tail()) # 查看后5行
-print(df.index) # 查看索引行
-print(df.values) # 查看内容
-print(df.columns) # 查看列名列表
-print(df.shape) # 查看数据的形状（返回行、列数）
-print(df.dtypes) # 查看每列的数据类型
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/10/05/pandas/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+            <div class="post-nav-item">
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zzzheng.top/2022/09/16/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/./img/touxiang.jpg">
-      <meta itemprop="name" content="即兴表演">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="即兴表演的个人博客网站">
-      <meta itemprop="description" content="即兴表演的个人博客网站">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 即兴表演的个人博客网站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/16/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-title-link" itemprop="url">数学建模</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-16 19:31:50" itemprop="dateCreated datePublished" datetime="2022-09-16T19:31:50+08:00">2022-09-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-20 20:36:22" itemprop="dateModified" datetime="2022-09-20T20:36:22+08:00">2022-09-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" itemprop="url" rel="index"><span itemprop="name">数学建模</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最近在弄数学建模,准备一些预备知识。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/09/16/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zzzheng.top/2022/09/13/pytorch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/./img/touxiang.jpg">
-      <meta itemprop="name" content="即兴表演">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="即兴表演的个人博客网站">
-      <meta itemprop="description" content="即兴表演的个人博客网站">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 即兴表演的个人博客网站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/13/pytorch/" class="post-title-link" itemprop="url">编写pytorch代码过程中使用和见到的一些pytorch操作张量函数</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-09-13 15:01:27 / 修改时间：16:03:28" itemprop="dateCreated datePublished" datetime="2022-09-13T15:01:27+08:00">2022-09-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>一直都想记录一下自己在写深度学习模型中见到和使用的函数，了解更多的pytorch函数也有助于更好地编写模型，终于有空了记录一下。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/09/13/pytorch/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zzzheng.top/2022/09/09/python%E4%B8%AD%E7%9A%84json%E6%A8%A1%E5%9D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/./img/touxiang.jpg">
-      <meta itemprop="name" content="即兴表演">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="即兴表演的个人博客网站">
-      <meta itemprop="description" content="即兴表演的个人博客网站">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 即兴表演的个人博客网站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/09/python%E4%B8%AD%E7%9A%84json%E6%A8%A1%E5%9D%97/" class="post-title-link" itemprop="url">python中的json模块</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-09 20:58:07" itemprop="dateCreated datePublished" datetime="2022-09-09T20:58:07+08:00">2022-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-13 15:36:50" itemprop="dateModified" datetime="2022-09-13T15:36:50+08:00">2022-09-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>之前一直会把load、loads,dump、dumps的功能搞混。在这里记录一下，一个简单区分他们的方式就是loads、dumps 结尾都带一个s,可以理解为操作string字符串的意思. </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/09/09/python%E4%B8%AD%E7%9A%84json%E6%A8%A1%E5%9D%97/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zzzheng.top/2022/08/29/SSM%E6%95%B4%E5%90%88%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/./img/touxiang.jpg">
-      <meta itemprop="name" content="即兴表演">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="即兴表演的个人博客网站">
-      <meta itemprop="description" content="即兴表演的个人博客网站">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 即兴表演的个人博客网站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/29/SSM%E6%95%B4%E5%90%88%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">SSM整合配置文件</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-08-29 21:25:35" itemprop="dateCreated datePublished" datetime="2022-08-29T21:25:35+08:00">2022-08-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-08-30 19:30:44" itemprop="dateModified" datetime="2022-08-30T19:30:44+08:00">2022-08-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>我这里主要是跟的尚硅谷的一个比较老的版本的一个SSM整合，本人也是个小菜鸡，欢迎指正错误和讨论哈，部分是我修改的，大部分都是参照视频里的。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/08/29/SSM%E6%95%B4%E5%90%88%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zzzheng.top/2022/08/25/my-site/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/./img/touxiang.jpg">
-      <meta itemprop="name" content="即兴表演">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="即兴表演的个人博客网站">
-      <meta itemprop="description" content="即兴表演的个人博客网站">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 即兴表演的个人博客网站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/25/my-site/" class="post-title-link" itemprop="url">my_site</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-08-25 20:28:55" itemprop="dateCreated datePublished" datetime="2022-08-25T20:28:55+08:00">2022-08-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-08-26 10:05:09" itemprop="dateModified" datetime="2022-08-26T10:05:09+08:00">2022-08-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>我的第一篇博客，不太会使用markdown，just a try！</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
