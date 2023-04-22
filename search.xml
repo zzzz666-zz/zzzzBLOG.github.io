@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>bash</title>
-    <url>/2022/10/20/bash/</url>
-    <content><![CDATA[<p>touch helloScript.sh<br>新建一个sh文件<br>vim helloScript.sh<br>编辑</p>
-<span id="more"></span>
-<p>cat &gt; hello.txt<br>输出这行命令的作用是写入hello.txt，并且覆盖之前的内容<br>cat &gt;&gt; hello.txt<br>输出这行命令的作用是写入hello.txt ，在原有的内容之上写入新的内容</p>
-<p>cat &lt;&lt; kreative<br>this is a creative idea<br>kreative</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>bash</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SSM整合配置文件</title>
     <url>/2022/08/29/SSM%E6%95%B4%E5%90%88%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<p>我这里主要是跟的尚硅谷的一个比较老的版本的一个SSM整合，本人也是个小菜鸡，欢迎指正错误和讨论哈，部分是我修改的，大部分都是参照视频里的。</p>
@@ -245,6 +230,21 @@
     <url>/2022/08/25/my-site/</url>
     <content><![CDATA[<p>我的第一篇博客，不太会使用markdown，just a try！</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>bash</title>
+    <url>/2022/10/20/bash/</url>
+    <content><![CDATA[<p>touch helloScript.sh<br>新建一个sh文件<br>vim helloScript.sh<br>编辑</p>
+<span id="more"></span>
+<p>cat &gt; hello.txt<br>输出这行命令的作用是写入hello.txt，并且覆盖之前的内容<br>cat &gt;&gt; hello.txt<br>输出这行命令的作用是写入hello.txt ，在原有的内容之上写入新的内容</p>
+<p>cat &lt;&lt; kreative<br>this is a creative idea<br>kreative</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>bash</tag>
+      </tags>
   </entry>
   <entry>
     <title>mysql</title>
@@ -511,27 +511,6 @@
       </tags>
   </entry>
   <entry>
-    <title>pandas</title>
-    <url>/2022/10/05/pandas/</url>
-    <content><![CDATA[<h2 id="查看文件数据的属性"><a href="#查看文件数据的属性" class="headerlink" title="查看文件数据的属性"></a>查看文件数据的属性</h2><pre><code>print(df)  查看全部内容
-print(df.head()) # 查看前5行
-print(df.tail()) # 查看后5行
-print(df.index) # 查看索引行
-print(df.values) # 查看内容
-print(df.columns) # 查看列名列表
-print(df.shape) # 查看数据的形状（返回行、列数）
-print(df.dtypes) # 查看每列的数据类型
-</code></pre>
-<span id="more"></span>
-<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><p>比如说在一个区间的数据</p>
-<pre><code># df.loc方法，根据行、列的标签值查询  df.loc[行标签,列标签] 主要用这个
-# df.iloc方法，根据行、列的数字位置查询
-df[&#39;name&#39;] = df[&#39;name&#39;].map(lambda x: x +&#39;a&#39;)  # 直接修改一列的数据，使用map函数
-# df[] 只限于column,df.loc就类似于矩阵索引
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
     <title>python中的json模块</title>
     <url>/2022/09/09/python%E4%B8%AD%E7%9A%84json%E6%A8%A1%E5%9D%97/</url>
     <content><![CDATA[<p>之前一直会把load、loads,dump、dumps的功能搞混。在这里记录一下，一个简单区分他们的方式就是loads、dumps 结尾都带一个s,可以理解为操作string字符串的意思. </p>
@@ -597,6 +576,195 @@ print(data)
       </categories>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数学建模</title>
+    <url>/2022/09/16/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/</url>
+    <content><![CDATA[<p>最近在弄数学建模,准备一些预备知识。</p>
+<span id="more"></span>
+<h2 id="卡夫检验"><a href="#卡夫检验" class="headerlink" title="卡夫检验"></a>卡夫检验</h2><p>卡夫检验可以用来分析两个变量间的关系：是否相互独立，是否来自一个总体。<br>使用列联表与python可以非常快地计算两个变量之间是否存在关系。<br>列联表如下所示。</p>
+<table>
+<thead>
+<tr>
+<th align="left">纹饰</th>
+<th align="right">风化</th>
+<th align="center">无风化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">C</td>
+<td align="right">15</td>
+<td align="center">13</td>
+</tr>
+<tr>
+<td align="left">A</td>
+<td align="right">9</td>
+<td align="center">16</td>
+</tr>
+<tr>
+<td align="left">B</td>
+<td align="right">6</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="left">在这里让我们来分析陶瓷的纹饰和风化是否存在关联。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">默认假设是纹饰与分化无关。并且定义显著性 alpha&#x3D;0.05(一般都设为0.05). 若p值&lt;0.05则拒绝原假设，也就是有关。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<pre><code>import pandas as pd
+import scipy
+d = &#123;&#39;C&#39;:&#123;&#39;风化&#39;:15,&#39;无风化&#39;:13&#125;,&#39;A&#39;:&#123;&#39;风化&#39;:9,&#39;无风化&#39;:11&#125;,&#39;B&#39;:&#123;&#39;风化&#39;:6,&#39;无风化&#39;:0&#125;&#125;
+f = pd.DataFrame(d)
+print(f)
+print(scipy.stats.chi2_contingency(f) )
+chi2, p, df, expected = scipy.stats.chi2_contingency(f)
+if p &lt; 0.05:
+    print(&#39;纹饰和风化有关&#39;)
+else:
+    print(&#39;纹饰和风化无关&#39;)
+</code></pre>
+<h2 id="PCA降维"><a href="#PCA降维" class="headerlink" title="PCA降维"></a>PCA降维</h2><p>目的是希望用较少的变量去解释原来资料中的大部分变异，把相关性很高的变量转化成彼此相互独立或不相关的变量，是一种降维方法。 </p>
+<pre><code>import matplotlib.pyplot as plt                
+from sklearn.decomposition import PCA          
+from sklearn.datasets import load_iris
+
+# 然后以字典的形式加载鸢尾花数据集，使用y表示数据集中的标签，使用x表示数据集中的属性数据。
+data=load_iris()
+y=data.target
+x=data.data
+print(x.shape)
+print(type(x))
+# 调用PCA算法进行降维主成分分析
+# 指定主成分个数，即降维后数据维度，降维后的数据保存在reduced_x中。
+pca=PCA(n_components=2)     
+reduced_x=pca.fit_transform(x)
+print(reduced_x.shape)
+print(pca.explained_variance_)
+print(pca.n_features_)
+</code></pre>
+<h2 id="三、判别分析"><a href="#三、判别分析" class="headerlink" title="三、判别分析"></a>三、判别分析</h2><p>根据所研究的个体的观测指标来推断该个体所属类型的一种统计方法.可用于多分类问题。<br>这里主要介绍Fisher判别，也就是机器学习中的LDA线性判别分析。LDA是有标签的降维。</p>
+<pre><code>import matplotlib.pyplot as plt                
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+
+df=load_iris()
+# 因为鸢尾花数据集不是随机分布，而是从上到下按同一个类别在一起排列的，所以拆分数据的时候需要指定stratify这个参数
+X_train, X_test,y_train,y_test = train_test_split(df.data,df.target,test_size=0.25,random_state=0,stratify=df.target) 
+print(df.target)
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+LDA = LinearDiscriminantAnalysis()
+LDA.fit(X_train,y_train)
+LDA.predict(X_test)
+</code></pre>
+<h2 id="K-means算法"><a href="#K-means算法" class="headerlink" title="K-means算法"></a>K-means算法</h2><p>常用的聚类算法</p>
+<pre><code>from sklearn import datasets
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+ 
+# 加载数据集，是一个字典类似Java中的map
+lris_df = datasets.load_iris()
+ 
+# 挑选出前两个维度作为x轴和y轴，你也可以选择其他维度
+x_axis = lris_df.data[:, 0]
+y_axis = lris_df.data[:, 3]
+
+# 这里已经知道了分3类，其他分类这里的参数需要调试
+model = KMeans(n_clusters=3)
+ 
+# 训练模型
+model.fit(lris_df.data)
+ 
+# 选取行标为100的那条数据，进行预测
+# prddicted_label = model.predict([[6.3, 3.3, 6, 2.5]])
+ 
+# 预测全部150条数据
+all_predictions = model.predict(lris_df.data)
+ 
+# x,y 是数据,c是center_point
+plt.scatter(x_axis, y_axis, c=all_predictions)
+plt.show()
+</code></pre>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>线性回归可能是统计和机器学习中最著名和最容易理解的算法之一。预测建模主要关注的是最小化模型的误差或做出最准确的预测，但以牺牲可解释性为代价。代码里展示的多元线性回归</p>
+<pre><code>from  numpy import genfromtxt      #genfromtxt函数创建数组表格数据
+import numpy as np
+from sklearn import datasets,linear_model
+ 
+data_multi = genfromtxt(&#39;data_multi.csv&#39;,delimiter=&#39;,&#39;)       #将路径下的文本文件导入并转化成numpy数组格式
+print(&quot;data_multi:&quot;,data_multi)
+ 
+X = data_multi[:,:-1]      #取所有行和除了最后一列的所有列作为特征向量
+Y = data_multi[:,-1]       #取所有行和最后一列作为回归的值
+print(&quot;X:&quot;,X)
+print(&quot;Y:&quot;,Y)
+ 
+#建立回归模型
+regr = linear_model.LinearRegression()
+regr.fit(X,Y)
+print(&quot;coefficients:&quot;,regr.coef_)          #b1,...,bp（与x相结合的各个参数）
+print(&quot;intercept:&quot;,regr.intercept_)        #b0（截面）
+x_pred = [[102,4,6]]
+y_pred = regr.predict(x_pred)         #预测
+print(&quot;y_pred:&quot;,y_pred)
+</code></pre>
+<h2 id="Spearman相关系数"><a href="#Spearman相关系数" class="headerlink" title="Spearman相关系数"></a>Spearman相关系数</h2><p>Spearman相关系数被称为等级变量之间的皮尔森相关系数，主要利用单调方程来衡量两个变量之间的相关性。也就是常说的成正比或者反比。</p>
+<pre><code>import pandas as pd
+import numpy as np
+from sklearn.datasets import load_iris
+from scipy.stats import spearmanr
+
+X=load_iris().data
+# 使用scipy.stats计算spearmanr相关系数
+#该函数返回(相关系数，p-values)
+result_2=spearmanr(X)[0]
+print(result_2)
+</code></pre>
+<h2 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h2><p>常见的逻辑回归，主要用于二分类而不是回归问题。</p>
+<pre><code>###logistic Regression
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+import pandas as pd
+LR = LogisticRegression()
+data = pd.read_csv(&#39;./diabetes.csv&#39;)
+train_data = data.iloc[:,:-1]
+label = data.iloc[:,-1]
+# print(label)
+# print(data.iloc[1])
+X_train, X_test, Y_train,Y_test = train_test_split(train_data,label,test_size=0.3,random_state=43)
+
+LR.fit(X_train,Y_train)
+
+LR.predict(X_test)
+</code></pre>
+<h2 id="decision-tree"><a href="#decision-tree" class="headerlink" title="decision tree##"></a>decision tree##</h2><p>决策树主要有两种用法，一种用于分类,一种用于回归。<br>    ###decision tree 4 classification</p>
+<pre><code>from sklearn.tree import DecisionTreeClassifier,plot_tree  # 可视化决策树
+from sklearn.metrics import accuracy_score
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+data=load_iris()
+x,y = data.data,data.target
+X_train, X_test, Y_train,Y_test = train_test_split(x,y,test_size=0.3,random_state=43)
+
+model = DecisionTreeClassifier()
+model.fit(X_train,Y_train)
+
+print(model.predict(X_test))
+print(model.feature_importances_)  # 分析每个权重的重要性
+plot_tree(model)  # 还可以添加一些参数的名字等等.
+</code></pre>
+]]></content>
+      <categories>
+        <category>数学建模</category>
+      </categories>
+      <tags>
+        <tag>数学建模</tag>
+        <tag>pandas</tag>
       </tags>
   </entry>
   <entry>
@@ -838,206 +1006,102 @@ indices=tensor([1, 3, 4, 2, 0]))
       </tags>
   </entry>
   <entry>
-    <title>数学建模</title>
-    <url>/2022/09/16/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/</url>
-    <content><![CDATA[<p>最近在弄数学建模,准备一些预备知识。</p>
+    <title>pandas</title>
+    <url>/2022/10/05/pandas/</url>
+    <content><![CDATA[<h2 id="查看文件数据的属性"><a href="#查看文件数据的属性" class="headerlink" title="查看文件数据的属性"></a>查看文件数据的属性</h2><pre><code>print(df)  查看全部内容
+print(df.head()) # 查看前5行
+print(df.tail()) # 查看后5行
+print(df.index) # 查看索引行
+print(df.values) # 查看内容
+print(df.columns) # 查看列名列表
+print(df.shape) # 查看数据的形状（返回行、列数）
+print(df.dtypes) # 查看每列的数据类型
+</code></pre>
 <span id="more"></span>
-<h2 id="卡夫检验"><a href="#卡夫检验" class="headerlink" title="卡夫检验"></a>卡夫检验</h2><p>卡夫检验可以用来分析两个变量间的关系：是否相互独立，是否来自一个总体。<br>使用列联表与python可以非常快地计算两个变量之间是否存在关系。<br>列联表如下所示。</p>
-<table>
-<thead>
-<tr>
-<th align="left">纹饰</th>
-<th align="right">风化</th>
-<th align="center">无风化</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">C</td>
-<td align="right">15</td>
-<td align="center">13</td>
-</tr>
-<tr>
-<td align="left">A</td>
-<td align="right">9</td>
-<td align="center">16</td>
-</tr>
-<tr>
-<td align="left">B</td>
-<td align="right">6</td>
-<td align="center">0</td>
-</tr>
-<tr>
-<td align="left">在这里让我们来分析陶瓷的纹饰和风化是否存在关联。</td>
-<td align="right"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="left">默认假设是纹饰与分化无关。并且定义显著性 alpha&#x3D;0.05(一般都设为0.05). 若p值&lt;0.05则拒绝原假设，也就是有关。</td>
-<td align="right"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<pre><code>import pandas as pd
-import scipy
-d = &#123;&#39;C&#39;:&#123;&#39;风化&#39;:15,&#39;无风化&#39;:13&#125;,&#39;A&#39;:&#123;&#39;风化&#39;:9,&#39;无风化&#39;:11&#125;,&#39;B&#39;:&#123;&#39;风化&#39;:6,&#39;无风化&#39;:0&#125;&#125;
-f = pd.DataFrame(d)
-print(f)
-print(scipy.stats.chi2_contingency(f) )
-chi2, p, df, expected = scipy.stats.chi2_contingency(f)
-if p &lt; 0.05:
-    print(&#39;纹饰和风化有关&#39;)
-else:
-    print(&#39;纹饰和风化无关&#39;)
-</code></pre>
-<h2 id="PCA降维"><a href="#PCA降维" class="headerlink" title="PCA降维"></a>PCA降维</h2><p>目的是希望用较少的变量去解释原来资料中的大部分变异，把相关性很高的变量转化成彼此相互独立或不相关的变量，是一种降维方法。 </p>
-<pre><code>import matplotlib.pyplot as plt                
-from sklearn.decomposition import PCA          
-from sklearn.datasets import load_iris
-
-# 然后以字典的形式加载鸢尾花数据集，使用y表示数据集中的标签，使用x表示数据集中的属性数据。
-data=load_iris()
-y=data.target
-x=data.data
-print(x.shape)
-print(type(x))
-# 调用PCA算法进行降维主成分分析
-# 指定主成分个数，即降维后数据维度，降维后的数据保存在reduced_x中。
-pca=PCA(n_components=2)     
-reduced_x=pca.fit_transform(x)
-print(reduced_x.shape)
-print(pca.explained_variance_)
-print(pca.n_features_)
-</code></pre>
-<h2 id="三、判别分析"><a href="#三、判别分析" class="headerlink" title="三、判别分析"></a>三、判别分析</h2><p>根据所研究的个体的观测指标来推断该个体所属类型的一种统计方法.可用于多分类问题。<br>这里主要介绍Fisher判别，也就是机器学习中的LDA线性判别分析。LDA是有标签的降维。</p>
-<pre><code>import matplotlib.pyplot as plt                
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-
-df=load_iris()
-# 因为鸢尾花数据集不是随机分布，而是从上到下按同一个类别在一起排列的，所以拆分数据的时候需要指定stratify这个参数
-X_train, X_test,y_train,y_test = train_test_split(df.data,df.target,test_size=0.25,random_state=0,stratify=df.target) 
-print(df.target)
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-LDA = LinearDiscriminantAnalysis()
-LDA.fit(X_train,y_train)
-LDA.predict(X_test)
-</code></pre>
-<h2 id="K-means算法"><a href="#K-means算法" class="headerlink" title="K-means算法"></a>K-means算法</h2><p>常用的聚类算法</p>
-<pre><code>from sklearn import datasets
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
- 
-# 加载数据集，是一个字典类似Java中的map
-lris_df = datasets.load_iris()
- 
-# 挑选出前两个维度作为x轴和y轴，你也可以选择其他维度
-x_axis = lris_df.data[:, 0]
-y_axis = lris_df.data[:, 3]
-
-# 这里已经知道了分3类，其他分类这里的参数需要调试
-model = KMeans(n_clusters=3)
- 
-# 训练模型
-model.fit(lris_df.data)
- 
-# 选取行标为100的那条数据，进行预测
-# prddicted_label = model.predict([[6.3, 3.3, 6, 2.5]])
- 
-# 预测全部150条数据
-all_predictions = model.predict(lris_df.data)
- 
-# x,y 是数据,c是center_point
-plt.scatter(x_axis, y_axis, c=all_predictions)
-plt.show()
-</code></pre>
-<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>线性回归可能是统计和机器学习中最著名和最容易理解的算法之一。预测建模主要关注的是最小化模型的误差或做出最准确的预测，但以牺牲可解释性为代价。代码里展示的多元线性回归</p>
-<pre><code>from  numpy import genfromtxt      #genfromtxt函数创建数组表格数据
-import numpy as np
-from sklearn import datasets,linear_model
- 
-data_multi = genfromtxt(&#39;data_multi.csv&#39;,delimiter=&#39;,&#39;)       #将路径下的文本文件导入并转化成numpy数组格式
-print(&quot;data_multi:&quot;,data_multi)
- 
-X = data_multi[:,:-1]      #取所有行和除了最后一列的所有列作为特征向量
-Y = data_multi[:,-1]       #取所有行和最后一列作为回归的值
-print(&quot;X:&quot;,X)
-print(&quot;Y:&quot;,Y)
- 
-#建立回归模型
-regr = linear_model.LinearRegression()
-regr.fit(X,Y)
-print(&quot;coefficients:&quot;,regr.coef_)          #b1,...,bp（与x相结合的各个参数）
-print(&quot;intercept:&quot;,regr.intercept_)        #b0（截面）
-x_pred = [[102,4,6]]
-y_pred = regr.predict(x_pred)         #预测
-print(&quot;y_pred:&quot;,y_pred)
-</code></pre>
-<h2 id="Spearman相关系数"><a href="#Spearman相关系数" class="headerlink" title="Spearman相关系数"></a>Spearman相关系数</h2><p>Spearman相关系数被称为等级变量之间的皮尔森相关系数，主要利用单调方程来衡量两个变量之间的相关性。也就是常说的成正比或者反比。</p>
-<pre><code>import pandas as pd
-import numpy as np
-from sklearn.datasets import load_iris
-from scipy.stats import spearmanr
-
-X=load_iris().data
-# 使用scipy.stats计算spearmanr相关系数
-#该函数返回(相关系数，p-values)
-result_2=spearmanr(X)[0]
-print(result_2)
-</code></pre>
-<h2 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h2><p>常见的逻辑回归，主要用于二分类而不是回归问题。</p>
-<pre><code>###logistic Regression
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-import pandas as pd
-LR = LogisticRegression()
-data = pd.read_csv(&#39;./diabetes.csv&#39;)
-train_data = data.iloc[:,:-1]
-label = data.iloc[:,-1]
-# print(label)
-# print(data.iloc[1])
-X_train, X_test, Y_train,Y_test = train_test_split(train_data,label,test_size=0.3,random_state=43)
-
-LR.fit(X_train,Y_train)
-
-LR.predict(X_test)
-</code></pre>
-<h2 id="decision-tree"><a href="#decision-tree" class="headerlink" title="decision tree##"></a>decision tree##</h2><p>决策树主要有两种用法，一种用于分类,一种用于回归。<br>    ###decision tree 4 classification</p>
-<pre><code>from sklearn.tree import DecisionTreeClassifier,plot_tree  # 可视化决策树
-from sklearn.metrics import accuracy_score
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-data=load_iris()
-x,y = data.data,data.target
-X_train, X_test, Y_train,Y_test = train_test_split(x,y,test_size=0.3,random_state=43)
-
-model = DecisionTreeClassifier()
-model.fit(X_train,Y_train)
-
-print(model.predict(X_test))
-print(model.feature_importances_)  # 分析每个权重的重要性
-plot_tree(model)  # 还可以添加一些参数的名字等等.
+<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><p>比如说在一个区间的数据</p>
+<pre><code># df.loc方法，根据行、列的标签值查询  df.loc[行标签,列标签] 主要用这个
+# df.iloc方法，根据行、列的数字位置查询
+df[&#39;name&#39;] = df[&#39;name&#39;].map(lambda x: x +&#39;a&#39;)  # 直接修改一列的数据，使用map函数
+# df[] 只限于column,df.loc就类似于矩阵索引
 </code></pre>
 ]]></content>
-      <categories>
-        <category>数学建模</category>
-      </categories>
-      <tags>
-        <tag>数学建模</tag>
-        <tag>pandas</tag>
-      </tags>
   </entry>
   <entry>
     <title>java八股文</title>
     <url>/2023/04/21/java%E5%85%AB%E8%82%A1%E6%96%87/</url>
-    <content><![CDATA[<p>JDK、JRE、JVM之间的区别</p>
-<p>hashCode()与equals()之间的关系</p>
-<p>String、StringBuffer、StringBuilder的区别</p>
-<p>泛型中extends和super的区别</p>
-<p>&#x3D;&#x3D;和equals方法的区别</p>
-<p>重载和重写的区别</p>
-<p>List和Set的区别</p>
-<p>ArrayList和LinkedList区别</p>
-<p>谈谈ConcurrentHashMap的扩容机制</p>
+    <content><![CDATA[<p>java 八股文，主要来自于网上资源，自己也会有一些补充。</p>
+<span id="more"></span>
+
+<details>
+
+
+<summary style="font-size:20px">**java基础**</summary>
+<details>
+<summary>**JDK、JRE、JVM之间的区别**</summary>
+
+<ul>
+<li>JDK(Java SE Development Kit)，Java标准开发包，它提供了编译、运⾏Java程序所需的各种⼯具和资源，包括Java编译器、Java运⾏时环境，以及常⽤的Java类库等。</li>
+<li>JRE( Java Runtime Environment) ，Java运⾏环境，⽤于运⾏Java的字节码⽂件。JRE中包括了JVM以及JVM⼯作所需要的类库，普通⽤户⽽只需要安装JRE来运⾏Java程序，⽽程序开发者必须安装JDK来编译、调试程序。</li>
+<li>JVM(Java Virtual Mechinal)，Java虚拟机，是JRE的⼀部分，它是整个java实现跨平台的最核⼼的部分，负责运⾏字节码⽂件。</li>
+</ul>
+<p>我们写Java代码，⽤txt就可以写，但是写出来的Java代码，想要运⾏，需要先编译成字节码，那就需要编译器，⽽JDK中就包含了编译器javac，编译之后的字节码，想要运⾏，就需要⼀个可以执⾏字节码的程序，这个程序就是JVM（Java虚拟机），专⻔⽤来执⾏Java字节码的。<br>如果我们要开发Java程序，那就需要JDK，因为要编译Java源⽂件。<br>如果我们只想运⾏已经编译好的Java字节码⽂件，也就是*.class⽂件，那么就只需要JRE。JDK中包含了JRE，JRE中包含了JVM。</p>
+<p>另外，JVM在执⾏Java字节码时，需要把字节码解释为机器指令，⽽不同操作系统的机器指令是有可能不⼀样的，所以就导致不同操作系统上的JVM是不⼀样的，所以我们在安装JDK时需要选择操作系统。另外，JVM是⽤来执⾏Java字节码的，所以凡是某个代码编译之后是Java字节码，那就都能在JVM上运<br>⾏，⽐如Apache Groovy, Scala and Kotlin 等等。</p>
+</details>
+
+<details>
+<summary>**hashCode()与equals()之间的关系**</summary>
+在Java中，每个对象都可以调⽤⾃⼰的hashCode()⽅法得到⾃⼰的哈希值(hashCode)，相当于对象的
+指纹信息，通常来说世界上没有完全相同的两个指纹，但是在Java中做不到这么绝对，但是我们仍然可
+以利⽤hashCode来做⼀些提前的判断，⽐如：
+
+<ul>
+<li>如果两个对象的hashCode不相同，那么这两个对象肯定不同的两个对象</li>
+<li>如果两个对象的hashCode相同，不代表这两个对象⼀定是同⼀个对象，也可能是两个对象</li>
+<li>如果两个对象相等，那么他们的hashCode就⼀定相同<br>在Java的⼀些集合类的实现中，在⽐较两个对象是否相等时，会根据上⾯的原则，会先调⽤对象的<br>hashCode()⽅法得到hashCode进⾏⽐较，如果hashCode不相同，就可以直接认为这两个对象不相<br>同，如果hashCode相同，那么就会进⼀步调⽤equals()⽅法进⾏⽐较。⽽equals()⽅法，就是⽤来最终<br>确定两个对象是不是相等的，通常equals⽅法的实现会⽐较重，逻辑⽐较多，⽽hashCode()主要就是得<br>到⼀个哈希值，实际上就⼀个数字，相对⽽⾔⽐较轻，所以在⽐较两个对象时，通常都会先根据<br>hashCode想⽐较⼀下。</li>
+</ul>
+<p>所以我们就需要注意，如果我们重写了equals()⽅法，那么就要注意hashCode()⽅法，⼀定要保证能遵<br>守上述规则。</p>
+</details>
+
+
+<details>
+<summary>**String、StringBuffer、StringBuilder的区别**</summary>
+1. String是不可变的，如果尝试去修改，会新⽣成⼀个字符串对象，StringBuffer和StringBuilder是可
+变的
+2. StringBuffer是线程安全的，StringBuilder是线程不安全的，所以在单线程环境下StringBuilder效
+率会更⾼
+</details>
+
+<details>
+<summary>**泛型中extends和super的区别**</summary>
+
+<ul>
+<li><? extends T>表示包括T在内的任何T的⼦类 </br></li>
+<li><? super T>表示包括T在内的任何T的⽗类
+</details></li>
+</ul>
+<details>
+<summary>**==和equals方法的区别**</summary>
+
+<ul>
+<li>&#x3D;&#x3D;：如果是基本数据类型，⽐较是值，如果是引⽤类型，⽐较的是引⽤地址.</li>
+<li>equals：具体看各个类重写equals⽅法之后的⽐较逻辑，⽐如String类，虽然是引⽤类型，但是<br>String类中重写了equals⽅法，⽅法内部⽐较的是字符串中的各个字符是否全部相等。</details></li>
+</ul>
+<details>
+<summary>**重载和重写的区别**</summary>
+
+<ul>
+<li>重载(Overload)： 在⼀个类中，同名的⽅法如果有不同的参数列表（⽐如参数类型不同、参数个数<br>不同）则视为重载。</li>
+<li>重写(Override)： 从字⾯上看，重写就是 重新写⼀遍的意思。其实就是在⼦类中把⽗类本身有的⽅<br>法重新写⼀遍。⼦类继承了⽗类的⽅法，但有时⼦类并不想原封不动的继承⽗类中的某个⽅法，所<br>以在⽅法名，参数列表，返回类型都相同(⼦类中⽅法的返回值可以是⽗类中⽅法返回值的⼦类)的<br>情况下， 对⽅法体进⾏修改，这就是重写。但要注意⼦类⽅法的访问修饰权限不能⼩于⽗类的。</details></li>
+</ul>
+<details>
+<summary>**ArrayList和LinkedList区别**</summary>
+
+<ol>
+<li>⾸先，他们的底层数据结构不同，ArrayList底层是基于数组实现的，LinkedList底层是基于链表实<br>现的</li>
+<li>由于底层数据结构不同，他们所适⽤的场景也不同，ArrayList更适合随机查找，LinkedList更适合<br>删除和添加，查询、添加、删除的时间复杂度不同</li>
+<li>另外ArrayList和LinkedList都实现了List接⼝，但是LinkedList还额外实现了Deque接⼝，所以<br>LinkedList还可以当做队列来使⽤</details>
+谈谈ConcurrentHashMap的扩容机制</li>
+</ol>
 <p>Jdk.到Jdk. HashMap 发生了什么变化(底层)?</p>
 <p>说一下HashMap的Put方法</p>
 <p>深拷⻉和浅拷⻉</p>
@@ -1081,8 +1145,10 @@ plot_tree(model)  # 还可以添加一些参数的名字等等.
 <p>Spring用到了哪些设计模式</p>
 <p>Spring Boot中常用注解及其底层实现</p>
 <p>Spring Boot是如何启动Tomcat的</p>
-<p>Mybatis的优缺点</p>
-<p>#{}和${}的区别是什么？</p>
+<p>Mybatis的优缺点 ##</p>
+<p>#{}和${}的区别是什么？ ##</p>
+</details>
+
 <p>索引的基本原理</p>
 <p>索引设计的原则？</p>
 <p>事务的基本特性和隔离级别</p>

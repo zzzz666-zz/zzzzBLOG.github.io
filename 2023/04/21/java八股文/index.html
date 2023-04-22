@@ -21,15 +21,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.zzzheng.top","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="JDK、JRE、JVM之间的区别 hashCode()与equals()之间的关系 String、StringBuffer、StringBuilder的区别 泛型中extends和super的区别 &#x3D;&#x3D;和equals方法的区别 重载和重写的区别 List和Set的区别 ArrayList和LinkedList区别 谈谈ConcurrentHashMap的扩容机制 Jdk.到Jd">
+    <meta name="description" content="java 八股文，主要来自于网上资源，自己也会有一些补充。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java八股文">
 <meta property="og:url" content="https://www.zzzheng.top/2023/04/21/java%E5%85%AB%E8%82%A1%E6%96%87/index.html">
 <meta property="og:site_name" content="即兴表演的个人博客网站">
-<meta property="og:description" content="JDK、JRE、JVM之间的区别 hashCode()与equals()之间的关系 String、StringBuffer、StringBuilder的区别 泛型中extends和super的区别 &#x3D;&#x3D;和equals方法的区别 重载和重写的区别 List和Set的区别 ArrayList和LinkedList区别 谈谈ConcurrentHashMap的扩容机制 Jdk.到Jd">
+<meta property="og:description" content="java 八股文，主要来自于网上资源，自己也会有一些补充。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-21T02:55:46.000Z">
-<meta property="article:modified_time" content="2023-04-21T02:56:12.816Z">
+<meta property="article:modified_time" content="2023-04-22T06:18:23.229Z">
 <meta property="article:author" content="即兴表演">
 <meta property="article:tag" content="java、python、linux">
 <meta name="twitter:card" content="summary">
@@ -231,9 +231,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-04-21 10:55:46 / 修改时间：10:56:12" itemprop="dateCreated datePublished" datetime="2023-04-21T10:55:46+08:00">2023-04-21</time>
+      <time title="创建时间：2023-04-21 10:55:46" itemprop="dateCreated datePublished" datetime="2023-04-21T10:55:46+08:00">2023-04-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-22 14:18:23" itemprop="dateModified" datetime="2023-04-22T14:18:23+08:00">2023-04-22</time>
     </span>
 
   
@@ -253,15 +259,79 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>JDK、JRE、JVM之间的区别</p>
-<p>hashCode()与equals()之间的关系</p>
-<p>String、StringBuffer、StringBuilder的区别</p>
-<p>泛型中extends和super的区别</p>
-<p>&#x3D;&#x3D;和equals方法的区别</p>
-<p>重载和重写的区别</p>
-<p>List和Set的区别</p>
-<p>ArrayList和LinkedList区别</p>
-<p>谈谈ConcurrentHashMap的扩容机制</p>
+        <p>java 八股文，主要来自于网上资源，自己也会有一些补充。</p>
+<span id="more"></span>
+
+<details>
+
+
+<summary style="font-size:20px">**java基础**</summary>
+<details>
+<summary>**JDK、JRE、JVM之间的区别**</summary>
+
+<ul>
+<li>JDK(Java SE Development Kit)，Java标准开发包，它提供了编译、运⾏Java程序所需的各种⼯具和资源，包括Java编译器、Java运⾏时环境，以及常⽤的Java类库等。</li>
+<li>JRE( Java Runtime Environment) ，Java运⾏环境，⽤于运⾏Java的字节码⽂件。JRE中包括了JVM以及JVM⼯作所需要的类库，普通⽤户⽽只需要安装JRE来运⾏Java程序，⽽程序开发者必须安装JDK来编译、调试程序。</li>
+<li>JVM(Java Virtual Mechinal)，Java虚拟机，是JRE的⼀部分，它是整个java实现跨平台的最核⼼的部分，负责运⾏字节码⽂件。</li>
+</ul>
+<p>我们写Java代码，⽤txt就可以写，但是写出来的Java代码，想要运⾏，需要先编译成字节码，那就需要编译器，⽽JDK中就包含了编译器javac，编译之后的字节码，想要运⾏，就需要⼀个可以执⾏字节码的程序，这个程序就是JVM（Java虚拟机），专⻔⽤来执⾏Java字节码的。<br>如果我们要开发Java程序，那就需要JDK，因为要编译Java源⽂件。<br>如果我们只想运⾏已经编译好的Java字节码⽂件，也就是*.class⽂件，那么就只需要JRE。JDK中包含了JRE，JRE中包含了JVM。</p>
+<p>另外，JVM在执⾏Java字节码时，需要把字节码解释为机器指令，⽽不同操作系统的机器指令是有可能不⼀样的，所以就导致不同操作系统上的JVM是不⼀样的，所以我们在安装JDK时需要选择操作系统。另外，JVM是⽤来执⾏Java字节码的，所以凡是某个代码编译之后是Java字节码，那就都能在JVM上运<br>⾏，⽐如Apache Groovy, Scala and Kotlin 等等。</p>
+</details>
+
+<details>
+<summary>**hashCode()与equals()之间的关系**</summary>
+在Java中，每个对象都可以调⽤⾃⼰的hashCode()⽅法得到⾃⼰的哈希值(hashCode)，相当于对象的
+指纹信息，通常来说世界上没有完全相同的两个指纹，但是在Java中做不到这么绝对，但是我们仍然可
+以利⽤hashCode来做⼀些提前的判断，⽐如：
+
+<ul>
+<li>如果两个对象的hashCode不相同，那么这两个对象肯定不同的两个对象</li>
+<li>如果两个对象的hashCode相同，不代表这两个对象⼀定是同⼀个对象，也可能是两个对象</li>
+<li>如果两个对象相等，那么他们的hashCode就⼀定相同<br>在Java的⼀些集合类的实现中，在⽐较两个对象是否相等时，会根据上⾯的原则，会先调⽤对象的<br>hashCode()⽅法得到hashCode进⾏⽐较，如果hashCode不相同，就可以直接认为这两个对象不相<br>同，如果hashCode相同，那么就会进⼀步调⽤equals()⽅法进⾏⽐较。⽽equals()⽅法，就是⽤来最终<br>确定两个对象是不是相等的，通常equals⽅法的实现会⽐较重，逻辑⽐较多，⽽hashCode()主要就是得<br>到⼀个哈希值，实际上就⼀个数字，相对⽽⾔⽐较轻，所以在⽐较两个对象时，通常都会先根据<br>hashCode想⽐较⼀下。</li>
+</ul>
+<p>所以我们就需要注意，如果我们重写了equals()⽅法，那么就要注意hashCode()⽅法，⼀定要保证能遵<br>守上述规则。</p>
+</details>
+
+
+<details>
+<summary>**String、StringBuffer、StringBuilder的区别**</summary>
+1. String是不可变的，如果尝试去修改，会新⽣成⼀个字符串对象，StringBuffer和StringBuilder是可
+变的
+2. StringBuffer是线程安全的，StringBuilder是线程不安全的，所以在单线程环境下StringBuilder效
+率会更⾼
+</details>
+
+<details>
+<summary>**泛型中extends和super的区别**</summary>
+
+<ul>
+<li><? extends T>表示包括T在内的任何T的⼦类 </br></li>
+<li><? super T>表示包括T在内的任何T的⽗类
+</details></li>
+</ul>
+<details>
+<summary>**==和equals方法的区别**</summary>
+
+<ul>
+<li>&#x3D;&#x3D;：如果是基本数据类型，⽐较是值，如果是引⽤类型，⽐较的是引⽤地址.</li>
+<li>equals：具体看各个类重写equals⽅法之后的⽐较逻辑，⽐如String类，虽然是引⽤类型，但是<br>String类中重写了equals⽅法，⽅法内部⽐较的是字符串中的各个字符是否全部相等。</details></li>
+</ul>
+<details>
+<summary>**重载和重写的区别**</summary>
+
+<ul>
+<li>重载(Overload)： 在⼀个类中，同名的⽅法如果有不同的参数列表（⽐如参数类型不同、参数个数<br>不同）则视为重载。</li>
+<li>重写(Override)： 从字⾯上看，重写就是 重新写⼀遍的意思。其实就是在⼦类中把⽗类本身有的⽅<br>法重新写⼀遍。⼦类继承了⽗类的⽅法，但有时⼦类并不想原封不动的继承⽗类中的某个⽅法，所<br>以在⽅法名，参数列表，返回类型都相同(⼦类中⽅法的返回值可以是⽗类中⽅法返回值的⼦类)的<br>情况下， 对⽅法体进⾏修改，这就是重写。但要注意⼦类⽅法的访问修饰权限不能⼩于⽗类的。</details></li>
+</ul>
+<details>
+<summary>**ArrayList和LinkedList区别**</summary>
+
+<ol>
+<li>⾸先，他们的底层数据结构不同，ArrayList底层是基于数组实现的，LinkedList底层是基于链表实<br>现的</li>
+<li>由于底层数据结构不同，他们所适⽤的场景也不同，ArrayList更适合随机查找，LinkedList更适合<br>删除和添加，查询、添加、删除的时间复杂度不同</li>
+<li>另外ArrayList和LinkedList都实现了List接⼝，但是LinkedList还额外实现了Deque接⼝，所以<br>LinkedList还可以当做队列来使⽤</details>
+谈谈ConcurrentHashMap的扩容机制</li>
+</ol>
 <p>Jdk.到Jdk. HashMap 发生了什么变化(底层)?</p>
 <p>说一下HashMap的Put方法</p>
 <p>深拷⻉和浅拷⻉</p>
@@ -305,8 +375,10 @@
 <p>Spring用到了哪些设计模式</p>
 <p>Spring Boot中常用注解及其底层实现</p>
 <p>Spring Boot是如何启动Tomcat的</p>
-<p>Mybatis的优缺点</p>
-<p>#{}和${}的区别是什么？</p>
+<p>Mybatis的优缺点 ##</p>
+<p>#{}和${}的区别是什么？ ##</p>
+</details>
+
 <p>索引的基本原理</p>
 <p>索引设计的原则？</p>
 <p>事务的基本特性和隔离级别</p>
