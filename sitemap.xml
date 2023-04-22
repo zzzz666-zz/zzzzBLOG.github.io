@@ -175,20 +175,6 @@
   </url>
   
   <url>
-    <loc>https://www.zzzheng.top/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/</loc>
-    <lastmod>2023-04-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.zzzheng.top/tags/pandas/</loc>
-    <lastmod>2023-04-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.zzzheng.top/tags/pytorch/</loc>
     <lastmod>2023-04-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -197,6 +183,20 @@
   
   <url>
     <loc>https://www.zzzheng.top/tags/dl/</loc>
+    <lastmod>2023-04-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.zzzheng.top/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/</loc>
+    <lastmod>2023-04-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.zzzheng.top/tags/pandas/</loc>
     <lastmod>2023-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

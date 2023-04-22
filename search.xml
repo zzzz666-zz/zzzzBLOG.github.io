@@ -226,12 +226,6 @@
       </tags>
   </entry>
   <entry>
-    <title>my_site</title>
-    <url>/2022/08/25/my-site/</url>
-    <content><![CDATA[<p>我的第一篇博客，不太会使用markdown，just a try！</p>
-]]></content>
-  </entry>
-  <entry>
     <title>bash</title>
     <url>/2022/10/20/bash/</url>
     <content><![CDATA[<p>touch helloScript.sh<br>新建一个sh文件<br>vim helloScript.sh<br>编辑</p>
@@ -245,6 +239,12 @@
       <tags>
         <tag>bash</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>my_site</title>
+    <url>/2022/08/25/my-site/</url>
+    <content><![CDATA[<p>我的第一篇博客，不太会使用markdown，just a try！</p>
+]]></content>
   </entry>
   <entry>
     <title>mysql</title>
@@ -511,6 +511,27 @@
       </tags>
   </entry>
   <entry>
+    <title>pandas</title>
+    <url>/2022/10/05/pandas/</url>
+    <content><![CDATA[<h2 id="查看文件数据的属性"><a href="#查看文件数据的属性" class="headerlink" title="查看文件数据的属性"></a>查看文件数据的属性</h2><pre><code>print(df)  查看全部内容
+print(df.head()) # 查看前5行
+print(df.tail()) # 查看后5行
+print(df.index) # 查看索引行
+print(df.values) # 查看内容
+print(df.columns) # 查看列名列表
+print(df.shape) # 查看数据的形状（返回行、列数）
+print(df.dtypes) # 查看每列的数据类型
+</code></pre>
+<span id="more"></span>
+<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><p>比如说在一个区间的数据</p>
+<pre><code># df.loc方法，根据行、列的标签值查询  df.loc[行标签,列标签] 主要用这个
+# df.iloc方法，根据行、列的数字位置查询
+df[&#39;name&#39;] = df[&#39;name&#39;].map(lambda x: x +&#39;a&#39;)  # 直接修改一列的数据，使用map函数
+# df[] 只限于column,df.loc就类似于矩阵索引
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
     <title>python中的json模块</title>
     <url>/2022/09/09/python%E4%B8%AD%E7%9A%84json%E6%A8%A1%E5%9D%97/</url>
     <content><![CDATA[<p>之前一直会把load、loads,dump、dumps的功能搞混。在这里记录一下，一个简单区分他们的方式就是loads、dumps 结尾都带一个s,可以理解为操作string字符串的意思. </p>
@@ -576,195 +597,6 @@ print(data)
       </categories>
       <tags>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数学建模</title>
-    <url>/2022/09/16/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/</url>
-    <content><![CDATA[<p>最近在弄数学建模,准备一些预备知识。</p>
-<span id="more"></span>
-<h2 id="卡夫检验"><a href="#卡夫检验" class="headerlink" title="卡夫检验"></a>卡夫检验</h2><p>卡夫检验可以用来分析两个变量间的关系：是否相互独立，是否来自一个总体。<br>使用列联表与python可以非常快地计算两个变量之间是否存在关系。<br>列联表如下所示。</p>
-<table>
-<thead>
-<tr>
-<th align="left">纹饰</th>
-<th align="right">风化</th>
-<th align="center">无风化</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">C</td>
-<td align="right">15</td>
-<td align="center">13</td>
-</tr>
-<tr>
-<td align="left">A</td>
-<td align="right">9</td>
-<td align="center">16</td>
-</tr>
-<tr>
-<td align="left">B</td>
-<td align="right">6</td>
-<td align="center">0</td>
-</tr>
-<tr>
-<td align="left">在这里让我们来分析陶瓷的纹饰和风化是否存在关联。</td>
-<td align="right"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="left">默认假设是纹饰与分化无关。并且定义显著性 alpha&#x3D;0.05(一般都设为0.05). 若p值&lt;0.05则拒绝原假设，也就是有关。</td>
-<td align="right"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<pre><code>import pandas as pd
-import scipy
-d = &#123;&#39;C&#39;:&#123;&#39;风化&#39;:15,&#39;无风化&#39;:13&#125;,&#39;A&#39;:&#123;&#39;风化&#39;:9,&#39;无风化&#39;:11&#125;,&#39;B&#39;:&#123;&#39;风化&#39;:6,&#39;无风化&#39;:0&#125;&#125;
-f = pd.DataFrame(d)
-print(f)
-print(scipy.stats.chi2_contingency(f) )
-chi2, p, df, expected = scipy.stats.chi2_contingency(f)
-if p &lt; 0.05:
-    print(&#39;纹饰和风化有关&#39;)
-else:
-    print(&#39;纹饰和风化无关&#39;)
-</code></pre>
-<h2 id="PCA降维"><a href="#PCA降维" class="headerlink" title="PCA降维"></a>PCA降维</h2><p>目的是希望用较少的变量去解释原来资料中的大部分变异，把相关性很高的变量转化成彼此相互独立或不相关的变量，是一种降维方法。 </p>
-<pre><code>import matplotlib.pyplot as plt                
-from sklearn.decomposition import PCA          
-from sklearn.datasets import load_iris
-
-# 然后以字典的形式加载鸢尾花数据集，使用y表示数据集中的标签，使用x表示数据集中的属性数据。
-data=load_iris()
-y=data.target
-x=data.data
-print(x.shape)
-print(type(x))
-# 调用PCA算法进行降维主成分分析
-# 指定主成分个数，即降维后数据维度，降维后的数据保存在reduced_x中。
-pca=PCA(n_components=2)     
-reduced_x=pca.fit_transform(x)
-print(reduced_x.shape)
-print(pca.explained_variance_)
-print(pca.n_features_)
-</code></pre>
-<h2 id="三、判别分析"><a href="#三、判别分析" class="headerlink" title="三、判别分析"></a>三、判别分析</h2><p>根据所研究的个体的观测指标来推断该个体所属类型的一种统计方法.可用于多分类问题。<br>这里主要介绍Fisher判别，也就是机器学习中的LDA线性判别分析。LDA是有标签的降维。</p>
-<pre><code>import matplotlib.pyplot as plt                
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-
-df=load_iris()
-# 因为鸢尾花数据集不是随机分布，而是从上到下按同一个类别在一起排列的，所以拆分数据的时候需要指定stratify这个参数
-X_train, X_test,y_train,y_test = train_test_split(df.data,df.target,test_size=0.25,random_state=0,stratify=df.target) 
-print(df.target)
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-LDA = LinearDiscriminantAnalysis()
-LDA.fit(X_train,y_train)
-LDA.predict(X_test)
-</code></pre>
-<h2 id="K-means算法"><a href="#K-means算法" class="headerlink" title="K-means算法"></a>K-means算法</h2><p>常用的聚类算法</p>
-<pre><code>from sklearn import datasets
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
- 
-# 加载数据集，是一个字典类似Java中的map
-lris_df = datasets.load_iris()
- 
-# 挑选出前两个维度作为x轴和y轴，你也可以选择其他维度
-x_axis = lris_df.data[:, 0]
-y_axis = lris_df.data[:, 3]
-
-# 这里已经知道了分3类，其他分类这里的参数需要调试
-model = KMeans(n_clusters=3)
- 
-# 训练模型
-model.fit(lris_df.data)
- 
-# 选取行标为100的那条数据，进行预测
-# prddicted_label = model.predict([[6.3, 3.3, 6, 2.5]])
- 
-# 预测全部150条数据
-all_predictions = model.predict(lris_df.data)
- 
-# x,y 是数据,c是center_point
-plt.scatter(x_axis, y_axis, c=all_predictions)
-plt.show()
-</code></pre>
-<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>线性回归可能是统计和机器学习中最著名和最容易理解的算法之一。预测建模主要关注的是最小化模型的误差或做出最准确的预测，但以牺牲可解释性为代价。代码里展示的多元线性回归</p>
-<pre><code>from  numpy import genfromtxt      #genfromtxt函数创建数组表格数据
-import numpy as np
-from sklearn import datasets,linear_model
- 
-data_multi = genfromtxt(&#39;data_multi.csv&#39;,delimiter=&#39;,&#39;)       #将路径下的文本文件导入并转化成numpy数组格式
-print(&quot;data_multi:&quot;,data_multi)
- 
-X = data_multi[:,:-1]      #取所有行和除了最后一列的所有列作为特征向量
-Y = data_multi[:,-1]       #取所有行和最后一列作为回归的值
-print(&quot;X:&quot;,X)
-print(&quot;Y:&quot;,Y)
- 
-#建立回归模型
-regr = linear_model.LinearRegression()
-regr.fit(X,Y)
-print(&quot;coefficients:&quot;,regr.coef_)          #b1,...,bp（与x相结合的各个参数）
-print(&quot;intercept:&quot;,regr.intercept_)        #b0（截面）
-x_pred = [[102,4,6]]
-y_pred = regr.predict(x_pred)         #预测
-print(&quot;y_pred:&quot;,y_pred)
-</code></pre>
-<h2 id="Spearman相关系数"><a href="#Spearman相关系数" class="headerlink" title="Spearman相关系数"></a>Spearman相关系数</h2><p>Spearman相关系数被称为等级变量之间的皮尔森相关系数，主要利用单调方程来衡量两个变量之间的相关性。也就是常说的成正比或者反比。</p>
-<pre><code>import pandas as pd
-import numpy as np
-from sklearn.datasets import load_iris
-from scipy.stats import spearmanr
-
-X=load_iris().data
-# 使用scipy.stats计算spearmanr相关系数
-#该函数返回(相关系数，p-values)
-result_2=spearmanr(X)[0]
-print(result_2)
-</code></pre>
-<h2 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h2><p>常见的逻辑回归，主要用于二分类而不是回归问题。</p>
-<pre><code>###logistic Regression
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-import pandas as pd
-LR = LogisticRegression()
-data = pd.read_csv(&#39;./diabetes.csv&#39;)
-train_data = data.iloc[:,:-1]
-label = data.iloc[:,-1]
-# print(label)
-# print(data.iloc[1])
-X_train, X_test, Y_train,Y_test = train_test_split(train_data,label,test_size=0.3,random_state=43)
-
-LR.fit(X_train,Y_train)
-
-LR.predict(X_test)
-</code></pre>
-<h2 id="decision-tree"><a href="#decision-tree" class="headerlink" title="decision tree##"></a>decision tree##</h2><p>决策树主要有两种用法，一种用于分类,一种用于回归。<br>    ###decision tree 4 classification</p>
-<pre><code>from sklearn.tree import DecisionTreeClassifier,plot_tree  # 可视化决策树
-from sklearn.metrics import accuracy_score
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-data=load_iris()
-x,y = data.data,data.target
-X_train, X_test, Y_train,Y_test = train_test_split(x,y,test_size=0.3,random_state=43)
-
-model = DecisionTreeClassifier()
-model.fit(X_train,Y_train)
-
-print(model.predict(X_test))
-print(model.feature_importances_)  # 分析每个权重的重要性
-plot_tree(model)  # 还可以添加一些参数的名字等等.
-</code></pre>
-]]></content>
-      <categories>
-        <category>数学建模</category>
-      </categories>
-      <tags>
-        <tag>数学建模</tag>
-        <tag>pandas</tag>
       </tags>
   </entry>
   <entry>
@@ -1006,25 +838,193 @@ indices=tensor([1, 3, 4, 2, 0]))
       </tags>
   </entry>
   <entry>
-    <title>pandas</title>
-    <url>/2022/10/05/pandas/</url>
-    <content><![CDATA[<h2 id="查看文件数据的属性"><a href="#查看文件数据的属性" class="headerlink" title="查看文件数据的属性"></a>查看文件数据的属性</h2><pre><code>print(df)  查看全部内容
-print(df.head()) # 查看前5行
-print(df.tail()) # 查看后5行
-print(df.index) # 查看索引行
-print(df.values) # 查看内容
-print(df.columns) # 查看列名列表
-print(df.shape) # 查看数据的形状（返回行、列数）
-print(df.dtypes) # 查看每列的数据类型
-</code></pre>
+    <title>数学建模</title>
+    <url>/2022/09/16/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/</url>
+    <content><![CDATA[<p>最近在弄数学建模,准备一些预备知识。</p>
 <span id="more"></span>
-<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><p>比如说在一个区间的数据</p>
-<pre><code># df.loc方法，根据行、列的标签值查询  df.loc[行标签,列标签] 主要用这个
-# df.iloc方法，根据行、列的数字位置查询
-df[&#39;name&#39;] = df[&#39;name&#39;].map(lambda x: x +&#39;a&#39;)  # 直接修改一列的数据，使用map函数
-# df[] 只限于column,df.loc就类似于矩阵索引
+<h2 id="卡夫检验"><a href="#卡夫检验" class="headerlink" title="卡夫检验"></a>卡夫检验</h2><p>卡夫检验可以用来分析两个变量间的关系：是否相互独立，是否来自一个总体。<br>使用列联表与python可以非常快地计算两个变量之间是否存在关系。<br>列联表如下所示。</p>
+<table>
+<thead>
+<tr>
+<th align="left">纹饰</th>
+<th align="right">风化</th>
+<th align="center">无风化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">C</td>
+<td align="right">15</td>
+<td align="center">13</td>
+</tr>
+<tr>
+<td align="left">A</td>
+<td align="right">9</td>
+<td align="center">16</td>
+</tr>
+<tr>
+<td align="left">B</td>
+<td align="right">6</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="left">在这里让我们来分析陶瓷的纹饰和风化是否存在关联。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">默认假设是纹饰与分化无关。并且定义显著性 alpha&#x3D;0.05(一般都设为0.05). 若p值&lt;0.05则拒绝原假设，也就是有关。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<pre><code>import pandas as pd
+import scipy
+d = &#123;&#39;C&#39;:&#123;&#39;风化&#39;:15,&#39;无风化&#39;:13&#125;,&#39;A&#39;:&#123;&#39;风化&#39;:9,&#39;无风化&#39;:11&#125;,&#39;B&#39;:&#123;&#39;风化&#39;:6,&#39;无风化&#39;:0&#125;&#125;
+f = pd.DataFrame(d)
+print(f)
+print(scipy.stats.chi2_contingency(f) )
+chi2, p, df, expected = scipy.stats.chi2_contingency(f)
+if p &lt; 0.05:
+    print(&#39;纹饰和风化有关&#39;)
+else:
+    print(&#39;纹饰和风化无关&#39;)
+</code></pre>
+<h2 id="PCA降维"><a href="#PCA降维" class="headerlink" title="PCA降维"></a>PCA降维</h2><p>目的是希望用较少的变量去解释原来资料中的大部分变异，把相关性很高的变量转化成彼此相互独立或不相关的变量，是一种降维方法。 </p>
+<pre><code>import matplotlib.pyplot as plt                
+from sklearn.decomposition import PCA          
+from sklearn.datasets import load_iris
+
+# 然后以字典的形式加载鸢尾花数据集，使用y表示数据集中的标签，使用x表示数据集中的属性数据。
+data=load_iris()
+y=data.target
+x=data.data
+print(x.shape)
+print(type(x))
+# 调用PCA算法进行降维主成分分析
+# 指定主成分个数，即降维后数据维度，降维后的数据保存在reduced_x中。
+pca=PCA(n_components=2)     
+reduced_x=pca.fit_transform(x)
+print(reduced_x.shape)
+print(pca.explained_variance_)
+print(pca.n_features_)
+</code></pre>
+<h2 id="三、判别分析"><a href="#三、判别分析" class="headerlink" title="三、判别分析"></a>三、判别分析</h2><p>根据所研究的个体的观测指标来推断该个体所属类型的一种统计方法.可用于多分类问题。<br>这里主要介绍Fisher判别，也就是机器学习中的LDA线性判别分析。LDA是有标签的降维。</p>
+<pre><code>import matplotlib.pyplot as plt                
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+
+df=load_iris()
+# 因为鸢尾花数据集不是随机分布，而是从上到下按同一个类别在一起排列的，所以拆分数据的时候需要指定stratify这个参数
+X_train, X_test,y_train,y_test = train_test_split(df.data,df.target,test_size=0.25,random_state=0,stratify=df.target) 
+print(df.target)
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+LDA = LinearDiscriminantAnalysis()
+LDA.fit(X_train,y_train)
+LDA.predict(X_test)
+</code></pre>
+<h2 id="K-means算法"><a href="#K-means算法" class="headerlink" title="K-means算法"></a>K-means算法</h2><p>常用的聚类算法</p>
+<pre><code>from sklearn import datasets
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+ 
+# 加载数据集，是一个字典类似Java中的map
+lris_df = datasets.load_iris()
+ 
+# 挑选出前两个维度作为x轴和y轴，你也可以选择其他维度
+x_axis = lris_df.data[:, 0]
+y_axis = lris_df.data[:, 3]
+
+# 这里已经知道了分3类，其他分类这里的参数需要调试
+model = KMeans(n_clusters=3)
+ 
+# 训练模型
+model.fit(lris_df.data)
+ 
+# 选取行标为100的那条数据，进行预测
+# prddicted_label = model.predict([[6.3, 3.3, 6, 2.5]])
+ 
+# 预测全部150条数据
+all_predictions = model.predict(lris_df.data)
+ 
+# x,y 是数据,c是center_point
+plt.scatter(x_axis, y_axis, c=all_predictions)
+plt.show()
+</code></pre>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>线性回归可能是统计和机器学习中最著名和最容易理解的算法之一。预测建模主要关注的是最小化模型的误差或做出最准确的预测，但以牺牲可解释性为代价。代码里展示的多元线性回归</p>
+<pre><code>from  numpy import genfromtxt      #genfromtxt函数创建数组表格数据
+import numpy as np
+from sklearn import datasets,linear_model
+ 
+data_multi = genfromtxt(&#39;data_multi.csv&#39;,delimiter=&#39;,&#39;)       #将路径下的文本文件导入并转化成numpy数组格式
+print(&quot;data_multi:&quot;,data_multi)
+ 
+X = data_multi[:,:-1]      #取所有行和除了最后一列的所有列作为特征向量
+Y = data_multi[:,-1]       #取所有行和最后一列作为回归的值
+print(&quot;X:&quot;,X)
+print(&quot;Y:&quot;,Y)
+ 
+#建立回归模型
+regr = linear_model.LinearRegression()
+regr.fit(X,Y)
+print(&quot;coefficients:&quot;,regr.coef_)          #b1,...,bp（与x相结合的各个参数）
+print(&quot;intercept:&quot;,regr.intercept_)        #b0（截面）
+x_pred = [[102,4,6]]
+y_pred = regr.predict(x_pred)         #预测
+print(&quot;y_pred:&quot;,y_pred)
+</code></pre>
+<h2 id="Spearman相关系数"><a href="#Spearman相关系数" class="headerlink" title="Spearman相关系数"></a>Spearman相关系数</h2><p>Spearman相关系数被称为等级变量之间的皮尔森相关系数，主要利用单调方程来衡量两个变量之间的相关性。也就是常说的成正比或者反比。</p>
+<pre><code>import pandas as pd
+import numpy as np
+from sklearn.datasets import load_iris
+from scipy.stats import spearmanr
+
+X=load_iris().data
+# 使用scipy.stats计算spearmanr相关系数
+#该函数返回(相关系数，p-values)
+result_2=spearmanr(X)[0]
+print(result_2)
+</code></pre>
+<h2 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h2><p>常见的逻辑回归，主要用于二分类而不是回归问题。</p>
+<pre><code>###logistic Regression
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+import pandas as pd
+LR = LogisticRegression()
+data = pd.read_csv(&#39;./diabetes.csv&#39;)
+train_data = data.iloc[:,:-1]
+label = data.iloc[:,-1]
+# print(label)
+# print(data.iloc[1])
+X_train, X_test, Y_train,Y_test = train_test_split(train_data,label,test_size=0.3,random_state=43)
+
+LR.fit(X_train,Y_train)
+
+LR.predict(X_test)
+</code></pre>
+<h2 id="decision-tree"><a href="#decision-tree" class="headerlink" title="decision tree##"></a>decision tree##</h2><p>决策树主要有两种用法，一种用于分类,一种用于回归。<br>    ###decision tree 4 classification</p>
+<pre><code>from sklearn.tree import DecisionTreeClassifier,plot_tree  # 可视化决策树
+from sklearn.metrics import accuracy_score
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+data=load_iris()
+x,y = data.data,data.target
+X_train, X_test, Y_train,Y_test = train_test_split(x,y,test_size=0.3,random_state=43)
+
+model = DecisionTreeClassifier()
+model.fit(X_train,Y_train)
+
+print(model.predict(X_test))
+print(model.feature_importances_)  # 分析每个权重的重要性
+plot_tree(model)  # 还可以添加一些参数的名字等等.
 </code></pre>
 ]]></content>
+      <categories>
+        <category>数学建模</category>
+      </categories>
+      <tags>
+        <tag>数学建模</tag>
+        <tag>pandas</tag>
+      </tags>
   </entry>
   <entry>
     <title>java八股文</title>
@@ -1064,7 +1064,7 @@ df[&#39;name&#39;] = df[&#39;name&#39;].map(lambda x: x +&#39;a&#39;)  # 直接�
 
 
 <details>
-<summary>**String、StringBuffer、StringBuilder的区别**</summary>
+<summary>String、StringBuffer、StringBuilder的区别</summary>
 1. String是不可变的，如果尝试去修改，会新⽣成⼀个字符串对象，StringBuffer和StringBuilder是可
 变的
 2. StringBuffer是线程安全的，StringBuilder是线程不安全的，所以在单线程环境下StringBuilder效
@@ -1072,7 +1072,7 @@ df[&#39;name&#39;] = df[&#39;name&#39;].map(lambda x: x +&#39;a&#39;)  # 直接�
 </details>
 
 <details>
-<summary>**泛型中extends和super的区别**</summary>
+<summary>泛型中extends和super的区别</summary>
 
 <ul>
 <li><? extends T>表示包括T在内的任何T的⼦类 </br></li>
@@ -1080,21 +1080,21 @@ df[&#39;name&#39;] = df[&#39;name&#39;].map(lambda x: x +&#39;a&#39;)  # 直接�
 </details></li>
 </ul>
 <details>
-<summary>**==和equals方法的区别**</summary>
+<summary>==和equals方法的区别</summary>
 
 <ul>
 <li>&#x3D;&#x3D;：如果是基本数据类型，⽐较是值，如果是引⽤类型，⽐较的是引⽤地址.</li>
 <li>equals：具体看各个类重写equals⽅法之后的⽐较逻辑，⽐如String类，虽然是引⽤类型，但是<br>String类中重写了equals⽅法，⽅法内部⽐较的是字符串中的各个字符是否全部相等。</details></li>
 </ul>
 <details>
-<summary>**重载和重写的区别**</summary>
+<summary>重载和重写的区别</summary>
 
 <ul>
 <li>重载(Overload)： 在⼀个类中，同名的⽅法如果有不同的参数列表（⽐如参数类型不同、参数个数<br>不同）则视为重载。</li>
 <li>重写(Override)： 从字⾯上看，重写就是 重新写⼀遍的意思。其实就是在⼦类中把⽗类本身有的⽅<br>法重新写⼀遍。⼦类继承了⽗类的⽅法，但有时⼦类并不想原封不动的继承⽗类中的某个⽅法，所<br>以在⽅法名，参数列表，返回类型都相同(⼦类中⽅法的返回值可以是⽗类中⽅法返回值的⼦类)的<br>情况下， 对⽅法体进⾏修改，这就是重写。但要注意⼦类⽅法的访问修饰权限不能⼩于⽗类的。</details></li>
 </ul>
 <details>
-<summary>**ArrayList和LinkedList区别**</summary>
+<summary>ArrayList和LinkedList区别</summary>
 
 <ol>
 <li>⾸先，他们的底层数据结构不同，ArrayList底层是基于数组实现的，LinkedList底层是基于链表实<br>现的</li>
@@ -1102,18 +1102,115 @@ df[&#39;name&#39;] = df[&#39;name&#39;].map(lambda x: x +&#39;a&#39;)  # 直接�
 <li>另外ArrayList和LinkedList都实现了List接⼝，但是LinkedList还额外实现了Deque接⼝，所以<br>LinkedList还可以当做队列来使⽤</details>
 谈谈ConcurrentHashMap的扩容机制</li>
 </ol>
-<p>Jdk.到Jdk. HashMap 发生了什么变化(底层)?</p>
-<p>说一下HashMap的Put方法</p>
-<p>深拷⻉和浅拷⻉</p>
-<p>HashMap的扩容机制原理</p>
-<p>CopyOnWriteArrayList的底层原理是怎样的</p>
-<p>什么是字节码？采用字节码的好处是什么？</p>
-<p>Java中的异常体系是怎样的</p>
-<p>在Java的异常处理机制中，什么时候应该抛出异常，什么时候捕获异常？</p>
-<p>Java中有哪些类加载器</p>
-<p>说说类加载器双亲委派模型</p>
-<p>JVM中哪些是线程共享区</p>
-<p>你们项目如何排查JVM问题</p>
+<details>
+<summary>Jdk1.7到Jdk1.8 HashMap 发⽣了什么变化(底层)?</summary>
+
+
+<ol>
+<li>1.7中底层是数组+链表，1.8中底层是数组+链表+红⿊树，加红⿊树的⽬的是提⾼HashMap插⼊和<br>查询整体效率</li>
+<li>1.7中链表插⼊使⽤的是头插法，1.8中链表插⼊使⽤的是尾插法，因为1.8中插⼊key和value时需要<br>判断链表元素个数，所以需要遍历链表统计链表元素个数，所以正好就直接使⽤尾插法</li>
+<li>1.7中哈希算法⽐较复杂，存在各种右移与异或运算，1.8中进⾏了简化，因为复杂的哈希算法的⽬的<br>就是提⾼散列性，来提供HashMap的整体效率，⽽1.8中新增了红⿊树，所以可以适当的简化哈希<br>算法，节省CPU资源</details>
+<details>
+<summary>说一下HashMap的Put方法</summary></li>
+</ol>
+<p>先说HashMap的Put⽅法的⼤体流程：</p>
+<ol>
+<li><p>根据Key通过哈希算法与与运算得出数组下标</p>
+</li>
+<li><p>如果数组下标位置元素为空，则将key和value封装为Entry对象（JDK1.7中是Entry对象，JDK1.8中<br>是Node对象）并放⼊该位置</p>
+</li>
+<li><p>如果数组下标位置元素不为空，则要分情况讨论<br> a. 如果是JDK1.7，则先判断是否需要扩容，如果要扩容就进⾏扩容，如果不⽤扩容就⽣成Entry对<br> 象，并使⽤头插法添加到当前位置的链表中<br> b. 如果是JDK1.8，则会先判断当前位置上的Node的类型，看是红⿊树Node，还是链表Node<br>  ⅰ. 如果是红⿊树Node，则将key和value封装为⼀个红⿊树节点并添加到红⿊树中去，在这个过程中会判断红⿊树中是否存在当前key，如果存在则更新value</p>
+<p>  ⅱ. 如果此位置上的Node对象是链表节点，则将key和value封装为⼀个链表Node并通过尾插<br> 法插⼊到链表的最后位置去，因为是尾插法，所以需要遍历链表，在遍历链表的过程中会<br> 判断是否存在当前key，如果存在则更新value，当遍历完链表后，将新链表Node插⼊到链<br> 表中，插⼊到链表后，会看当前链表的节点个数，如果⼤于等于8，那么则会将该链表转成<br> 红⿊树<br>  ⅲ. 将key和value封装为Node插⼊到链表或红⿊树中后，再判断是否需要进⾏扩容，如果需要<br> 就扩容，如果不需要就结束PUT⽅法</p>
+</li>
+</ol>
+</details>
+
+<details>
+<summary>深拷⻉和浅拷⻉</summary>
+
+<p>深拷⻉和浅拷⻉就是指对象的拷⻉，⼀个对象中存在两种类型的属性，⼀种是基本数据类型，⼀种是实<br>例对象的引⽤。</p>
+<ol>
+<li><p>浅拷⻉是指，只会拷⻉基本数据类型的值，以及实例对象的引⽤地址，并不会复制⼀份引⽤地址所<br>指向的对象，也就是浅拷⻉出来的对象，内部的类属性指向的是同⼀个对象.</p>
+</li>
+<li><p>深拷⻉是指，既会拷⻉基本数据类型的值，也会针对实例对象的引⽤地址所指向的对象进⾏复制，<br>深拷⻉出来的对象，内部的属性指向的不是同⼀个对象<br>深拷⻉和浅拷⻉</p>
+</details>
+<details>
+<summary>HashMap的扩容机制原理</summary>
+1.7版本
+ 1. 先⽣成新数组
+ 2. 遍历⽼数组中的每个位置上的链表上的每个元素
+ 3. 取每个元素的key，并基于新数组⻓度，计算出每个元素在新数组中的下标
+ 4. 将元素添加到新数组中去
+ 5. 所有元素转移完了之后，将新数组赋值给HashMap对象的table属性</li>
+</ol>
+<p>1.8版本</p>
+<ol>
+<li>先⽣成新数组</li>
+<li>遍历⽼数组中的每个位置上的链表或红⿊树</li>
+<li>如果是链表，则直接将链表中的每个元素重新计算下标，并添加到新数组中去</li>
+<li>如果是红⿊树，则先遍历红⿊树，先计算出红⿊树中每个元素对应在新数组中的下标位置<br>   a. 统计每个下标位置的元素个数<br>   b. 如果该位置下的元素个数超过了8，则⽣成⼀个新的红⿊树，并将根节点的添加到新数组的对应<br>位置</li>
+</ol>
+<p>   c. 如果该位置下的元素个数没有超过8，那么则⽣成⼀个链表，并将链表的头节点添加到新数组的<br>对应位置<br>  5. 所有元素转移完了之后，将新数组赋值给HashMap对象的table属性</p>
+</details>
+
+<details>
+<summary>CopyOnWriteArrayList的底层原理是怎样的</summary>
+
+<ol>
+<li>⾸先CopyOnWriteArrayList内部也是⽤过数组来实现的，在向CopyOnWriteArrayList添加元素<br>时，会复制⼀个新的数组，写操作在新数组上进⾏，读操作在原数组上进⾏</li>
+<li>并且，写操作会加锁，防⽌出现并发写⼊丢失数据的问题</li>
+<li>写操作结束之后会把原数组指向新数组</li>
+<li>CopyOnWriteArrayList允许在写操作时来读取数据，⼤⼤提⾼了读的性能，因此适合读多写少的应<br>⽤场景，但是CopyOnWriteArrayList会⽐较占内存，同时可能读到的数据不是实时最新的数据，所<br>以不适合实时性要求很⾼的场景</details>
+<details>
+<summary>什么是字节码？采用字节码的好处是什么？</summary></li>
+</ol>
+<p>编译器(javac)将Java源⽂件(<em>.java)⽂件编译成为字节码⽂件(</em>.class)，可以做到⼀次编译到处运⾏，windows上编译好的class⽂件，可以直接在linux上运⾏，通过这种⽅式做到跨平台，不过Java的跨平台有⼀个前提条件，就是不同的操作系统上安装的JDK或JRE是不⼀样的，虽然字节码是通⽤的，但是需要把字节码解释成各个操作系统的机器码是需要不同的解释器的，所以针对各个操作系统需要有各⾃<br>的JDK或JRE。</p>
+<p>采⽤字节码的好处，⼀⽅⾯实现了跨平台，另外⼀⽅⾯也提⾼了代码执⾏的性能，编译器在编译源代码<br>时可以做⼀些编译期的优化，⽐如锁消除、标量替换、⽅法内联等。</p>
+</details>
+<details>
+<summary>Java中的异常体系是怎样的</summary>
+
+<ul>
+<li>Java中的所有异常都来⾃顶级⽗类Throwable。</li>
+<li>Throwable下有两个⼦类Exception和Error。</li>
+<li>Error表示⾮常严重的错误，⽐如java.lang.StackOverFlowError和Java.lang.OutOfMemoryError，<br>通常这些错误出现时，仅仅想靠程序⾃⼰是解决不了的，可能是虚拟机、磁盘、操作系统层⾯出现<br>的问题了，所以通常也不建议在代码中去捕获这些Error，因为捕获的意义不⼤，因为程序可能已经<br>根本运⾏不了了。</li>
+<li>Exception表示异常，表示程序出现Exception时，是可以靠程序⾃⼰来解决的，⽐如<br>NullPointerException、IllegalAccessException等，我们可以捕获这些异常来做特殊处理。<br>CopyOnWriteArrayList的底层原理是怎样的<br>什么是字节码？采⽤字节码的好处是什么？</li>
+<li>Exception的⼦类通常⼜可以分为RuntimeException和⾮RuntimeException两类</li>
+<li>RunTimeException表示运⾏期异常，表示这个异常是在代码运⾏过程中抛出的，这些异常是⾮检查<br>异常，程序中可以选择捕获处理，也可以不处理。这些异常⼀般是由程序逻辑错误引起的，程序应该从逻<br>辑⻆度尽可能避免这类异常的发⽣，⽐如NullPointerException、IndexOutOfBoundsException等。</li>
+<li>⾮RuntimeException表示⾮运⾏期异常，也就是我们常说的检查异常，是必须进⾏处理的异常，如果<br>不处理，程序就不能检查异常通过。如IOException、SQLException等以及⽤户⾃定义的Exception异<br>常。</details>
+<details>
+<summary>在Java的异常处理机制中，什么时候应该抛出异常，什么时候捕获异常？</summary>
+异常相当于⼀种提示，如果我们抛出异常，就相当于告诉上层⽅法，我抛了⼀个异常，我处理不了这个
+异常，交给你来处理，⽽对于上层⽅法来说，它也需要决定⾃⼰能不能处理这个异常，是否也需要交给
+它的上层。</li>
+</ul>
+<p>所以我们在写⼀个⽅法时，我们需要考虑的就是，本⽅法能否合理的处理该异常，如果处理不了就继续<br>向上抛出异常，包括本⽅法中在调⽤另外⼀个⽅法时，发现出现了异常，如果这个异常应该由⾃⼰来处<br>理，那就捕获该异常并进⾏处理。</p>
+</details>
+<details>
+<summary>Java中有哪些类加载器</summary>
+
+<p>JDK⾃带有三个类加载器：bootstrap ClassLoader、ExtClassLoader、AppClassLoader。</p>
+<ul>
+<li>BootStrapClassLoader是ExtClassLoader的⽗类加载器，默认负责加载%JAVA_HOME%lib下的<br>jar包和class⽂件。</li>
+<li>ExtClassLoader是AppClassLoader的⽗类加载器，负责加载%JAVA_HOME%&#x2F;lib&#x2F;ext⽂件夹下的<br>jar包和class类。</li>
+<li>AppClassLoader是⾃定义类加载器的⽗类，负责加载classpath下的类⽂件。</details>
+<details>
+<summary>说说类加载器双亲委派模型</summary>
+JVM中存在三个默认的类加载器：</li>
+</ul>
+<ol>
+<li>BootstrapClassLoader</li>
+<li>ExtClassLoader</li>
+<li>AppClassLoader<br>AppClassLoader的⽗加载器是ExtClassLoader，ExtClassLoader的⽗加载器是<br>BootstrapClassLoader。<br>JVM在加载⼀个类时，会调⽤AppClassLoader的loadClass⽅法来加载这个类，不过在这个⽅法中，会<br>先使⽤ExtClassLoader的loadClass⽅法来加载类，同样ExtClassLoader的loadClass⽅法中会先使⽤<br>BootstrapClassLoader来加载类，如果BootstrapClassLoader加载到了就直接成功，如果<br>BootstrapClassLoader没有加载到，那么ExtClassLoader就会⾃⼰尝试加载该类，如果没有加载到，<br>那么则会由AppClassLoader来加载这个类。<br>所以，双亲委派指得是，JVM在加载类时，会委派给Ext和Bootstrap进⾏加载，如果没加载到才由⾃⼰<br>进⾏加载。</li>
+</ol>
+</details>
+<details>
+<summary>JVM中哪些是线程共享区</summary>
+
+<p>堆区和⽅法区是所有线程共享的，栈、本地⽅法栈、程序计数器是每个线程独有的<br><a href="https://sm.ms/image/XndN2TUKJPAmFQp" target="_blank"><img data-src="https://s2.loli.net/2023/04/22/XndN2TUKJPAmFQp.png" ></a></p>
+</details>
+你们项目如何排查JVM问题
+
 <p>一个对象从加载到JVM，再到被GC清除，都经历了什么过程？</p>
 <p>怎么确定一个对象到底是不是垃圾？</p>
 <p>JVM有哪些垃圾回收算法？</p>

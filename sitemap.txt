@@ -19,10 +19,10 @@ https://www.zzzheng.top/tags/SSM/
 https://www.zzzheng.top/tags/bash/
 https://www.zzzheng.top/tags/sql/
 https://www.zzzheng.top/tags/python/
-https://www.zzzheng.top/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/
-https://www.zzzheng.top/tags/pandas/
 https://www.zzzheng.top/tags/pytorch/
 https://www.zzzheng.top/tags/dl/
+https://www.zzzheng.top/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/
+https://www.zzzheng.top/tags/pandas/
 https://www.zzzheng.top/categories/java/
 https://www.zzzheng.top/categories/linux/
 https://www.zzzheng.top/categories/sql/
