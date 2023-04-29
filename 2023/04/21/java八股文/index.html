@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/04/22/XndN2TUKJPAmFQp.png">
 <meta property="article:published_time" content="2023-04-21T02:55:46.000Z">
-<meta property="article:modified_time" content="2023-04-22T12:57:29.886Z">
+<meta property="article:modified_time" content="2023-04-29T07:57:41.539Z">
 <meta property="article:author" content="即兴表演">
 <meta property="article:tag" content="java、python、linux">
 <meta name="twitter:card" content="summary">
@@ -241,7 +241,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-22 20:57:29" itemprop="dateModified" datetime="2023-04-22T20:57:29+08:00">2023-04-22</time>
+      <time title="修改时间：2023-04-29 15:57:41" itemprop="dateModified" datetime="2023-04-29T15:57:41+08:00">2023-04-29</time>
     </span>
 
   
@@ -441,19 +441,129 @@ JVM中存在三个默认的类加载器：</li>
 
 <p>堆区和⽅法区是所有线程共享的，栈、本地⽅法栈、程序计数器是每个线程独有的<br><a href="https://sm.ms/image/XndN2TUKJPAmFQp" target="_blank"><img data-src="https://s2.loli.net/2023/04/22/XndN2TUKJPAmFQp.png" ></a></p>
 </details>
-你们项目如何排查JVM问题
+<details>
+<summary>你们项目如何排查JVM问题</summary>
 
-<p>一个对象从加载到JVM，再到被GC清除，都经历了什么过程？</p>
-<p>怎么确定一个对象到底是不是垃圾？</p>
-<p>JVM有哪些垃圾回收算法？</p>
-<p>什么是STW？</p>
-<p>JVM参数有哪些？</p>
-<p>说说对线程安全的理解</p>
-<p>对守护线程的理解</p>
-<p>ThreadLocal的底层原理</p>
-<p>并发、并行、串行之间的区别</p>
-<p>Java死锁如何避免？</p>
-<p>线程池的底层工作原理</p>
+<p>对于还在正常运⾏的系统：</p>
+<ol>
+<li>可以使⽤jmap来查看JVM中各个区域的使⽤情况</li>
+<li>可以通过jstack来查看线程的运⾏情况，⽐如哪些线程阻塞、是否出现了死锁</li>
+<li>可以通过jstat命令来查看垃圾回收的情况，特别是fullgc，如果发现fullgc⽐较频繁，那么就得进⾏<br>调优了</li>
+<li>通过各个命令的结果，或者jvisualvm等⼯具来进⾏分析</li>
+<li>⾸先，初步猜测频繁发送fullgc的原因，如果频繁发⽣fullgc但是⼜⼀直没有出现内存溢出，那么表<br>示fullgc实际上是回收了很多对象了，所以这些对象最好能在younggc过程中就直接回收掉，避免这<br>些对象进⼊到⽼年代，对于这种情况，就要考虑这些存活时间不⻓的对象是不是⽐较⼤，导致年轻<br>代放不下，直接进⼊到了⽼年代，尝试加⼤年轻代的⼤⼩，如果改完之后，fullgc减少，则证明修改<br>有效</li>
+<li>同时，还可以找到占⽤CPU最多的线程，定位到具体的⽅法，优化这个⽅法的执⾏，看是否能避免某些对象的创建，从⽽节省内存</li>
+</ol>
+<p>对于已经发⽣了OOM的系统：</p>
+<ol>
+<li>⼀般⽣产系统中都会设置当系统发⽣了OOM时，⽣成当时的dump⽂件（-<br>XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath&#x3D;&#x2F;usr&#x2F;local&#x2F;base）</li>
+<li>我们可以利⽤jsisualvm等⼯具来分析dump⽂件</li>
+<li>根据dump⽂件找到异常的实例对象，和异常的线程（占⽤CPU⾼），定位到具体的代码</li>
+<li>然后再进⾏详细的分析和调试<br>总之，调优不是⼀蹴⽽就的，需要分析、推理、实践、总结、再分析，最终定位到具体的问题</li>
+</ol>
+</details>
+<details>
+<summary>一个对象从加载到JVM，再到被GC清除，都经历了什么过程？</summary>
+
+<ol>
+<li>⾸先把字节码⽂件内容加载到⽅法区</li>
+<li>然后再根据类信息在堆区创建对象</li>
+<li>对象⾸先会分配在堆区中年轻代的Eden区，经过⼀次Minor GC后，对象如果存活，就会进⼊<br>Suvivor区。在后续的每次Minor GC中，如果对象⼀直存活，就会在Suvivor区来回拷⻉，每移动<br>⼀次，年龄加1</li>
+<li>当年龄超过15后，对象依然存活，对象就会进⼊⽼年代</li>
+<li>如果经过Full GC，被标记为垃圾对象，那么就会被GC线程清理掉</li>
+</ol>
+</details>
+<details>
+
+<summary>怎么确定一个对象到底是不是垃圾？</summary>
+
+<ol>
+<li><p>引⽤计数算法： 这种⽅式是给堆内存当中的每个对象记录⼀个引⽤个数。引⽤个数为0的就认为是<br>垃圾。这是早期JDK中使⽤的⽅式。引⽤计数⽆法解决循环引⽤的问题。</p>
+</li>
+<li><p>可达性算法： 这种⽅式是在内存中，从根对象向下⼀直找引⽤，找到的对象就不是垃圾，没找到的<br>对象就是垃圾。</p>
+</details>
+<details>
+<summary>JVM有哪些垃圾回收算法？</summary>
+</li>
+<li><p>标记清除算法：<br>a. 标记阶段：把垃圾内存标记出来<br>b. 清除阶段：直接将垃圾内存回收。<br>c. 这种算法是⽐较简单的，但是有个很严重的问题，就是会产⽣⼤量的内存碎⽚。</p>
+</li>
+<li><p>复制算法：为了解决标记清除算法的内存碎⽚问题，就产⽣了复制算法。复制算法将内存分为⼤⼩<br>相等的两半，每次只使⽤其中⼀半。垃圾回收时，将当前这⼀块的存活对象全部拷⻉到另⼀半，然<br>后当前这⼀半内存就可以直接清除。这种算法没有内存碎⽚，但是他的问题就在于浪费空间。⽽<br>且，他的效率跟存活对象的个数有关。</p>
+</li>
+<li><p>标记压缩算法：为了解决复制算法的缺陷，就提出了标记压缩算法。这种算法在标记阶段跟标记清<br>除算法是⼀样的，但是在完成标记之后，不是直接清理垃圾内存，⽽是将存活对象往⼀端移动，然<br>后将边界以外的所有内存直接清除。</p>
+</details></li>
+</ol>
+<details>
+<summary>什么是STW？</summary>
+
+<p>STW: Stop-The-World，是在垃圾回收算法执⾏过程当中，需要将JVM内存冻结的⼀种状态。在STW<br>状态下，JAVA的所有线程都是停⽌执⾏的-GC线程除外，native⽅法可以执⾏，但是，不能与JVM交<br>互。GC各种算法优化的重点，就是减少STW，同时这也是JVM调优的重点。</p>
+</details>
+
+<details>
+<summary>JVM参数有哪些？</summary>
+
+<p>JVM参数⼤致可以分为三类：</p>
+<ol>
+<li>标注指令： -开头，这些是所有的HotSpot都⽀持的参数。可以⽤java -help 打印出来。</li>
+<li>⾮标准指令： -X开头，这些指令通常是跟特定的HotSpot版本对应的。可以⽤java -X 打印出来。</li>
+<li>不稳定参数： -XX 开头，这⼀类参数是跟特定HotSpot版本对应的，并且变化⾮常⼤。</details></li>
+</ol>
+<details>
+
+<summary>说说对线程安全的理解？</summary>
+
+<p>线程安全指的是，我们写的某段代码，在多个线程同时执⾏这段代码时，不会产⽣混乱，依然能够得到<br>正常的结果，⽐如i++，i初始化值为0，那么两个线程来同时执⾏这⾏代码，如果代码是线程安全的，那<br>么最终的结果应该就是⼀个线程的结果为1，⼀个线程的结果为2，如果出现了两个线程的结果都为1，则<br>表示这段代码是线程不安全的。<br>所以线程安全，主要指的是⼀段代码在多个线程同时执⾏的情况下，能否得到正确的结果。</p>
+</details>
+
+<details>
+
+<summary>对守护线程的理解</summary>
+
+<p>线程分为⽤户线程和守护线程，⽤户线程就是普通线程，守护线程就是JVM的后台线程，⽐如垃圾回收<br>线程就是⼀个守护线程，守护线程会在其他普通线程都停⽌运⾏之后⾃动关闭。我们可以通过设置<br>thread.setDaemon(true)来把⼀个线程设置为守护线程。</p>
+</details>
+
+<details>
+
+<summary>ThreadLocal的底层原理</summary>
+
+<ol>
+<li>ThreadLocal是Java中所提供的线程本地存储机制，可以利⽤该机制将数据缓存在某个线程内部，<br>该线程可以在任意时刻、任意⽅法中获取缓存的数据</li>
+<li>ThreadLocal底层是通过ThreadLocalMap来实现的，每个Thread对象（注意不是ThreadLocal对<br>象）中都存在⼀个ThreadLocalMap，Map的key为ThreadLocal对象，Map的value为需要缓存的<br>值</li>
+<li>如果在线程池中使⽤ThreadLocal会造成内存泄漏，因为当ThreadLocal对象使⽤完之后，应该要把<br>设置的key，value，也就是Entry对象进⾏回收，但线程池中的线程不会回收，⽽线程对象是通过强<br>引⽤指向ThreadLocalMap，ThreadLocalMap也是通过强引⽤指向Entry对象，线程不被回收，<br>Entry对象也就不会被回收，从⽽出现内存泄漏，解决办法是，在使⽤了ThreadLocal对象之后，⼿<br>动调⽤ThreadLocal的remove⽅法，⼿动清楚Entry对象</li>
+<li>ThreadLocal经典的应⽤场景就是连接管理（⼀个线程持有⼀个连接，该连接对象可以在不同的⽅法之间进⾏传递，线程之间不共享同⼀个连接）</details></li>
+</ol>
+<details>
+
+<summary>并发、并行、串行之间的区别</summary>
+
+<ol>
+<li>串⾏：⼀个任务执⾏完，才能执⾏下⼀个任务</li>
+<li>并⾏(Parallelism)：两个任务同时执⾏</li>
+<li>并发(Concurrency)：两个任务整体看上去是同时执⾏，在底层，两个任务被拆成了很多份，然后<br>⼀个⼀个执⾏，站在更⾼的⻆度看来两个任务是同时在执⾏的</li>
+</ol>
+</details>
+
+<details>
+<summary>Java死锁如何避免？</summary>
+
+<p>造成死锁的⼏个原因：</p>
+<ol>
+<li><p>⼀个资源每次只能被⼀个线程使⽤</p>
+</li>
+<li><p>⼀个线程在阻塞等待某个资源时，不释放已占有资源</p>
+</li>
+<li><p>⼀个线程已经获得的资源，在未使⽤完之前，不能被强⾏剥夺</p>
+</li>
+<li><p>若⼲线程形成头尾相接的循环等待资源关系<br>这是造成死锁必须要达到的4个条件，如果要避免死锁，只需要不满⾜其中某⼀个条件即可。⽽其中前3<br>个条件是作为锁要符合的条件，所以要避免死锁就需要打破第4个条件，不出现循环等待锁的关系。<br>在开发过程中：</p>
+</li>
+<li><p>要注意加锁顺序，保证每个线程按同样的顺序进⾏加锁</p>
+</li>
+<li><p>要注意加锁时限，可以针对所设置⼀个超时时间</p>
+</li>
+<li><p>要注意死锁检查，这是⼀种预防机制，确保在第⼀时间发现死锁并进⾏解决</p>
+</li>
+</ol>
+</details>
+线程池的底层工作原理
+
 <p>线程池为什么是先添加列队而不是先创建最大线程？</p>
 <p>ReentrantLock中的公平锁和非公平锁的底层实现</p>
 <p>ReentrantLock中tryLock()和lock()方法的区别</p>
